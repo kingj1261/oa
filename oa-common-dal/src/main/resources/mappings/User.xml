@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+  
+<mapper namespace="User">
+
+  <!-- 用户resultMap -->
+  <resultMap id="userMap" type="com.wantai.oa.common.dal.mappings.dos.auth.User">
+      <result property="id" column="id" javaType="int" jdbcType="INTEGER"/>
+      <result property="name" column="name" javaType="string" jdbcType="VARCHAR"/>
+      <result property="loginName" column="login_name" javaType="string" jdbcType="VARCHAR"/>
+      <result property="password" column="password" javaType="string" jdbcType="VARCHAR"/>
+  </resultMap>
+
+  <!-- USER QUERY BY NAME -->
+  <select id="findByName" parameterType="java.lang.String" resultMap="userMap">
+    select * from  m_b_user where login_name=#{name}
+  </select>
+
+</mapper>

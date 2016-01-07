@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <!-- 输出日志到控制台  ConsoleAppender -->
+    <appender name="console"
+              class="org.apache.log4j.ConsoleAppender">
+        <param name="Threshold" value="info"></param>
+        <layout class="org.apache.log4j.TTCCLayout">
+            <param name="ConversionPattern" value="TTCCLayout"></param>
+        </layout>
+    </appender>
+
+    <!-- 输出日志到文件  每天一个文件 -->
+    <appender name="dailyRollingFile"
+              class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="Threshold" value="info"></param>
+        <param name="ImmediateFlush" value="true"></param>
+        <param name="file" value="/Users/mapingmp/logs/oa/default.log"></param>
+        <param name="DatePattern" value="'.'yyyy-MM-dd'.log'"></param>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss\} %-5p] [%t] {%c:%L}-%m%n"></param>
+        </layout>
+    </appender>
+
+
+    <!-- 输出日志到文件 -->
+    <appender name="file"
+              class="org.apache.log4j.FileAppender">
+        <param name="File" value="/Users/mapingmp/logs/oa/default.log"></param>
+        <param name="Threshold" value="info"></param>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss\} %-5p] [%t] {%c:%L}-%m%n"></param>
+        </layout>
+    </appender>
+
+    <!-- [公共Appender] 数据访问层 -->
+    <appender name="DAL-APPENDER"
+              class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="/Users/mapingmp/logs/oa/common-dal.log" />
+        <param name="Append" value="true" />
+        <param name="ImmediateFlush" value="true"></param>
+        <param name="Encoding" value="UTF-8" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss\} %-5p] [%t] {%c:%L}-%m%n"></param>
+        </layout>
+    </appender>
+
+    <!-- [框架Logger] 数据访问层 - Ibatis -->
+    <logger name="com.ibatis" additivity="false">
+        <level value="${oa.loggingLevel}" />
+        <appender-ref ref="DAL-APPENDER" />
+        <appender-ref ref="file" />
+    </logger>
+
+    <!-- [公共Appender] auth层 -->
+    <appender name="AUTH-APPENDER"
+              class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="/Users/mapingmp/logs/oa/common-auth.log" />
+        <param name="append" value="true" />
+        <param name="ImmediateFlush" value="true"></param>
+        <param name="encoding" value="UTF-8" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss\} %-5p] [%t] {%c:%L}-%m%n"></param>
+        </layout>
+    </appender>
+
+    <!-- [框架Logger] auth层 - Ibatis -->
+    <logger name="com.wantai.oa.auth" additivity="false">
+        <level value="${oa.loggingLevel}" />
+        <appender-ref ref="AUTH-APPENDER" />
+        <appender-ref ref="file" />
+    </logger>
+
+    <root>
+        <priority value="info" />
+        <appender-ref ref="console" />
+        <appender-ref ref="dailyRollingFile" />
+        <appender-ref ref="file" />
+    </root>
+
+</log4j:configuration>

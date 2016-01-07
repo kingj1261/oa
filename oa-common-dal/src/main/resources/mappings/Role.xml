@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+  
+<mapper namespace="Role">
+
+  <!-- 角色resultMap -->
+  <resultMap id="roleMap" type="com.wantai.oa.common.dal.mappings.dos.auth.Role">
+      <result property="id" column="id" javaType="int" jdbcType="INTEGER"/>
+      <result property="name" column="name" javaType="string" jdbcType="VARCHAR"/>
+      <result property="parentId" column="pid" javaType="int" jdbcType="INTEGER"/>
+  </resultMap>
+
+  <!-- ROLE QUERY BY NAME -->
+  <select id="findRolesByUserId" parameterType="java.lang.String" resultMap="roleMap">
+    select role.* from  m_b_role role,m_b_user_role mp
+      where role.id=mp.role_id
+      and mp.user_id=#{userId}
+  </select>
+
+</mapper>

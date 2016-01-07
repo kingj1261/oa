@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!-- 查找最新的schemaLocation 访问 http://www.springframework.org/schema/ -->
+<beans
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:mvc="http://www.springframework.org/schema/mvc"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.springframework.org/schema/beans"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd   
+        http://www.springframework.org/schema/context   
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd   
+        http://www.springframework.org/schema/mvc   
+        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+  
+  	<!-- 启用MVC注解 -->
+    <mvc:annotation-driven />
+    <context:annotation-config />
+
+    <!-- 静态资源文件，不会被Spring MVC拦截 -->
+    <mvc:resources mapping="/diagram-viewer/**" location="/diagram-viewer/"/>
+    <mvc:resources mapping="/editor-app/**" location="/editor-app/"/>
+
+    <!-- 指定Sping组件扫描的基本包路径 -->
+    <context:component-scan base-package="com.wantai.oa" >
+    	<!-- 这里只扫描Controller，不可重复加载Service -->
+    	<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!-- activiti modeler rest服务，位于activiti-modeler.jar下 -->
+    <context:component-scan base-package="org.activiti.rest">
+        <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.RestController"/>
+    </context:component-scan>
+
+  	<!-- JSP视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
+        <property name="prefix" value="/WEB-INF/views/" /> 
+        <property name="suffix" value=".jsp" />
+        <property name="order" value="1" />
+    </bean>
+
+    <!-- json解析 -->
+    <bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"></bean>
+    <bean id="restResponseFactory" class="org.activiti.rest.service.api.RestResponseFactory"/>
+    <bean id="contentTypeResolver" class="org.activiti.rest.common.application.DefaultContentTypeResolver"/>
+</beans>
