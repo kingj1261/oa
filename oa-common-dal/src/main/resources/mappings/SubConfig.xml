@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+  
+<mapper namespace="SubConfig">
+
+  <!-- 插入配置数据 -->
+  <insert id="addSubConfig" parameterType="com.wantai.oa.common.dal.mappings.dos.performance.SubConfigDo">
+      insert into OA_SUB_BUSINESS_CONFIG(
+        id,
+        business_config_id,
+        sub_event_code,
+        value,
+        from_value,
+        to_value,
+        unit,
+        memo,
+        gmt_create,
+        gmt_modified,
+        operator,
+        last_modified_oeprator
+      )
+      values (
+        #{id},
+        #{businessConfigId},
+        #{subEventCode},
+        #{value},
+        #{fromValue},
+        #{toValue},
+        #{unit},
+        #{memo},
+        now(),
+        now(),
+        #{operator},
+        #{lastModifiedOperator}
+      )
+  </insert>
+
+  <!-- 修改子配置表 -->
+  <update id="updateSubConfig">
+      update OA_SUB_BUSINESS_CONFIG set from_value=#{fromValue},to_value=#{toValue},value=#{value}
+      where id=#{id}
+  </update>
+
+  <!-- 删除子配置表数据 -->
+  <delete id="deleteSubConfig">
+      delete from OA_SUB_BUSINESS_CONFIG where id=#{id}
+  </delete>
+
+</mapper>

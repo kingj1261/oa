@@ -20,6 +20,20 @@
     <mvc:resources mapping="/diagram-viewer/**" location="/diagram-viewer/"/>
     <mvc:resources mapping="/editor-app/**" location="/editor-app/"/>
 
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/plain;charset=UTF-8</value>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
     <!-- 指定Sping组件扫描的基本包路径 -->
     <context:component-scan base-package="com.wantai.oa" >
     	<!-- 这里只扫描Controller，不可重复加载Service -->

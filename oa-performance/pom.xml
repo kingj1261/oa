@@ -14,9 +14,11 @@
     <dependencies>
         <dependency>
             <groupId>com.wantai.oa</groupId>
-            <artifactId>oa-common-dal</artifactId>
+            <artifactId>oa-rules</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+
+
     </dependencies>
 
 </project>

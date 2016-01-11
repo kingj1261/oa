@@ -2,6 +2,7 @@ package com.wantai.oa.auth.service.impl;
 
 import com.wantai.oa.auth.service.MenuService;
 import com.wantai.oa.auth.service.UserService;
+import com.wantai.oa.biz.shared.service.BaseService;
 import com.wantai.oa.common.dal.mappings.dos.auth.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

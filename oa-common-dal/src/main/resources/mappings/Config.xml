@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+  
+<mapper namespace="Config">
+
+
+    <!-- 配置查询resultMap -->
+    <resultMap id="configMap" type="com.wantai.oa.common.dal.mappings.dos.performance.ConfigDo" extends="Common.commonResultMap">
+        <result property="configType" column="config_type" javaType="string" jdbcType="VARCHAR"/>
+        <result property="bizItem" column="biz_item" javaType="string" jdbcType="VARCHAR"/>
+        <result property="bizEvent" column="biz_event" javaType="string" jdbcType="VARCHAR"/>
+        <result property="bizItemName" column="biz_item_name" javaType="string" jdbcType="VARCHAR"/>
+        <result property="bizEventName" column="biz_event_name" javaType="string" jdbcType="VARCHAR"/>
+        <result property="bizItemOrder" column="biz_item_order" javaType="int" jdbcType="INTEGER"/>
+        <result property="bizEventOrder" column="biz_event_order" javaType="int" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!-- 查询事项事件配置 -->
+    <select id="queryConfigs" resultMap="configMap">
+        select id,company_code,company_id,
+               config_type,biz_item,biz_event,
+               biz_event_name,biz_item_name,
+               biz_item_order,biz_event_order,
+               memo,gmt_create,gmt_modified,
+               operator,last_modified_oeprator
+        from   OA_BUSINESS_CONFIG
+        where company_code=#{companyCode}
+        and   company_id=#{companyId}
+        and   config_type=#{configType}
+        order by biz_item_order,biz_event_order asc
+    </select>
+</mapper>

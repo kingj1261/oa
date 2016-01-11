@@ -6,6 +6,7 @@ import com.wantai.oa.auth.service.UserService;
 import com.wantai.oa.common.dal.mappings.dos.auth.User;
 import com.wantai.oa.common.lang.enums.ErrorCodeEnum;
 import com.wantai.oa.common.lang.exception.AuthException;
+import com.wantai.oa.test.BaseTest;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.mgt.DefaultSecurityManager;

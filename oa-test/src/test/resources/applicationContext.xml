@@ -13,6 +13,10 @@
 		<!-- 只扫描Service，也可以添加Repostory，但是要把Controller排除在外，Controller由spring-mvc.xml去加载 -->
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Service" />
+
+        <context:include-filter type="annotation"
+                                expression="org.springframework.stereotype.Component" />
+
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
@@ -58,6 +62,11 @@
     <bean id="transactionManager"
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <!-- jdbcTemplate -->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
     </bean>
 
     <!-- 事务模板类-->

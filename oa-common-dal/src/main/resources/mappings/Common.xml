@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+  
+<mapper namespace="Common">
+
+  <!-- 公共resultMap -->
+  <resultMap id="commonResultMap" type="com.wantai.oa.common.dal.mappings.dos.BaseDo">
+      <result property="id" column="id" javaType="long" jdbcType="INTEGER"/>
+      <result property="companyCode" column="company_code" javaType="string" jdbcType="VARCHAR"/>
+      <result property="companyId" column="company_id" javaType="long" jdbcType="INTEGER"/>
+      <result property="memo" column="memo" javaType="string" jdbcType="VARCHAR"/>
+      <result property="gmtCreate" column="gmt_create" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <result property="gmtModified" column="gmt_modified" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <result property="operator" column="operator" javaType="string" jdbcType="VARCHAR"/>
+      <result property="lastModifiedOperator" column="last_modified_operator" javaType="string" jdbcType="VARCHAR"/>
+  </resultMap>
+</mapper>

@@ -71,4 +71,13 @@ public interface CommonDAO {
      * @throws      DataAccessException
      */
     int update(String statement, Object parameter) throws DataAccessException;
+
+    /**
+     *
+     * @param       statement       sql脚本
+     * @param       parameter       sql参数
+     * @return                      受影响行数
+     * @throws      DataAccessException
+     */
+    int delete(String statement, Object parameter) throws DataAccessException;
 }

@@ -14,6 +14,8 @@
         <module>oa-auth</module>
         <module>oa-common-lang</module>
         <module>oa-test</module>
+        <module>oa-rules</module>
+        <module>oa-biz-shared</module>
     </modules>
     <name>Wantai OA Maven Webapp</name>
 
@@ -38,6 +40,8 @@
         <!-- shiro -->
         <shiro.version>1.2.3</shiro.version>
 
+        <!-- drools-->
+        <drools.version>5.5.0.Final</drools.version>
         <oa.version>0.0.1-SNAPSHOT</oa.version>
 
     </properties>
@@ -219,6 +223,13 @@
             <version>3.0.5.RELEASE</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- drools-->
+        <dependency>
+            <groupId>org.drools</groupId>
+            <artifactId>drools-core</artifactId>
+            <version>${drools.version}</version>
+        </dependency>
     </dependencies>
 
     <repositories>
@@ -253,6 +264,8 @@
                     <source>1.8</source>
                     <target>1.8</target>
                     <encoding>UTF-8</encoding>
+                    <debug>true</debug>
+                    <compilerArgument>-g:source,lines,vars</compilerArgument>
                 </configuration>
             </plugin>
             <plugin>

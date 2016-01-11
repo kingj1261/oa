@@ -53,4 +53,9 @@ public class MyBatisCommonDAO extends SqlSessionDaoSupport implements CommonDAO 
     public int update(String statement, Object parameter) throws DataAccessException {
         return getCurrentSqlSession().update(statement, parameter);
     }
+
+    @Override
+    public int delete(String statement, Object parameter) throws DataAccessException {
+        return getCurrentSqlSession().delete(statement, parameter);
+    }
 }

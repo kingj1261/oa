@@ -16,7 +16,10 @@ public enum ErrorCodeEnum {
     LOGIN_ERROR_USER_NOT_EXISTS("LOGIN_ERROR_USER_NOT_EXISTS", "用户不存在"),
 
     /**用户密码错误*/
-    LOGIN_ERROR_USER_PASSWORD_INVALID("LOGIN_ERROR_USER_PASSWORD_INVALID", "用户密码错误");
+    LOGIN_ERROR_USER_PASSWORD_INVALID("LOGIN_ERROR_USER_PASSWORD_INVALID", "用户密码错误"),
+
+    /** 规则配置错误*/
+    RULE_ERROR_NOT_VALID("RULE_ERROR_NOT_VALID", "规则配置错误");
 
     /**返回码*/
     private String code;

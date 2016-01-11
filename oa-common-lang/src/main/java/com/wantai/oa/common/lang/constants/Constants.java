@@ -12,5 +12,8 @@ package com.wantai.oa.common.lang.constants;
 public class Constants {
 
     /** 当前登陆用户菜单key */
-    public static final String MENU = "_MENU_";
+    public static final String MENU   = "_MENU_";
+
+    /** 系统管理员*/
+    public static final String SYSTEM = "system";
 }
