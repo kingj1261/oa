@@ -1,8 +1,8 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.wantai.oa</groupId>
-	<artifactId>mars-oa-parent</artifactId>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.wantai.oa</groupId>
+    <artifactId>mars-oa-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
@@ -13,14 +13,15 @@
         <module>oa-common-util</module>
         <module>oa-auth</module>
         <module>oa-common-lang</module>
-        <module>oa-test</module>
+        <!--<module>oa-test</module>-->
+        <!--<module>oa-config</module>-->
         <module>oa-rules</module>
         <module>oa-biz-shared</module>
     </modules>
     <name>Wantai OA Maven Webapp</name>
 
-	<!-- Jar版本管理 -->
-	<properties>
+    <!-- Jar版本管理 -->
+    <properties>
         <!-- 编码格式 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- spring版本号 -->
@@ -44,61 +45,67 @@
         <drools.version>5.5.0.Final</drools.version>
         <oa.version>0.0.1-SNAPSHOT</oa.version>
 
+        <!-- redis-->
+        <redis.version>2.7.3</redis.version>
+
+        <!--common pool-->
+        <common.pool.version>2.3</common.pool.version>
+
     </properties>
 
 
-	<dependencies>
-		<!-- Spring start -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		<!-- Spring framework 4中的orm包已经单独拿出来了，所以要和hibernate集成，需要此包 -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		<!-- 提供JMS，Freemarker,Quartz集成服务 -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
+    <dependencies>
+        <!-- Spring start -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <!-- Spring framework 4中的orm包已经单独拿出来了，所以要和hibernate集成，需要此包 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <!-- 提供JMS，Freemarker,Quartz集成服务 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
 
         <!-- Spring end -->
 
-		<!-- MySQL驱动 -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>${mysql.connector}</version>
-		</dependency>
-		<!-- log4j -->
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>${log4j.version}</version>
-		</dependency>
-		<!-- jstl -->
-		<dependency>
-			<groupId>jstl</groupId>
-			<artifactId>jstl</artifactId>
-			<version>${jstl}</version>
-		</dependency>
-		<!-- activiti依赖 -->
-		<dependency>
-			<groupId>org.activiti</groupId>
-			<artifactId>activiti-engine</artifactId>
-			<version>${activiti.version}</version>
-		</dependency>
-		<!-- activiti 与 Spring 集成 -->
-		<dependency>
-			<groupId>org.activiti</groupId>
-			<artifactId>activiti-spring</artifactId>
-			<version>${activiti.version}</version>
-		</dependency>
+        <!-- MySQL驱动 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.connector}</version>
+        </dependency>
+        <!-- log4j -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <!-- jstl -->
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${jstl}</version>
+        </dependency>
+        <!-- activiti依赖 -->
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-engine</artifactId>
+            <version>${activiti.version}</version>
+        </dependency>
+        <!-- activiti 与 Spring 集成 -->
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-spring</artifactId>
+            <version>${activiti.version}</version>
+        </dependency>
 
 
         <!-- mybatis -->
@@ -134,31 +141,24 @@
             <type>pom</type>
         </dependency>
 
-		<!-- junit -->
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.11</version>
-		</dependency>
+        <!-- junit -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+        </dependency>
 
         <!-- 连接池 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>1.0.0</version>
-        </dependency>
-
-        <!-- groovy integartion -->
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-            <version>2.4.5</version>
         </dependency>
 
         <!-- process editor start -->
@@ -215,7 +215,6 @@
             <version>${shiro.version}</version>
         </dependency>
 
-
         <!-- spring test -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -251,7 +250,6 @@
         </repository>
     </repositories>
 
-
     <build>
         <finalName>marsOA</finalName>
         <plugins>
@@ -279,36 +277,60 @@
                 </configuration>
             </plugin>
 
-            <!-- groovy compile plugin -->
+            <!--jetty-->
             <plugin>
-                <!--编译groovy代码插件，没有以下插件groovy默认是不会进行编译的-->
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>1.6</version>
-                <executions>
-                    <execution>
-                        <id>compile</id>
-                        <phase>compile</phase>
-                        <configuration>
-                            <tasks>
-                                <mkdir dir="${basedir}\src\main\java"/>
-                                <taskdef name="groovyc" classname="org.codehaus.groovy.ant.Groovyc">
-                                    <classpath refid="maven.compile.classpath"/>
-                                </taskdef>
-                                <mkdir dir="${project.build.outputDirectory}"/>
-                                <!--destdir指定编译后的groovy字节码文件的存储路径，${project.build.outputDirectory}为系统默认的存储路径，在maven项目路径没有进行更改的情况下直接用这个即可-->
-                                <!--srcdir指定需要进行编译的groovy代码文件夹-->
-                                <groovyc destdir="${project.build.outputDirectory}"
-                                         srcdir="${basedir}\src\main\java">
-                                    <classpath refid="maven.compile.classpath"/>
-                                </groovyc>
-                            </tasks>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>8.1.16.v20140903</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>8.1.16.v20140903</version>
+                <configuration>
+                    <scanIntervalSeconds>5</scanIntervalSeconds>
+                    <webApp>
+                        <contextPath>/test</contextPath>
+                    </webApp>
+                    <stopKey/>
+                    <stopPort/>
+                </configuration>
             </plugin>
         </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.apache.maven.plugins</groupId>
+                                        <artifactId>
+                                            maven-antrun-plugin
+                                        </artifactId>
+                                        <versionRange>
+                                            [1.6,)
+                                        </versionRange>
+                                        <goals>
+                                            <goal>run</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore></ignore>
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 </project>
