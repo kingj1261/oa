@@ -14,7 +14,7 @@
         <module>oa-auth</module>
         <module>oa-common-lang</module>
         <!--<module>oa-test</module>-->
-        <!--<module>oa-config</module>-->
+        <module>oa-config</module>
         <module>oa-rules</module>
         <module>oa-biz-shared</module>
     </modules>
@@ -229,6 +229,19 @@
             <artifactId>drools-core</artifactId>
             <version>${drools.version}</version>
         </dependency>
+
+        <!-- Redis client -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>${redis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+            <version>${common.pool.version}</version>
+        </dependency>
+
     </dependencies>
 
     <repositories>
