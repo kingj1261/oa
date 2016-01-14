@@ -4,7 +4,6 @@
  */
 package com.wantai.oa.biz.shared.vo;
 
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,17 +20,17 @@ public class BizItemVO implements Serializable {
     /**
      * 业务事项编号
      */
-    String bizItem;
+    String           bizItem;
 
     /**
      * 业务事项名称
      */
-    String bizItemName;
+    String           bizItemName;
 
     /**
      * 排序
      */
-    int order;
+    int              order;
 
     /**
      * 业务事件集合
@@ -68,5 +67,23 @@ public class BizItemVO implements Serializable {
 
     public void setBizEvents(List<BizEventVO> bizEvents) {
         this.bizEvents = bizEvents;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        BizItemVO itemVO = (BizItemVO) o;
+
+        return bizItem.equals(itemVO.bizItem);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return bizItem.hashCode();
     }
 }

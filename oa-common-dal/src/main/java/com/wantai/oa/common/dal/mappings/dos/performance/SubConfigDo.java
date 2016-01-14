@@ -4,24 +4,35 @@
  */
 package com.wantai.oa.common.dal.mappings.dos.performance;
 
+import com.wantai.oa.common.dal.mappings.dos.BaseDo;
+
 /**
  * 子表配置对象
  *
  * @author maping.mp
  * @version $Id: SubConfigDo.groovy, v 0.1 2015-1-04 下午09:36:49 maping.mp Exp $
  */
-public class SubConfigDo extends ConfigDo {
+public class SubConfigDo extends BaseDo {
     /**
      * id
      */
-    Long id;
+    Long   id;
 
-    Long businessConfigId;
+    /** 主配置id*/
+    Long   businessConfigId;
 
     /**
      * 配置类型
      */
     String subEventCode;
+
+    String subEventCodeName;
+
+    /** 目标配置对象*/
+    String target;
+
+    /** 客户id*/
+    String customerId;
 
     /**
      * 值
@@ -43,10 +54,7 @@ public class SubConfigDo extends ConfigDo {
      */
     String unit;
 
-    /**
-     * 是否启用 true-启用 false-不启用
-     */
-    String memo;
+    int    order;
 
     @Override
     public Long getId() {
@@ -74,12 +82,10 @@ public class SubConfigDo extends ConfigDo {
         this.subEventCode = subEventCode;
     }
 
-    @Override
     public String getValue() {
         return value;
     }
 
-    @Override
     public void setValue(String value) {
         this.value = value;
     }
@@ -100,23 +106,43 @@ public class SubConfigDo extends ConfigDo {
         this.toValue = toValue;
     }
 
-    @Override
     public String getUnit() {
         return unit;
     }
 
-    @Override
     public void setUnit(String unit) {
         this.unit = unit;
     }
 
-    @Override
-    public String getMemo() {
-        return memo;
+    public String getTarget() {
+        return target;
     }
 
-    @Override
-    public void setMemo(String memo) {
-        this.memo = memo;
+    public void setTarget(String target) {
+        this.target = target;
+    }
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
+    }
+
+    public String getSubEventCodeName() {
+        return subEventCodeName;
+    }
+
+    public void setSubEventCodeName(String subEventCodeName) {
+        this.subEventCodeName = subEventCodeName;
+    }
+
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
     }
 }

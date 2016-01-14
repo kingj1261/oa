@@ -14,16 +14,16 @@ import java.io.Serializable;
 public class Status implements Serializable {
 
     /** 状态 */
-    boolean success = true;
+    boolean success      = true;
 
     /** 错误码 */
-    String errorCode;
+    String  errorCode    = "";
 
     /** 错误描述*/
-    String errorMessage;
+    String  errorMessage = "";
 
     /** 结果对象*/
-    Object data;
+    Object  data;
 
     public boolean isSuccess() {
         return success;

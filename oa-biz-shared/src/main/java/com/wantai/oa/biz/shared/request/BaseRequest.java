@@ -4,8 +4,10 @@
  */
 package com.wantai.oa.biz.shared.request;
 
-import com.wantai.oa.common.lang.enums.ConfigTypeEnum;
+import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -15,94 +17,53 @@ import java.io.Serializable;
  * @version $Id: BaseRequest.java, v 0.1 2015-1-04 下午10:55:39 maping.mp Exp $
  */
 public class BaseRequest implements Serializable {
-    /**
-     * 公司码
-     */
-    String companyCode;
 
-    /**
-     * 公司id
-     */
-    Long companyId;
-
-    /**
-     * 配置类型
-     */
-    ConfigTypeEnum configType;
-
-    /**
-     * 业务事项
-     */
-    String bizItem;
-
-    /**
-     * 业务事件
-     */
-    String bizEvent;
+    /** 业务配置id*/
+    @NotNull(message = "主配置编号id不能为空")
+    @Digits(integer = 10, fraction = 0)
+    Long   businessConfigId;
 
     /**
      * 值
      */
+    @NotNull(message = "值不能为空")
+    @NotEmpty(message = "值不能为空")
+    @Digits(integer = 10, fraction = 2)
     String value;
+
+    /**
+     * 开始值
+     */
+    @NotNull(message = "开始值不能为空")
+    @NotEmpty(message = "开始值不能为空")
+    @Digits(integer = 10, fraction = 2)
+    String fromValue;
+
+    /**
+     * 结束值
+     */
+    @NotNull(message = "结束值不能为空")
+    @NotEmpty(message = "结束值不能为空")
+    @Digits(integer = 10, fraction = 2)
+    String toValue;
 
     /**
      * 单位
      */
+    @NotNull(message = "单位不能为空")
+    @NotEmpty(message = "单位不能为空")
     String unit;
 
-    /**
-     * 备注
-     */
-    String memo;
+    String subEventCode;
 
-    /**
-     * 操作员
-     */
-    String operator;
+    String subEventCodeName;
 
-    /**
-     * 最后一次修改操作员
-     */
-    String lastModifiedOperator;
-
-    public String getCompanyCode() {
-        return companyCode;
+    public Long getBusinessConfigId() {
+        return businessConfigId;
     }
 
-    public void setCompanyCode(String companyCode) {
-        this.companyCode = companyCode;
-    }
-
-    public Long getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
-    }
-
-    public ConfigTypeEnum getConfigType() {
-        return configType;
-    }
-
-    public void setConfigType(ConfigTypeEnum configType) {
-        this.configType = configType;
-    }
-
-    public String getBizItem() {
-        return bizItem;
-    }
-
-    public void setBizItem(String bizItem) {
-        this.bizItem = bizItem;
-    }
-
-    public String getBizEvent() {
-        return bizEvent;
-    }
-
-    public void setBizEvent(String bizEvent) {
-        this.bizEvent = bizEvent;
+    public void setBusinessConfigId(Long businessConfigId) {
+        this.businessConfigId = businessConfigId;
     }
 
     public String getValue() {
@@ -113,6 +74,22 @@ public class BaseRequest implements Serializable {
         this.value = value;
     }
 
+    public String getFromValue() {
+        return fromValue;
+    }
+
+    public void setFromValue(String fromValue) {
+        this.fromValue = fromValue;
+    }
+
+    public String getToValue() {
+        return toValue;
+    }
+
+    public void setToValue(String toValue) {
+        this.toValue = toValue;
+    }
+
     public String getUnit() {
         return unit;
     }
@@ -121,27 +98,19 @@ public class BaseRequest implements Serializable {
         this.unit = unit;
     }
 
-    public String getMemo() {
-        return memo;
+    public String getSubEventCode() {
+        return subEventCode;
     }
 
-    public void setMemo(String memo) {
-        this.memo = memo;
+    public void setSubEventCode(String subEventCode) {
+        this.subEventCode = subEventCode;
     }
 
-    public String getOperator() {
-        return operator;
+    public String getSubEventCodeName() {
+        return subEventCodeName;
     }
 
-    public void setOperator(String operator) {
-        this.operator = operator;
-    }
-
-    public String getLastModifiedOperator() {
-        return lastModifiedOperator;
-    }
-
-    public void setLastModifiedOperator(String lastModifiedOperator) {
-        this.lastModifiedOperator = lastModifiedOperator;
+    public void setSubEventCodeName(String subEventCodeName) {
+        this.subEventCodeName = subEventCodeName;
     }
 }

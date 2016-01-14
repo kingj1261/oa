@@ -22,17 +22,23 @@ public class User implements Serializable {
     /**
      * 用户名称
      */
-    String name;
+    String  name;
 
     /**
      * 用户登录名称
      */
-    String loginName;
+    String  loginName;
 
     /**
      * 登陆密码
      */
-    String password;
+    String  password;
+
+    /** 公司编码*/
+    String  companyCode = "99999999999";
+
+    /** 公司id*/
+    int     companyId   = 1;
 
     public Integer getId() {
         return id;
@@ -64,5 +70,21 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getCompanyCode() {
+        return companyCode;
+    }
+
+    public void setCompanyCode(String companyCode) {
+        this.companyCode = companyCode;
+    }
+
+    public int getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
     }
 }

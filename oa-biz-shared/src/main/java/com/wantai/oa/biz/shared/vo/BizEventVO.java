@@ -5,6 +5,7 @@
 package com.wantai.oa.biz.shared.vo;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 业务事件VO
@@ -14,20 +15,45 @@ import java.io.Serializable;
  */
 public class BizEventVO implements Serializable {
 
+    /** 配置id*/
+    Long                configId;
+
+    /** 业务事项编号*/
+    String              bizItem;
+
     /**
-     * 业务事项编号
+     * 业务事件编号
      */
-    String bizEvent;
+    String              bizEvent;
 
     /**
      * 业务事项名称
      */
-    String bizEventName;
+    String              bizEventName;
 
     /**
      * 排序
      */
-    int order;
+    int                 order;
+
+    /** 子表配置*/
+    List<SubBizEventVO> subEventList;
+
+    public Long getConfigId() {
+        return configId;
+    }
+
+    public void setConfigId(Long configId) {
+        this.configId = configId;
+    }
+
+    public String getBizItem() {
+        return bizItem;
+    }
+
+    public void setBizItem(String bizItem) {
+        this.bizItem = bizItem;
+    }
 
     public String getBizEvent() {
         return bizEvent;
@@ -51,5 +77,31 @@ public class BizEventVO implements Serializable {
 
     public void setOrder(int order) {
         this.order = order;
+    }
+
+    public List<SubBizEventVO> getSubEventList() {
+        return subEventList;
+    }
+
+    public void setSubEventList(List<SubBizEventVO> subEventList) {
+        this.subEventList = subEventList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        BizEventVO eventVO = (BizEventVO) o;
+
+        return bizEvent.equals(eventVO.bizEvent);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return bizEvent.hashCode();
     }
 }

@@ -15,7 +15,13 @@ import com.wantai.oa.common.dal.mappings.dos.auth.User;
 public final class UserHolder {
 
     /** 当前ThreadLocal对象*/
-    private static final ThreadLocal<User> userThreadLocal = new ThreadLocal<>();
+    private static final ThreadLocal<User> userThreadLocal = new ThreadLocal<User>() {
+                                                               protected User initialValue() {
+                                                                   User user = new User();
+                                                                   user.setLoginName("system");
+                                                                   return user;
+                                                               }
+                                                           };
 
     /**
      * 获取当前登陆用户

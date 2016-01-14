@@ -13,13 +13,16 @@ package com.wantai.oa.common.lang.enums;
 public enum ConfigTypeEnum {
 
     /** 绩效系数 */
-    JXXS("jxxs", "绩效系数"),
+    GWXS("GWXS", "绩效系数"),
 
     /**岗位奖金*/
-    GWJJ("gwjj", "岗位奖金"),
+    GWJJ("GWJJ", "岗位奖金"),
 
     /** 岗位提成*/
-    GWTC("gwtc", "岗位提成");
+    GWTC("GWTC", "岗位提成"),
+
+    /** 基础设置*/
+    JCSZ("JCSZ", "基础设置");
 
     /**返回码*/
     private String code;

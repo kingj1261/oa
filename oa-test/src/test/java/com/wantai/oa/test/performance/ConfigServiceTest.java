@@ -6,7 +6,7 @@ import com.wantai.oa.biz.shared.vo.ConfigVO;
 import com.wantai.oa.common.lang.constants.Constants;
 import com.wantai.oa.common.lang.enums.UnitEnum;
 import com.wantai.oa.performance.common.ConfigService;
-import com.wantai.oa.performance.common.request.ConfigRequest;
+import com.wantai.oa.performance.common.request.RatioRequest;
 import com.wantai.oa.test.BaseTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ public class ConfigServiceTest extends BaseTest {
     @Test
     public void testAddSubConfig() {
         jdbcTemplate.execute("delete from oa_sub_business_config");
-        ConfigRequest request = new ConfigRequest();
+        RatioRequest request = new RatioRequest();
         request.setId(1L);
         request.setBusinessConfigId(1L);
         request.setSubEventCode("1000000");
@@ -50,7 +50,7 @@ public class ConfigServiceTest extends BaseTest {
         request.setOperator(Constants.SYSTEM);
         request.setLastModifiedOperator(Constants.SYSTEM);
 
-        ConfigRequest request1 = new ConfigRequest();
+        RatioRequest request1 = new RatioRequest();
         request1.setId(2L);
         request1.setBusinessConfigId(1L);
         request1.setSubEventCode("1000000");
@@ -61,7 +61,7 @@ public class ConfigServiceTest extends BaseTest {
         request1.setOperator(Constants.SYSTEM);
         request1.setLastModifiedOperator(Constants.SYSTEM);
 
-        List<ConfigRequest> requests = new ArrayList<>();
+        List<RatioRequest> requests = new ArrayList<>();
         requests.add(request);
         requests.add(request1);
         configService.addConfig(requests);

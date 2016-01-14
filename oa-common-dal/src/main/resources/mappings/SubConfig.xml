@@ -4,12 +4,34 @@
   
 <mapper namespace="SubConfig">
 
+  <!-- subConfigMap -->
+  <resultMap id="subConfigMap" type="com.wantai.oa.common.dal.mappings.dos.performance.SubConfigDo">
+      <result property="id" column="id" javaType="long" jdbcType="INTEGER"/>
+      <result property="businessConfigId" column="business_config_id" javaType="long" jdbcType="INTEGER"/>
+      <result property="subEventCode" column="sub_event_code" javaType="string" jdbcType="VARCHAR"/>
+      <result property="subEventCodeName" column="sub_event_code_name" javaType="string" jdbcType="VARCHAR"/>
+      <result property="target" column="target" javaType="string" jdbcType="VARCHAR"/>
+      <result property="customerId" column="customer_id" javaType="string" jdbcType="VARCHAR"/>
+      <result property="value" column="value" javaType="string" jdbcType="VARCHAR"/>
+      <result property="fromValue" column="from_value" javaType="string" jdbcType="VARCHAR"/>
+      <result property="toValue" column="to_value" javaType="string" jdbcType="VARCHAR"/>
+      <result property="unit" column="unit" javaType="string" jdbcType="VARCHAR"/>
+      <result property="order" column="orders" javaType="int" jdbcType="INTEGER"/>
+      <result property="gmtCreate" column="gmt_create" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <result property="gmtModified" column="gmt_modified" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <result property="operator" column="operator" javaType="string" jdbcType="VARCHAR"/>
+      <result property="lastModifiedOperator" column="last_modified_operator" javaType="string" jdbcType="VARCHAR"/>
+  </resultMap>
+
   <!-- 插入配置数据 -->
   <insert id="addSubConfig" parameterType="com.wantai.oa.common.dal.mappings.dos.performance.SubConfigDo">
       insert into OA_SUB_BUSINESS_CONFIG(
         id,
         business_config_id,
         sub_event_code,
+        sub_event_code_name,
+        target,
+        customer_id,
         value,
         from_value,
         to_value,
@@ -24,6 +46,9 @@
         #{id},
         #{businessConfigId},
         #{subEventCode},
+        #{subEventCodeName},
+        #{target},
+        #{customerId},
         #{value},
         #{fromValue},
         #{toValue},
@@ -46,5 +71,29 @@
   <delete id="deleteSubConfig">
       delete from OA_SUB_BUSINESS_CONFIG where id=#{id}
   </delete>
+
+  <!-- 根据主表id查询子表配置数据 -->
+  <select id="querySubConfigs" resultMap="subConfigMap">
+      select
+            id                    ,
+            business_config_id    ,
+            sub_event_code        ,
+            sub_event_code_name   ,
+            target                ,
+            customer_id           ,
+            value                 ,
+            from_value            ,
+            to_value              ,
+            unit                  ,
+            memo                  ,
+            orders                ,
+            gmt_create            ,
+            gmt_modified          ,
+            operator              ,
+            last_modified_oeprator
+      from OA_SUB_BUSINESS_CONFIG
+      where business_config_id=#{mainConfigId}
+      order by orders asc
+  </select>
 
 </mapper>
