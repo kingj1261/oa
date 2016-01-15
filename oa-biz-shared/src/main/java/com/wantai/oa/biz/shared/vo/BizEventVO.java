@@ -36,6 +36,16 @@ public class BizEventVO implements Serializable {
      */
     int                 order;
 
+    /**
+     * 是否启用
+     */
+    boolean             enable;
+
+    /**
+     * 单位
+     */
+    String              unit;
+
     /** 子表配置*/
     List<SubBizEventVO> subEventList;
 
@@ -77,6 +87,22 @@ public class BizEventVO implements Serializable {
 
     public void setOrder(int order) {
         this.order = order;
+    }
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
     public List<SubBizEventVO> getSubEventList() {

@@ -61,15 +61,10 @@
       )
   </insert>
 
-  <!-- 修改子配置表 -->
-  <update id="updateSubConfig">
-      update OA_SUB_BUSINESS_CONFIG set from_value=#{fromValue},to_value=#{toValue},value=#{value}
-      where id=#{id}
-  </update>
 
   <!-- 删除子配置表数据 -->
   <delete id="deleteSubConfig">
-      delete from OA_SUB_BUSINESS_CONFIG where id=#{id}
+      delete from OA_SUB_BUSINESS_CONFIG where business_config_id=#{busConfigId}
   </delete>
 
   <!-- 根据主表id查询子表配置数据 -->

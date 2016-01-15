@@ -43,4 +43,17 @@ public abstract class BaseService {
             }
         });
     }
+
+    /**
+     * 公共服务类
+     * @param service             业务执行接口
+     */
+    public void execute(BizService service) {
+        transactionTemplate.execute(new TransactionCallbackWithoutResult() {
+            @Override
+            protected void doInTransactionWithoutResult(TransactionStatus status) {
+                service.execute();
+            }
+        });
+    }
 }

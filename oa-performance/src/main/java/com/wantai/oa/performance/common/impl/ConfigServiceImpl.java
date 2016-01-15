@@ -5,8 +5,8 @@
 package com.wantai.oa.performance.common.impl;
 
 import com.wantai.oa.auth.core.UserHolder;
+import com.wantai.oa.biz.shared.request.BaseRequest;
 import com.wantai.oa.biz.shared.service.BaseService;
-import com.wantai.oa.biz.shared.service.Executable;
 import com.wantai.oa.biz.shared.vo.BizEventVO;
 import com.wantai.oa.biz.shared.vo.BizItemVO;
 import com.wantai.oa.biz.shared.vo.ConfigVO;
@@ -15,7 +15,6 @@ import com.wantai.oa.common.dal.mappings.dos.performance.ConfigDo;
 import com.wantai.oa.common.dal.mappings.dos.performance.SubConfigDo;
 import com.wantai.oa.common.lang.enums.CustomerTypeEnum;
 import com.wantai.oa.performance.common.ConfigService;
-import com.wantai.oa.performance.common.request.RatioRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -40,32 +39,16 @@ import java.util.stream.Collectors;
 public class ConfigServiceImpl extends BaseService implements ConfigService {
 
     @Override
-    public void addConfig(List<RatioRequest> ratioRequests) {
-        operate(
-            ratioRequests,
-            request -> commonDAO.insert("SubConfig.addSubConfig",
-                convert(request, new SubConfigDo())));
-    }
-
-    /**
-     * 通用配置处理模板方法
-     * @param ratioRequests            配置对象
-     * @param callback                  回调接口
-     */
-    private void operate(List<RatioRequest> ratioRequests, Executable<RatioRequest> callback) {
-        final int[] rowIndex = { 1 };
-        Assert.notNull(ratioRequests, "请求参数列表不能为空");
-        ratioRequests.forEach(request -> {
-            service(() -> {
-                Assert.hasText(request.getFromValue(), message("第[%d]行开始值不能为空", rowIndex[0]));
-                Assert.hasText(request.getToValue(), message("第[%d]行结束值不能为空", rowIndex[0]));
-                Assert.hasText(request.getValue(), message("第[%d]行目标值不能为空", rowIndex[0]));
-            }, () -> callback.execute(request));
-            rowIndex[0]++;
+    public void addConfig(Long busConfigId, List<? extends BaseRequest> requests) {
+        execute(() -> {
+            commonDAO.delete("SubConfig.deleteSubConfig", busConfigId);
+            requests.forEach(request -> {
+                commonDAO.insert("SubConfig.addSubConfig", convert(request, new SubConfigDo()));
+            });
         });
     }
 
-    private Object convert(RatioRequest request, SubConfigDo subConfigDo) {
+    private Object convert(BaseRequest request, SubConfigDo subConfigDo) {
         subConfigDo.setBusinessConfigId(request.getBusinessConfigId());
         ConfigDo configDo = (ConfigDo) commonDAO.selectOne("Config.queryById", request);
         if (StringUtils.isBlank(request.getSubEventCode())) {
@@ -93,26 +76,6 @@ public class ConfigServiceImpl extends BaseService implements ConfigService {
         subConfigDo.setOperator(UserHolder.getUser().getLoginName());
         subConfigDo.setLastModifiedOperator(UserHolder.getUser().getLoginName());
         return subConfigDo;
-    }
-
-    private String message(String message, int rowIndex) {
-        return String.format(message, rowIndex);
-    }
-
-    @Override
-    public void update(List<RatioRequest> ratioRequests) {
-        operate(
-            ratioRequests,
-            request -> commonDAO.update("SubConfig.updateSubConfig",
-                convert(request, new SubConfigDo())));
-    }
-
-    @Override
-    public void delete(List<RatioRequest> ratioRequests) {
-        operate(
-            ratioRequests,
-            request -> commonDAO.delete("SubConfig.deleteSubConfig",
-                convert(request, new SubConfigDo())));
     }
 
     @Override
@@ -175,6 +138,8 @@ public class ConfigServiceImpl extends BaseService implements ConfigService {
                     eventVO.setBizEvent(event.getBizEvent());
                     eventVO.setBizEventName(event.getBizEventName());
                     eventVO.setOrder(event.getBizEventOrder());
+                    eventVO.setEnable(Boolean.parseBoolean(event.getEnable()));
+                    eventVO.setUnit(event.getUnit());
                     eventVO.setSubEventList(querySubEventsVo(event.getId()));
                     eventVOs.add(eventVO);
                 });

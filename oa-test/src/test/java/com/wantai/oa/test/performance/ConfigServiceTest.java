@@ -1,9 +1,9 @@
 package com.wantai.oa.test.performance;
 
+import com.alibaba.fastjson.JSON;
 import com.wantai.oa.biz.shared.vo.BizEventVO;
 import com.wantai.oa.biz.shared.vo.BizItemVO;
 import com.wantai.oa.biz.shared.vo.ConfigVO;
-import com.wantai.oa.common.lang.constants.Constants;
 import com.wantai.oa.common.lang.enums.UnitEnum;
 import com.wantai.oa.performance.common.ConfigService;
 import com.wantai.oa.performance.common.request.RatioRequest;
@@ -40,31 +40,25 @@ public class ConfigServiceTest extends BaseTest {
     public void testAddSubConfig() {
         jdbcTemplate.execute("delete from oa_sub_business_config");
         RatioRequest request = new RatioRequest();
-        request.setId(1L);
         request.setBusinessConfigId(1L);
         request.setSubEventCode("1000000");
         request.setValue("10");
         request.setFromValue("0");
         request.setToValue("100");
         request.setUnit(UnitEnum.CNY.getCode());
-        request.setOperator(Constants.SYSTEM);
-        request.setLastModifiedOperator(Constants.SYSTEM);
 
         RatioRequest request1 = new RatioRequest();
-        request1.setId(2L);
         request1.setBusinessConfigId(1L);
         request1.setSubEventCode("1000000");
         request1.setValue("10");
         request1.setFromValue("0");
         request1.setToValue("100");
         request1.setUnit(UnitEnum.CNY.getCode());
-        request1.setOperator(Constants.SYSTEM);
-        request1.setLastModifiedOperator(Constants.SYSTEM);
 
         List<RatioRequest> requests = new ArrayList<>();
         requests.add(request);
         requests.add(request1);
-        configService.addConfig(requests);
+        configService.addConfig(1L, requests);
         assertTrue(jdbcTemplate.queryForInt("select count(*) from OA_SUB_BUSINESS_CONFIG") == 2);
     }
 
@@ -82,11 +76,7 @@ public class ConfigServiceTest extends BaseTest {
         for (String data : datas) {
             jdbcTemplate.execute(data);
         }
-        List<ConfigVO> configs = configService.queryConfigs("ABC", 1, "GWJX");
-        assertNotNull(configs);
-        assertTrue(configs.size() == 1);
-
-        ConfigVO configVO = configs.get(0);
+        ConfigVO configVO = configService.queryConfigs("ABC", 1, "GWJX", true, "");
         assertNotNull(configVO);
         assertEquals(configVO.getConfigType(), "GWJX");
 
@@ -99,5 +89,21 @@ public class ConfigServiceTest extends BaseTest {
         });
 
         jdbcTemplate.execute("delete from oa_business_config");
+    }
+
+    @Test
+    public void createJsonAddData() {
+        List<RatioRequest> requests = new ArrayList<>();
+        RatioRequest request = new RatioRequest();
+        request.setBusinessConfigId(999997L);
+        request.setFromValue("10");
+        request.setToValue("100");
+        request.setValue("1.3");
+        request.setUnit("156");
+        request.setSubEventCode("10000000");
+
+        requests.add(request);
+
+        System.out.println(JSON.toJSONString(requests));
     }
 }

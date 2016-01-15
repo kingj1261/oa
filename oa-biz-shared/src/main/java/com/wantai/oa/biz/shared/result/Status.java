@@ -14,13 +14,16 @@ import java.io.Serializable;
 public class Status implements Serializable {
 
     /** 状态 */
-    boolean success      = true;
+    boolean success        = true;
+
+    /** 状态码 */
+    int     responseStatus = 200;
 
     /** 错误码 */
-    String  errorCode    = "";
+    String  errorCode      = "";
 
     /** 错误描述*/
-    String  errorMessage = "";
+    String  errorMessage   = "";
 
     /** 结果对象*/
     Object  data;
@@ -55,5 +58,13 @@ public class Status implements Serializable {
 
     public void setData(Object data) {
         this.data = data;
+    }
+
+    public int getResponseStatus() {
+        return responseStatus;
+    }
+
+    public void setResponseStatus(int responseStatus) {
+        this.responseStatus = responseStatus;
     }
 }

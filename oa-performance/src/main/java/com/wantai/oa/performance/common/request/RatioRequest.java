@@ -14,25 +14,4 @@ import com.wantai.oa.biz.shared.request.BaseRequest;
  */
 public class RatioRequest extends BaseRequest {
 
-    /** 目标配置对象*/
-    String target;
-
-    /** 客户id*/
-    String customerId;
-
-    public String getTarget() {
-        return target;
-    }
-
-    public void setTarget(String target) {
-        this.target = target;
-    }
-
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
 }

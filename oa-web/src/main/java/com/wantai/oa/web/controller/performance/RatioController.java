@@ -4,6 +4,7 @@
  */
 package com.wantai.oa.web.controller.performance;
 
+import com.alibaba.fastjson.JSON;
 import com.wantai.oa.auth.core.UserHolder;
 import com.wantai.oa.biz.shared.result.Status;
 import com.wantai.oa.biz.shared.vo.BizEventVO;
@@ -14,14 +15,13 @@ import com.wantai.oa.performance.common.request.RatioRequest;
 import com.wantai.oa.web.controller.common.BaseController;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -36,6 +36,8 @@ import java.util.stream.Collectors;
 @RestController
 public class RatioController extends BaseController {
 
+    @Autowired
+    protected Validator   validator;
     /** 配置服务对象 */
     @Autowired
     private ConfigService configService;
@@ -86,28 +88,29 @@ public class RatioController extends BaseController {
      * @return              配置数据对象
      */
     @RequestMapping(value = "/config/add", method = RequestMethod.POST)
-    public Status addConfig(HttpServletRequest request, HttpServletResponse response,
-                            @Valid RatioRequest ratioRequest, BindingResult result) {
+    public Status addConfig(HttpServletRequest request, Long businessConfigId) {
         return execute(status -> {
-            if (result.hasErrors()) {
-                throw new RuntimeException("参数错误!");
+            String datas = request.getParameter(getDataKey());
+            if (StringUtils.isBlank(datas)) {
+                throw new RuntimeException("请求参数为空");
             }
-            List<RatioRequest> requests = new ArrayList<>();
-            requests.add(ratioRequest);
-            configService.addConfig(requests);
-        });
-    }
 
-    /**
-     * 配置数据
-     * @return              配置数据对象
-     */
-    @RequestMapping(value = "/config/update", method = RequestMethod.PUT)
-    public Status updateConfig(RatioRequest request) {
-        return execute(status -> {
-            List<RatioRequest> requests = new ArrayList<>();
-            requests.add(request);
-            configService.update(requests);
+            if (businessConfigId == null) {
+                throw new RuntimeException("主配置id不能为空");
+            }
+
+            try {
+                List<RatioRequest> requests = JSON.parseArray(datas, RatioRequest.class);
+                requests.forEach(ratio -> {
+                    Set<ConstraintViolation<RatioRequest>> errors = validator.validate(ratio);
+                    if (errors.size() > 0) {
+                        throw new RuntimeException("请求参数数据错误,错误数[" + errors.size() + "]");
+                    }
+                });
+                configService.addConfig(businessConfigId, requests);
+            } catch (Exception e) {
+                throw new RuntimeException("绩效系数数据解析错误");
+            }
         });
     }
 }

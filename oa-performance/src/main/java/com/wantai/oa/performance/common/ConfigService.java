@@ -4,9 +4,9 @@
  */
 package com.wantai.oa.performance.common;
 
+import com.wantai.oa.biz.shared.request.BaseRequest;
 import com.wantai.oa.biz.shared.vo.ConfigVO;
 import com.wantai.oa.biz.shared.vo.SubBizEventVO;
-import com.wantai.oa.performance.common.request.RatioRequest;
 
 import java.util.List;
 
@@ -20,21 +20,10 @@ public interface ConfigService {
 
     /**
      * 新增配置对象
+     * @param busConfigId
      * @param requestList   请求参数
      */
-    void addConfig(List<RatioRequest> requestList);
-
-    /**
-     * 更新配置对象
-     * @param requestList   请求参数
-     */
-    void update(List<RatioRequest> requestList);
-
-    /**
-     * 删除配置对象
-     * @param requestList   请求参数
-     */
-    void delete(List<RatioRequest> requestList);
+    void addConfig(Long busConfigId, List<? extends BaseRequest> requestList);
 
     /**
      * 根据配置类型查询所有的配置对象
