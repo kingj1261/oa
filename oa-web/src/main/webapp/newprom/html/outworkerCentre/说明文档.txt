@@ -1,0 +1,10 @@
+-------------------------------------------通用中心-------------------------------
+ 外出申请：goOut-Entry.html
+ 外出审批：goOut-Approve.html
+ 外出执行：goOut-execute.html
+        外出执行-查看：goOut-execute-look.html
+        外出执行-编辑：goOut-execute-edit.html
+ 外出完结审批：goOut-end.html
+        外出完结审批-查看：goOut-end-look.html
+        外出完结审批-编辑：goOut-end-approve.html
+ 外出列表：goOut-list.html

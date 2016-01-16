@@ -1,0 +1,124 @@
+<title>外勤中心-通用外勤中心-外出列表</title>
+<link rel="stylesheet" href="css/S-allModule.css">
+
+<!--您当前位置-->
+<div class="S-location">
+    <i class="locationImg"></i><a>您当前位置:</a><a href="">外勤中心</a>&#47;<a href="">通用外勤中心</a>&#47;
+    <a class="locC">外出列表</a>
+</div>
+<div class="mainCont">
+    <!--顶部信息~查询-->
+    <div class="S-search">
+        <ul>
+            <li>
+                <label>外出流程：</label>
+                <select><option value="">全部</option></select>
+            </li>
+            <li>
+                <label>外出状态：</label>
+                <select><option value="">全部</option></select>
+            </li>
+            <li>
+                <label>申请人：</label><input type="text"/>
+            </li>
+            <li style="margin-right:2px;"><label>申请时间：</label>
+                <div class="demo fl relative" >
+                    <input class="S-modified dateImg" placeholder="全部" type="text"  onclick="laydate()">
+                </div>
+            </li>
+            <li><label style="width:30px;text-align:center;">到</label>
+                <div class="demo fl relative" >
+                    <input class="S-modified dateImg " placeholder="全部" type="text"  onclick="laydate()">
+                </div>
+            </li>
+            <li>
+                <input  type="button" value="查询" class="SearchBtn"/>
+            </li>
+        </ul>
+    </div>
+    <!--主表单-->
+    <table class="S-main-table mt20">
+        <tr>
+            <th>序号</th>
+            <th>外出单号</th>
+            <th>外出流程</th>
+            <th>外出状态</th>
+            <th>申请时间</th>
+            <th>申请人</th>
+            <th class="w70">操作</th>
+        </tr>
+        <tr class="colorOne">
+            <td>1</td>
+            <td>WC-20151009-001</td>
+            <td>申请</td>
+            <td>草稿</td>
+            <td>2015-10-09 12：12：12</td>
+            <td>成成</td>
+            <td>
+                <div class="mr10 h35 w70">
+                    <a class="checkBtn fr" onclick="shoutye('html/outworkerCentre/', this)">查看</a>
+                </div>
+            </td>
+        </tr>
+        <tr class="colorTwo">
+            <td>2</td>
+            <td>WC-20151009-001</td>
+            <td>审批</td>
+            <td class="TabBlue">待审批</td>
+            <td>2015-10-09 12：12：12</td>
+            <td>成成</td>
+            <td>
+                <div class="mr10 h35 w70">
+                    <a class="checkBtn fr" onclick="shoutye('html/outworkerCentre/', this)">查看</a>
+                </div>
+            </td>
+        </tr>
+        <tr class="colorOne">
+            <td>3</td>
+            <td>WC-20151009-001</td>
+            <td>执行</td>
+            <td>已执行</td>
+            <td>2015-10-09 12：12：12</td>
+            <td>成成</td>
+            <td>
+                <div class="mr10 h35 w70">
+                    <a class="checkBtn fr" onclick="shoutye('html/outworkerCentre/', this)">查看</a>
+                </div>
+            </td>
+        </tr>
+        <tr class="colorTwo">
+            <td>4</td>
+            <td>WC-20151009-001</td>
+            <td>完结审批</td>
+            <td>完结</td>
+            <td>2015-10-09 12：12：12</td>
+            <td>成成</td>
+            <td>
+                <div class="mr10 h35 w70">
+                    <a class="checkBtn fr" onclick="shoutye('html/outworkerCentre/', this)">查看</a>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <!--分页-->
+    <div class="page">
+        <div class="mt20 mb25 fl c7e">每页显示10条 <em>共计1234条</em></div>
+        <div class="pageBtn fr">
+            <span>第一页</span>
+                <span>
+                    <img src="images/leftBtn.png">
+                </span>
+            <em>1</em>
+            <em>2</em>
+            <em>...</em>
+            <em>11</em>
+            <em>12</em>
+                <span>
+                    <img src="images/rightbtn.png">
+                </span>
+            <span>末页</span>
+        </div>
+    </div>
+</div>
+
+

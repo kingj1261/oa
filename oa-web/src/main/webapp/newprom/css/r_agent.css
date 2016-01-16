@@ -1,0 +1,1294 @@
+@charset 'utf-8';
+@import "r_cont.css";
+/*--------------------------------------------------------------------------合格证--------------------------------------------------------------------*/
+.imglist{height: 90px;margin-bottom: 15px;}
+
+.fileBox{height: 85px;width: 88px;}
+.fileBox::after {
+    content: "+";
+    font-size: 40px;
+    font-weight: bold;color:#999;
+    top: 31%;
+}
+.fl{float: left;}
+.lanBCBTn{border: none;background: #0a9ce1;color: #fff;font-size: 14px;border-radius: 3px;width: 80px;
+          height: 30px;font-weight: bold}
+.certificate .listDataClass .dataToolBox .unitBox,.certificate .listDataClass .dataToolBox  input.DataText,.certificate .dataToolBox  .count,.certificate .listDataClass .dataToolBox select.DataText{height: 30px;line-height: 30px;}
+.fr{float: right;}
+p.blueColor {font-size: 16px;font-family: '微软雅黑';}
+.undo,.count{margin-left: 0;margin-top: 0;}
+.certificate .dataToolBox  .count{background-color: #00c261;padding: 0 15px;margin-left: 0;margin-top: 0;}
+.certificate .dataToolBox .marginNone{background-color: #0a9ce1;}
+.borborWidth{height: 0;border-top: #e6e6e6 solid 1px; }
+.certificate .selectBoxes{width: 200px;}
+.certificate .dataToolBox input.DataText{padding-left: 5px;}
+.certificate .formWidth{min-width: 180px;}
+.certificate .selectBoxes input.DataText{width: 82%;margin: 0;}
+.certificate .selectBoxes a.icon-search{width: 18%;float: left;background-color: #f7f7f7;margin: 0;}
+.certificate .disabledColor,.certificate .onlyWidth{min-width: 170px;}
+.marginBottom .popupTextTitle {
+    background-color: #ffffff;
+    border: 1px solid #DADDE5;
+
+    width: 100%;
+}
+.tableBoxBorder{border-left: 1px solid #dadde5;}
+.tableBoxBorder .trColori,.tableBoxBorder .trColorn{background-color: #FFF;}
+.tableBoxBorder td input.DataText{float: none;}
+.tableBoxBorder tr:hover{background-color: transparent;}
+.tableBoxBorder .trColori td,.tableBoxBorder th{border: 1px solid #dadde5;}
+.tableBoxBorder .trColori td:last-child .DataText{text-align: left;}
+.tableBoxes .DataText{width: 90%;height:80%;display: block;line-height: 42px;margin: auto; }
+.tableBoxeser td:last-child{width: 50%;text-align: left;}
+.tableBoxes td,.tableBoxes th{width:200px;}
+
+
+.LookImg .dataToolBox{margin-right: -20px;}
+.LookImg .unitBox{height: auto;margin-right: 20px;margin-bottom: 0;}
+.LookImg img{height: 215px;width: 269px;display: block;}
+
+.imglistpic .unitBox {width: 100%;height: 135px;}
+.imglistpic .formWidth {width: 182px;text-align: left;margin-bottom: 10px;}
+.imgpic{margin-right: 15px;}
+img.imgpic{height: 88px;width: 88px;}
+
+.imglistpic .unitBox{width: 32%;}
+.textareaBorder{border: 1px solid #dadde5;width: 100%;min-height: 100px;padding: 10px;}
+
+.width100es{height: 30px;line-height: 30px;}
+.tableBoxer th{border-top-width: 0;}
+.tableBoxer th:last-child{width: 50%;}
+.tableBoxer th{background-color: transparent;font-weight: bold;}
+
+input.inputWidth{height: 35px;line-height: 3.5px;margin-right: 20px;width: 80% !important;}
+
+/*-----------------------------------------------------巡展中心--------------------------------------------*/
+/**************************************************代理首页********************/
+.border{background-color: #FFF;}
+.border td,.border th{
+    border: 1px solid #e8e8e8;
+}
+
+.border tr{
+    border-left: 1px solid #e8e8e8; border-right: 1px solid #e8e8e8;
+}
+.solid{border-bottom: 1px #e8e8e8 dashed;width: 100%;clear: both;}
+.editBox{
+    min-width: 200px;width: 20%;float: left;margin-right: 2%;margin-left: -2%;margin-bottom: 10px;
+}
+.editBox:last-child{margin-right: 0;}
+.editBox  .formWidth1{min-width:58px;width: 34%;}
+.editBox img{height: 160px;width:91%;margin-left: 9%}
+
+.editBox .disabledColor{width: 60%;}
+.tabCenter p{width: 170px;margin: auto;text-align: right;}
+.tabCenter.delText{min-width: 110px}
+.width90{width: 93%;margin-left: 6%;}
+.width90 p.undo{background-color: #00c261;margin-right: 5px;color: #FFF;}
+.width90 p.delText{background-color: #8B8B8B;height: 35px;line-height: 35px;}
+table.dataToBox{min-width:965px;width: 100%;}
+table.dataToBox .DataText {margin-bottom: 20px !important;}
+table.dataToBox textarea {width: 85%;}
+.borderBlod{margin-right: 15px;}
+.popupBtn .undo,.borderBlod{border-color:  #dadde5;}
+.popupContBox .selectBoxes{min-width: 130px;}
+.popupContBox .selectBoxes  .DataText{margin: 0;}
+.popupContBox .selectBoxes .icon-search{width: 21%;}
+.border .sellerListBoxTitle{ border-right: 1px solid #e8e8e8;}
+
+/*-------------------------------------设置中心--------------------------------------*/
+/**************************************************分公司及部门管理********************/
+
+.listContext .selectBoxes {
+    width: 200px;
+    margin-bottom: 0; }
+.listContext .selectBoxes .menuBox {
+    top: 43px; }
+.listContext .listDataContext {
+    width: 75%;
+    min-width: 750px;
+    float: left; }
+.listContext .listDataContext .undo {
+    height: 35px;
+    line-height: 35px;
+    min-width: 88px;
+    font-size: 16px;
+    font-family: '?????????????????';
+    float: left; }
+.listContext .setTable {
+    width: 700px;
+    clear: both; }
+.listContext .setTable .menuBox {
+    top: 30px; }
+.listContext .setTable .formWidth {
+    max-width: 90px;
+    width: 90px; }
+.listContext .setTable table {
+    width: 700px; }
+.listContext .setTable table .onlyWidth, .listContext .setTable table .DataSelect {
+    width: 100%;
+    padding-left: 10px; }
+.listContext .setTable table td {
+    border: 1px solid #e8e8e8;
+    border: 1px solid #e8e8e8;
+    padding: 10px;
+    color: #707070; }
+.listContext .setTable input.DataText {
+    width: 81%; }
+.listContext .popupBtn {
+    width: 700px; }
+
+.menuBox {
+    display: none;
+    position: absolute;
+    top: 38px;
+    background-color: #FFF;
+    width: 74%;
+    min-width: 200px;
+    border: 1px solid #f3f3f3;
+    border: 1px solid #f3f3f3;
+    padding: 10px;
+    line-height: 24px; }
+.menuBox span {
+    font-size: 13px;
+    display: block; }
+.menuBox .unitActive, .menuBox .menuText .menuc:hover, .menuText .menuBox .menuc:hover {
+    position: relative;
+    background-color: transparent;
+    color: #0f9ee3; }
+.menuBox .unitActive:before, .menuBox .menuText .menuc:hover:before, .menuText .menuBox .menuc:hover:before {
+    content: '';
+    display: block;
+    border: 7px solid #0f9ee3;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+    position: absolute;
+    left: 0%;
+    top: 5px; }
+
+.menuTitle {
+    font-size: 14px;
+    font-weight: bold; }
+
+.menuText {
+    padding: 5px 20px;
+    display: none; }
+.menuText .menuc {
+    padding-left: 15px; }
+
+.menuChi {
+    padding-left: 15px; }
+
+.menuChir:before {
+    content: url("../images/jia.png");
+    padding-right: 5px; }
+
+.menuChin:before {
+    content: url("../images/jian.png");
+    padding-right: 5px; }
+
+.lockBox {
+    min-height: 300px;
+    max-width: 800px;
+    margin: 5% auto; }
+
+.lockImgBox {
+    min-width: 260px; }
+.lockImgBox img {
+    height: 190px;
+    width: 160px;
+    margin: auto;
+    display: block;
+    margin-top: 13%; }
+
+.lockBox .lockListBox {
+    width: 400px; }
+
+.lockListBox .unitBox {
+    margin-right: 0; }
+.lockListBox .lockListTitle {
+    color: #2984be;
+    font: 30px/2 '?????????????????';
+    margin-bottom: 10px; }
+.lockListBox .lockListTitle img {
+    vertical-align: middle;
+    height: 34px;
+    width: 34px;
+    margin-left: 10px;
+    margin-top: -5px; }
+.lockListBox .DataCont {
+    background-color: #FFF; }
+.lockListBox .DataCont i {
+    font-size: 24px;
+    color: gainsboro;
+    vertical-align: middle;
+    margin: 0 5px; }
+.lockListBox .DataCont input {
+    width: 85%;
+    height: 100%;
+    border: 0; }
+.lockListBox .DataText {
+    min-width: 70px;
+    font-size: 14px; }
+.lockListBox .onlyWidth, .lockListBox .DataSelect {
+    min-width: 250px; }
+
+
+/*-------------------------------------卖家中心--------------------------------------*/
+
+/**************************************************代理首页********************/
+
+
+.agentHome {
+    background-color: #f5f5f5;
+    padding: 15px 20px; }
+.agentHome .listDataTitle img {
+    vertical-align: middle;
+    height: 40px;
+    width: 40px;
+    margin-right: 10px; }
+.agentHome .TitleActiveColor {
+    font-size: 25px; }
+
+.DataClassOnly {
+    margin-bottom: 20px;
+    min-width: 1024px;
+    background-color: #FFF;
+    width: 1180px; }
+.DataClassOnly h3 {
+    height: 52px;
+    line-height: 52px;
+    margin: 0 20px;
+    border: 1px solid #f2f2f2;
+    border-top-width: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    font-size: 18px;
+    font-family: '?????????????????';
+    color: #676767; }
+.DataClassOnly img {
+    vertical-align: middle;
+    height: 30px;
+    width: 30px;
+    margin-right: 10px; }
+
+#DataClassOnly p.DataText {
+    height: 120px; }
+#DataClassOnly .OnlyData {
+    width: 48%; }
+
+#DataClassOnly #OnlyData {
+    background-color: #f5f5f5;
+    margin: 38px 50px 0 0;
+    padding: 0;
+    width: auto;
+    border-right: 1px dashed gainsboro;
+    border-left: 1px dashed gainsboro; }
+#DataClassOnly #OnlyData img {
+    height: 15px;
+    width: 15px;
+    display: inline-block;
+    margin: 0; }
+#DataClassOnly #OnlyData dl {
+    margin: 10px 0;
+    padding: 20px;
+    text-align: center;
+    border-right: 1px dashed gainsboro;
+    width: auto; }
+#DataClassOnly #OnlyData dl:last-child {
+    border-right: 0; }
+#DataClassOnly dt {
+    font-size: 14px;
+    font-weight: bold; }
+#DataClassOnly dd {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 0.8; }
+
+/*店铺动态*/
+.DataTextImg {
+    width: 100%;
+
+    text-align: center; }
+.DataTextImg .DataText {
+    width: 10.5%;
+    border: 1px solid #f2f2f2;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-top-width: 0; }
+.DataTextImg dl:last-of-type {
+    border: 0; }
+.DataTextImg img {
+    margin: 0; }
+.DataTextImg b {
+    font-size: 14px;
+    font-weight: bold; }
+
+.OnlyData {
+    width: auto;
+    min-width: 280px;
+    margin-right: 1%;float: left;
+    padding: 30px 60px;
+    font-size: 12px;
+    height: 100%; }
+.OnlyData img {
+    vertical-align: middle;
+    height: 84px;
+    width: 84px;
+    margin-top: 10px; }
+.OnlyData p.DataText {
+    height: 150px;
+    text-align: center; }
+.OnlyData p.DataText img, .OnlyData p.DataText b {
+    display: block;
+    margin: auto;
+    font-weight: bold;
+    font-family: '???????'; }
+.OnlyData p.DataText img {
+    margin-bottom: 10px;
+    height: 110px;
+    width: 110px; }
+.OnlyData .morny, .OnlyData .BoxPopup .DataTextColor, .BoxPopup .OnlyData .DataTextColor {
+    color: #f93838;
+    font-size: 14px; }
+.OnlyData ul {
+    margin-left: 10px;
+    margin-top: 8px; }
+.OnlyData .handleBox {
+    margin-top: 5px; }
+
+.DataLeft {
+    width: 60%; }
+
+.DataTextWidth {
+    min-width: 70px; }
+
+.homeToolBox {
+    background-color: #0a9ce1;
+    padding-left: 20px;
+    font-size: 16px;
+    color: #FFF;
+    height: 45px;
+    line-height: 45px; }
+
+.agentHomeData {
+    margin-bottom: 20px;
+    max-width: 1180px; }
+.agentHomeData .DataChart {
+    height: 450px; }
+
+#LineData, #PieData {
+    height: 370px; }
+
+#LineData {
+    overflow: hidden; }
+#LineData li {
+    border: 1px dashed #f2f2f2;
+    border-top-width: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    font-size: 14px;
+    padding: 0 15px;
+    line-height: 38px;
+    height: 38px;
+    background-color: transparent;
+    background-image: url("../images/pic.png");
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    -webkit-background-size: none;
+    -moz-background-size: none;
+    -o-background-size: none;
+    -ms-background-size: none;
+    background-size: none;
+    -webkit-background-clip: border-box;
+    -moz-background-clip: border-box;
+    -o-background-clip: border-box;
+    -ms-background-clip: border-box;
+    background-clip: border-box; }
+#LineData a, #LineData .navBox li, .navBox #LineData li {
+    color: #747474; }
+#LineData span {
+    color: #b9b9b9; }
+
+.DataChart {
+    min-width: 47%;
+    background-color: #FFF;
+    width: 49%;
+    float: left;
+    height: 100%;
+    margin-left: 20px;
+    border: 1px solid #f2f2f2;
+    border: 1px solid #f2f2f2;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    -ms-border-radius: 3px;
+    border-radius: 3px; }
+.DataChart h3 {
+    height: 50px;
+    line-height: 50px;
+    font-size: 16px;
+    background-color: #ececec;
+    color: #3e3e3e;
+    text-align: center;
+    margin-bottom: 20px; }
+
+#DataChart {
+    margin: 0; }
+
+.Warning:before {
+    content: '*';
+    display: inline-block;
+    color: #DB2B26;
+    vertical-align: middle;
+    font-weight: bold;
+    padding-right: 3px; }
+
+.sellerRight .errerBox {
+    text-align: center; }
+
+.errerBox {
+    color: #DB2B26;
+    font-size: 14px;
+    height: 35px;
+    line-height: 35px;
+    display: none; }
+.errerBox .icon-remove-sign {
+    background-color: transparent;
+    background-image: url("../images/wantImg.png");
+    background-repeat: no-repeat;
+    background-position: left top;
+    -webkit-background-size: none;
+    -moz-background-size: none;
+    -o-background-size: none;
+    -ms-background-size: none;
+    background-size: none;
+    -webkit-background-clip: border-box;
+    -moz-background-clip: border-box;
+    -o-background-clip: border-box;
+    -ms-background-clip: border-box;
+    background-clip: border-box;
+    font-size: 20px;
+    vertical-align: middle;
+    margin-right: 5px;
+    padding: 0 20px; }
+
+.TopBox {
+    position: fixed;
+    top: 80%;
+    right: 20px;
+    display: none; }
+
+/**********************************************店铺信息*基本信息********************/
+/*查看*/
+.listTable {
+    width: 30%;
+    float: left;
+    border: 1px solid #e8e8e8;
+    border: 1px solid #e8e8e8;
+    margin-right: 2% !important;
+    margin-bottom: 20px; }
+.listTable .tableHead {
+    text-align: center;
+    height: 35px;
+    line-height: 35px; }
+.listTable .tBodyBox {
+    background-color: transparent; }
+.listTable .tBodyBox td {
+    border: 1px solid #e8e8e8;
+    border: 1px solid #e8e8e8;
+    height: 30px;
+    line-height: 30px; }
+.listTable .tBodyBox .onlyWidth, .listTable .tBodyBox .DataSelect {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    text-align: center; }
+.listTable .tFootBox {
+    text-align: center; }
+.listTable .tFootBox a, .listTable .tFootBox .navBox li, .navBox .listTable .tFootBox li {
+    margin: 10px auto;
+    float: none;
+    display: block;
+    font-size: 20px; }
+.listTable .tFootBox a:hover, .listTable .tFootBox .navBox li:hover, .navBox .listTable .tFootBox li:hover {
+    background-color: #00c261; }
+.listTable .tableBox {
+    width: 88%;
+    margin: 20px auto 20px auto; }
+
+.listTableBox {
+    width: 100%; }
+
+#listTable {
+    border: 0; }
+#listTable .tableBox {
+    width: 100%; }
+
+
+.exitColor {
+    background-color: #f86d6d; }
+
+.modiColor {
+    background-color: #4d98eb; }
+
+.shopinofBox {
+    min-width: 1100px;
+    max-width: 1300px; }
+.shopinofBox .listDataClass {
+    height: 35px; }
+.shopinofBox .count, .shopinofBox .undo, .shopinofBox .DataSelect, .shopinofBox .countes {
+    margin-right: 10px;
+    font-size: 16px;
+    border: 0; }
+
+.marginNone {
+    margin-right: 0; }
+
+.width50 {
+    width: 48%;
+    min-width: 300px; }
+
+.marginRight {
+    margin-right: 22px; }
+
+/*联系人信息*/
+.inofBoxLeft {
+    margin-right: 15px;
+    width: 55%; }
+.inofBoxLeft .dataToBox {
+    height: 100%; }
+.inofBoxLeft .dataToBox em.DataText {
+    min-width: 125px;
+    text-align: right; }
+
+/*法人身份证扫描件*/
+.inofBoxRight {
+    min-width: 365px;
+    width: 27%; }
+.inofBoxRight dt.FontBold {
+    color: #666666;
+    font-size: 13px;
+    margin-bottom: 5px; }
+.inofBoxRight img {
+    width: 356px; }
+
+/*业务信息*/
+.businessBox {
+    min-width: 1000px; }
+.blueBig {
+    font-size: 28px;
+    line-height: 35px;height: 35px
+}
+.blueBig .ListDataBtn {display: block;height: 35px;}
+.blueColor, .blueBig {
+    color: #818181 !important;
+}
+.businessList {
+    width: 48%; }
+.businessList span.DataText {
+    width: 87%; }
+.imglist {
+    margin-right: -3%; }
+.imglist li {
+    width: 88px;
+    float: left;
+    margin: 0 2% 10px 0;
+    text-align: center; }
+.imglist li .fileBox, .imglist li img {
+    height: 88px;
+    width: 88px;
+    border: 1px solid #dadde5;
+    border: 1px solid #dadde5;
+    display: block; }
+.imglist span {
+    color: #737373; }
+.imglist .fileBox:after {
+    content: "+";
+    font-size: 30px;
+    font-weight: bold;
+    top: 30%; }
+
+/*资质证明*/
+.businessTitle {
+    background-color: #4cbff6;
+    font-size: 14px;
+    color: #FFF;
+    padding-left: 10px;
+    height: 30px;
+    line-height: 30px; }
+
+.counter {
+    color: #f86d6d;
+    background-color: transparent;
+    font-weight: bold; }
+
+/*企业简介*/
+.businessText {
+    padding: 10px;
+    text-indent: 2em;
+    border: 1px solid #dadde5;
+    border: 1px solid #dadde5;
+    min-height: 100px;
+    color: #737373;
+    font-size: 14px; }
+
+.popupText {
+    text-align: left; }
+.popupText dt.DataText {
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    font-size: 19px; }
+.popupText dt.DataText img {
+    vertical-align: middle;
+    margin-right: 10px;
+    height: 60px;
+    width: 67px; }
+.popupText .morny, .popupText .BoxPopup .DataTextColor, .BoxPopup .popupText .DataTextColor {
+    font-size: 13px; }
+.popupText .width100 {
+    margin-bottom: 5px; }
+.popupText textarea {
+    width: 100%;
+    border: 1px solid #dadde5;
+    border: 1px solid #dadde5;
+    min-height: 100px; }
+
+.businessBoxes span.disabledColor {
+    width: 100px; }
+.businessBoxes .unitBox {
+    min-width: 32%; }
+
+/**********************************************店铺信息*申请修改********************/
+
+.addFile {
+    height: 85px;
+    margin-right: 5%; }
+.addFile em.DataText {
+    line-height: 75px;
+    height: 75px; }
+
+
+.pageBtnBox {
+    text-align: center; }
+
+.DataSelect {
+    border-color: #c2c2c2;
+    color: #737373;
+    width: 69px; }
+
+.imgBox {
+    margin-right: -3%; }
+.imgBox p {
+    margin-right: 3%;
+    width: 48%;
+    float: left; }
+.imgBox .marginNone {
+    margin: 0; }
+.imgBox img {
+    height: 200px;
+    width: 100%;
+    display: block; }
+
+/**********************************************店铺信息*门店信息********************/
+
+.addBox span.DataText {
+    min-width: 70px;
+    width: 100px; }
+.addBox input {
+    margin-right: 5px; }
+
+.addImg img {
+    width: 400px;
+    height: 200px;
+    margin-right: 20px; }
+
+.borderBlod {
+    border: 1px solid #f3f3f3;
+    border-top-width: 0;
+    border-left-width: 0;
+    border-right-width: 0; }
+
+/**********************************************店铺信息*修改记录查看********************/
+
+.inofBox .sellerListBoxTitle {
+    padding-left: 0;
+    text-align: center; }
+
+.blueBiges {
+    font-size: 18px;clear: both; }
+
+.shopinofBoxes .width80 {
+    width: 48%; }
+.shopinofBoxes .inofBox {
+    margin-right: -3%; }
+.shopinofBoxes .width50 {
+    margin-right: 2%;
+    width: 47%; }
+.shopinofBoxes .inofBoxLeft {
+    width: 100%; }
+.shopinofBoxes .inofBoxLeft .width100 img {
+    width: 100%; }
+.shopinofBoxes .inofBoxLeft em.FontBold {
+    min-width: 78px; }
+.shopinofBoxes .businesses .width100 span.DataText {
+    width: 81%;  height: 30px;
+    line-height: 30px; }
+.shopinofBoxes .sellerListBoxTitle {
+    padding-left: 0;
+    text-align: center; }
+.shopinofBoxes .businessList {
+    width: 100%; }
+.shopinofBoxes .inofBoxRight {
+    margin-left: 18%; }
+.shopinofBoxes .imgBox img {
+    width: 100%; }
+.shopinofBoxes ul.width50 {
+    min-width: 280px; }
+.shopinofBoxes .imgBox .DataText {
+    width: 47%; }
+.shopinofBoxes .imgBox p {
+    width: 100%; }
+
+/**********************************************店铺信息*业务修改********************/
+
+.BoxPopup .fileBox {
+    height: 30px;
+    line-height: 30px; }
+.BoxPopup .fileBox:after {
+    content: '上传';top:0;font-size:14px }
+.BoxPopup .width100 {
+    margin-right: 0; }
+.BoxPopup .imglist {
+    margin-right: -3%; }
+.BoxPopup .imglist li {
+    margin-right: 2.39%; }
+.BoxPopup .DataTextColor {
+    margin-left: 10px; }
+
+.dataToBoxes .unitBox {
+    width: 32%; }
+.dataToBoxes .disabledColor {
+    width: 80%; }
+
+/*----------------------------------整车销售----------------------------*/
+.governBox .formWidth{min-width:95px;}
+.heightAuto{height: auto !important;}
+
+/*----------------------------------头保险----------------------------*/
+.insure  .formWidth{min-width:55px;}
+.insure .DataText input{margin: 0 10px;}
+
+/*----------------------------------卖家中心----------------------------*/
+
+/*---------------------------------------------------------缁╂晥鍩虹璁剧疆------------------------------------------------*/
+.inofBox {
+    border: 1px solid #f3f3f3;
+    border: 1px solid #f3f3f3; }
+
+.inofBoxLeft, .inofBoxRight {
+    float: left;
+    width: 49.2%;
+    margin-right: 1%; }
+
+.inofBoxRight {
+    margin-right: 0; }
+
+.inofTitle {
+    background-color: #fffdf9;
+    border: 1px solid #f3f3f3;
+    border-top-width: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    height: 78px;
+    padding: 10px 15px; }
+.inofTitle b {
+    height: 56px;
+    width: 56px; }
+.inofTitle .textPos {
+    color: #707070;
+    margin-left: 10px;
+    font-size: 16px;
+    font-family: '寰蒋闆呴粦';
+    margin-top: 12px; }
+
+.inofBox {
+    border: 1px solid #f3f3f3;
+    border: 1px solid #f3f3f3; }
+
+input {
+    border: 1px solid #c2c2c2;
+    border: 1px solid #c2c2c2;
+    margin-right: 5px; }
+
+.titleImg {
+    background-color: transparent;
+    background-image: url("../images/monryImg.png");
+    background-repeat: no-repeat;
+    background-position: left center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    background-size: cover;
+    -webkit-background-clip: border-box;
+    -moz-background-clip: border-box;
+    -o-background-clip: border-box;
+    -ms-background-clip: border-box;
+    background-clip: border-box; }
+
+.titleImg1 {
+    background-position: 0 0; }
+
+.titleImg2 {
+    background-position: 0 -58px; }
+
+.titleImg3 {
+    background-position: 0 -118px; }
+
+.titleImg4 {
+    background-position: 0 -177px; }
+
+.titleImg5 {
+    background-position: 0 -235px; }
+
+.titleImg6 {
+    background-position: 0 -294px; }
+
+.titleImg7 {
+    background-position: 0 -353px; }
+
+.inofList {
+    padding: 10px 15px; }
+.inofList .listDataClassBox {
+    padding-top: 20px; }
+
+.dataToBoxes {
+    margin-bottom: 20px;
+    height: 35px; }
+
+.listColor {
+    height: 100px; }
+.listColor dd {
+    color: #ff5400;
+    font-style: 14px;
+    float: left; }
+.listColor dd:first-child {
+    font-weight: bold;
+    margin-right: 20px; }
+
+.heightBox {
+    height: 170px; }
+
+.radioImg {
+    background-color: transparent;
+    background-image: url("../images/radio2.png");
+    background-repeat: no-repeat;
+    background-position: left center;
+    -webkit-background-size: none;
+    -moz-background-size: none;
+    -o-background-size: none;
+    -ms-background-size: none;
+    background-size: none;
+    -webkit-background-clip: border-box;
+    -moz-background-clip: border-box;
+    -o-background-clip: border-box;
+    -ms-background-clip: border-box;
+    background-clip: border-box;
+    padding-left: 22px;
+    margin-right: 10px;
+    min-width: 100px; }
+
+.radioImg1 {
+    background-color: transparent;
+    background-image: url("../images/radio1.png");
+    background-repeat: no-repeat;
+    background-position: left center;
+    -webkit-background-size: none;
+    -moz-background-size: none;
+    -o-background-size: none;
+    -ms-background-size: none;
+    background-size: none;
+    -webkit-background-clip: border-box;
+    -moz-background-clip: border-box;
+    -o-background-clip: border-box;
+    -ms-background-clip: border-box;
+    background-clip: border-box;
+    padding-left: 22px;
+    margin-right: 10px; }
+.infothColor div.DataText{height: 64px;min-width: 160px;}
+.infothColor th, .infotrColorni, .infotrColorn {
+    background-color: #ededed;
+    color: #707070; }
+.infothColor a, .infotrColorni a, .infotrColorn a, .infothColor .navBox li, .navBox .infothColor li, .infotrColorni .navBox li, .navBox .infotrColorni li, .infotrColorn .navBox li, .navBox .infotrColorn li {
+    color: #707070; }
+
+.infotrColorni {
+    background-color: #f8f8f8; }
+
+.infotrColorn {
+    background-color: white; }
+
+.ftHeightColor {
+    background-color: #f4f4f4; }
+
+/*琛ㄦ牸杈撳叆妗�*/
+.infoMorny {
+    margin: auto;
+    width: 300px; }
+.infoMorny i {
+    width: 60px; }
+
+/*---------------------------------------------------------缁╂晥绯绘暟璁剧疆------------------------------------------------*/
+.inofTitleis {
+    height: 53px;
+    margin-bottom: 10px;
+    line-height: 53px;
+    padding-top: 0;
+    padding-bottom: 0; }
+.inofTitleis .textPos {
+    margin: 0; }
+.inofTitleis .TitleActiveColor {
+    font-family: '瀹嬩綋';
+    font-size: 12px;
+    margin-left: 5px; }
+
+.DataTextImgBox {
+    height: 22px;
+    width: 22px;
+    margin: auto;
+    display: block;
+    margin-top: 15px;
+    position: relative;
+    overflow: hidden; }
+
+.DataTextTxt {
+    height: 24px;
+    line-height: 24px;
+    display: block;
+    font-family: '瀹嬩綋'; }
+
+.DataTextImg {
+    background-color: transparent;
+    background-image: url("../images/tabImg.png");
+    background-repeat: no-repeat;
+    background-position: left top;
+    -webkit-background-size: none;
+    -moz-background-size: none;
+    -o-background-size: none;
+    -ms-background-size: none;
+    background-size: none;
+    -webkit-background-clip: border-box;
+    -moz-background-clip: border-box;
+    -o-background-clip: border-box;
+    -ms-background-clip: border-box;
+    background-clip: border-box;
+    display: block;
+    height: 22px;
+    width: 22px; }
+
+.DataTextBox {
+    height: 44px;
+    position: absolute; }
+
+.DataTextImg1 {
+    background-position: 0 1px; }
+
+.DataTextImg2 {
+    background-position: 0 -22px; }
+
+.DataTextImg3 {
+    background-position: 0 -45px; }
+
+.DataTextImg4 {
+    background-position: 0 -67px; }
+
+.DataTextImg5 {
+    background-position: 0 -90px; }
+
+.DataTextImg6 {
+    background-position: 0 -113px; }
+
+.DataTextImg7 {
+    background-position: 0 -136px; }
+
+.DataTextImg8 {
+    background-position: 0 -159px; }
+.DataTextImg9{ background-position: 0 -181px;}
+.DataTextImges9{  background-position: -23px -181px;}
+.DataTextImges1 {
+    background-position: -23px 1px; }
+
+.DataTextImges2 {
+    background-position: -23px -22px; }
+
+.DataTextImges3 {
+    background-position: -23px -45px; }
+
+.DataTextImges4 {
+    background-position: -23px -67px; }
+
+.DataTextImges5 {
+    background-position: -23px -90px; }
+
+.DataTextImges6 {
+    background-position: -23px -113px; }
+
+.DataTextImges7 {
+    background-position: -23px -136px; }
+
+.DataTextImges8 {
+    background-position: -23px -159px; }
+
+/*---------------------------------------------------------宀椾綅濂栭噾璁剧疆------------------------------------------------*/
+.bonus {
+    font-size: 16px;
+    font-family: '寰蒋闆呴粦';
+    color: #707070;
+    margin-bottom: 10px; }
+
+.bounsHref {
+    width: 137px;
+    text-align: center;
+    height: 33px;
+    line-height: 33px;
+    background-color: #f1773c;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+    float: right;
+    margin-top: -5px; }
+.bounsHref a, .bounsHref .navBox li, .navBox .bounsHref li {
+    font-size: 12px;
+    color: #FFF;
+    display: block; }
+
+.fr {
+    float: right; }
+
+.dataThe {
+    font-size: 14px;
+    min-height: 54px; }
+.dataThe .marginRight {
+    margin-right: 20px; }
+
+.tableBox {
+    clear: both; }
+
+/*---------------------------------------------------------宀椾綅缁╂晥璁剧疆------------------------------------------------*/
+.heightBoxes {
+    height: auto;
+    min-height: 170px;
+    max-height: 220px; }
+
+.tableBoxBorder tr {
+    border: 1px solid #f3f3f3;
+    border: 1px solid #f3f3f3; }
+.tableBoxBorder td {
+    height: 100%;
+    vertical-align: bottom;
+    line-height: 35px;
+    width: 100%;
+    text-align: left; }
+.tableBoxBorder span.DataText {
+    margin-left: 15px;
+    min-width: 150px; }
+.tableBoxBorder .FontBold {
+    width: 110px;
+    height: 100%;
+    vertical-align: middle;
+    border: 1px solid #f3f3f3;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-top-width: 0;
+    text-align: center; }
+
+#tableBoxBores .FontBold {
+    min-width: 155px; }
+
+.inofBoxes {
+    height: 130px; }
+
+.selectUser {
+    height: 80px;
+    margin: 15px;
+    width: 72%;
+    min-width: 640px;
+    position: relative; }
+.selectUser .DataText {
+    height: 40px;
+    line-height: 40px; }
+.selectUser .DataText .menuBox {
+    top: 39px; }
+.selectUser dd.DataText {
+    width: 73%;
+    min-width: 380px;
+    position: relative; }
+.selectUser dd.DataText:hover .menuBox {
+    display: block; }
+.selectUser input {
+    width: auto; }
+.selectUser input.DataText {
+    margin-right: 0; }
+.selectUser .DataCont {
+    height: 40px;
+    line-height: 40px;
+    background-color: transparent;
+    background-image: url("../images/tvselect.png");
+    background-repeat: no-repeat;
+    background-position: 5px center;
+    -webkit-background-size: none;
+    -moz-background-size: none;
+    -o-background-size: none;
+    -ms-background-size: none;
+    background-size: none;
+    -webkit-background-clip: border-box;
+    -moz-background-clip: border-box;
+    -o-background-clip: border-box;
+    -ms-background-clip: border-box;
+    background-clip: border-box;
+    color: #979797;
+    padding-left: 55px;
+    text-align: right;
+    font-family: '寰蒋闆呴粦';
+    font-size: 22px;
+    margin-right: 15px;
+    width: 15%;
+    min-width: 150px; }
+.selectUser #DataText {
+    width: 75%;
+    min-width: 265px;
+    border: 1px solid #f3f3f3;
+    border: 1px solid #f3f3f3; }
+.selectUser .DataTextBtn {
+    width: 108px;
+    margin-left: -5px; }
+.selectUser .inofList {
+    margin-left: 150px;
+    color: #ff5400;
+    display: none; }
+
+.smaNavBoxes {
+    border: 1px solid #f3f3f3;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-top-width: 0;
+    height: 102px;
+    text-align: center;
+    margin: 15px;
+    width: 11.5%;
+    min-width: 120px;
+    display: none;
+    position: relative; }
+.smaNavBoxes img {
+    height: 70px;
+    width: 70px;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -o-border-radius: 100%;
+    -ms-border-radius: 100%;
+    border-radius: 100%; }
+.smaNavBoxes .DataText {
+    width: 100%; }
+.smaNavBoxes #userImg {
+    margin: auto;
+    font-family: '寰蒋闆呴粦';
+    font-size: 14px;
+    width: 100%; }
+.smaNavBoxes #userImg i {
+    color: #0c7db3; }
+.smaNavBoxes:before {
+    content: '';
+    display: block;
+    border: 7px solid #e7e9e8;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+    position: absolute;
+    right: -15px;
+    top: 42%; }
+
+/*---------------------------------------------------------宸ヨ祫璁剧疆鏌ヨ------------------------------------------------*/
+.borderBlod {
+    border: 1px dashed #f3f3f3;
+    border-top-width: 0;
+    border-left-width: 0;
+    border-right-width: 0; }
+
+.disabledColor {
+    background-color: #f5f5f5;
+    min-width: 130px;
+    padding-left: 5px;
+    margin-right: 5px; }
+
+/*---------------------------------------------------------鎴戠殑宸ヨ祫------------------------------------------------*/
+.inofListBorder {
+    border: 1px solid #f3f3f3;
+    border: 1px solid #f3f3f3; }
+.inofListBorder .DataText {
+    line-height: 65px;height: 65px;min-width: 90px; }
+
+.chartsBox {
+    text-align: center; }
+.chartsBox h3 {
+    height: 53px;
+    line-height: 53px;
+    background-color: #ececec;
+    color: #707070;
+    font-family: '寰蒋闆呴粦';
+    font-size: 16px; }
+.chartsBox .dataToBox {
+    padding-top: 20px;
+    width: 480px;
+    margin: auto; }
+
+.userBox {
+    height: auto;
+    text-align: center; }
+.userBox #smaNavBoxes {
+    display: block;
+    height: 110px;
+    width: 180px;
+    height: 100%; }
+.userBox #smaNavBoxes img {
+    width: 110px;
+    height: 110px; }
+.userBox #userImg {
+    margin: auto;
+    margin-top: 0; }
+.userBox #userImg i {
+    color: #0c7db3; }
+.userBox #unitBox {
+    clear: both;
+    height: auto;
+    text-align: left; }
+.userBox #unitBox .DataText {
+    height: 100%; }
+.userBox #unitBox i {
+    font-size: 30px;
+    font-family: '寰蒋闆呴粦'; }
+.userBox #unitBox b {
+    color: #f60a00;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0 5px; }
+.userBox .dataToBox {
+    height: auto;
+    position: relative;
+    margin-left: 30px;
+    width: 640px; }
+
+.salaryBox {
+    position: relative; }
+.salaryBox h3 {
+    height: 48px;
+    line-height: 48px;
+    background-color: #48b5e9;
+    padding: 0 25px;
+    color: #FFF;
+    font-size: 18px;
+    font-family: '寰蒋闆呴粦'; }

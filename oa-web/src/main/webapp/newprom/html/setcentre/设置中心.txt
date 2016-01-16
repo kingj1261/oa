@@ -1,0 +1,13 @@
+设置中心部分
+
+供应商管理 setcantre_supplier.html
+点击【查看】 setcantre_addsupplier.html
+
+库房管理 setcantre_depot.html
+
+分公司及部门管理 setcantre_door.html
+角色及权限管理 setcantre_role.html
+账号管理 setcantre_number.html
+客户信息管理 setcantre_client.html
+修改密码 setcantre_account.html
+
