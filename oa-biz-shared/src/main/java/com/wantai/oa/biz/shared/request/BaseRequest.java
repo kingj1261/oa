@@ -4,10 +4,6 @@
  */
 package com.wantai.oa.biz.shared.request;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -19,43 +15,24 @@ import java.io.Serializable;
 public class BaseRequest implements Serializable {
 
     /** 业务配置id*/
-    @NotNull(message = "主配置编号id不能为空")
-    @Digits(integer = 10, fraction = 0)
     Long   businessConfigId;
 
-    /**
-     * 值
-     */
-    @NotNull(message = "值不能为空")
-    @NotEmpty(message = "值不能为空")
-    @Digits(integer = 10, fraction = 2)
+    /** 业务配置id*/
     String value;
 
-    /**
-     * 开始值
-     */
-    @NotNull(message = "开始值不能为空")
-    @NotEmpty(message = "开始值不能为空")
-    @Digits(integer = 10, fraction = 2)
+    /** 开始值*/
     String fromValue;
 
-    /**
-     * 结束值
-     */
-    @NotNull(message = "结束值不能为空")
-    @NotEmpty(message = "结束值不能为空")
-    @Digits(integer = 10, fraction = 2)
+    /** 结束值*/
     String toValue;
 
-    /**
-     * 单位
-     */
-    @NotNull(message = "单位不能为空")
-    @NotEmpty(message = "单位不能为空")
+    /** 单位*/
     String unit;
 
+    /** 子事件编号*/
     String subEventCode;
 
+    /** 子事件名称*/
     String subEventCodeName;
 
     /** 目标配置对象*/
@@ -63,6 +40,9 @@ public class BaseRequest implements Serializable {
 
     /** 客户id*/
     String customerId;
+
+    /** 操作员*/
+    String operator;
 
     public String getTarget() {
         return target;
@@ -134,5 +114,13 @@ public class BaseRequest implements Serializable {
 
     public void setSubEventCodeName(String subEventCodeName) {
         this.subEventCodeName = subEventCodeName;
+    }
+
+    public String getOperator() {
+        return operator;
+    }
+
+    public void setOperator(String operator) {
+        this.operator = operator;
     }
 }

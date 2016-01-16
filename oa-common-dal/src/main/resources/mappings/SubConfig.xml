@@ -61,6 +61,22 @@
       )
   </insert>
 
+  <!-- update子表数据 -->
+  <update id="updateSubConfig">
+      update OA_SUB_BUSINESS_CONFIG
+
+      set value=#{value}
+      <if test="toValue!=null and toValue!=''">
+          ,to_value=#{toValue}
+      </if>
+      where business_config_id=#{businessConfigId}
+      and   sub_event_code=#{subEventCode}
+      and   target=#{target}
+      <if test="customerId!=null and customerId !=''">
+          and customer_id=#{customerId}
+      </if>
+  </update>
+
 
   <!-- 删除子配置表数据 -->
   <delete id="deleteSubConfig">
@@ -90,5 +106,39 @@
       where business_config_id=#{mainConfigId}
       order by orders asc
   </select>
+
+    <!-- 根据主表id查询子表配置数据-单条记录 -->
+    <select id="querySingleSubConfig" resultMap="subConfigMap">
+        select
+            subConfig.id                    ,
+            subConfig.business_config_id    ,
+            subConfig.sub_event_code        ,
+            subConfig.sub_event_code_name   ,
+            subConfig.target                ,
+            subConfig.customer_id           ,
+            subConfig.value                 ,
+            subConfig.from_value            ,
+            subConfig.to_value              ,
+            subConfig.unit                  ,
+            subConfig.memo                  ,
+            subConfig.orders                ,
+            subConfig.gmt_create            ,
+            subConfig.gmt_modified          ,
+            subConfig.operator              ,
+            subConfig.last_modified_oeprator
+        from  OA_SUB_BUSINESS_CONFIG subConfig,
+              OA_BUSINESS_CONFIG config
+        where config.company_code=#{companyCode}
+        and   config.company_id=#{companyId}
+        and   config.biz_item=#{bizItem}
+        and   config.biz_event=#{bizEvent}
+        and   config.id=subConfig.business_config_id
+        and   subConfig.target=#{target}
+        and   subConfig.sub_event_code=#{subEventCode}
+
+        <if test="customerId!=null and customerId!=''">
+        and   subConfig.customer_id=#{customerId}
+        </if>
+    </select>
 
 </mapper>

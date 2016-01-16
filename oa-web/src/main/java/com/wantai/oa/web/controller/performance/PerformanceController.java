@@ -31,10 +31,10 @@ import java.util.stream.Collectors;
  * 绩效系数管理控制器
  *
  * @author maping.mp
- * @version $Id: RatioController.java, v 0.1 2015-1-04 下午10:55:39 maping.mp Exp $
+ * @version $Id: PerformanceController.java, v 0.1 2015-1-04 下午10:55:39 maping.mp Exp $
  */
 @RestController
-public class RatioController extends BaseController {
+public class PerformanceController extends BaseController {
 
     @Autowired
     protected Validator   validator;

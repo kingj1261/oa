@@ -50,6 +50,23 @@ CREATE TABLE OA_SUB_BUSINESS_CONFIG(
   last_modified_oeprator VARCHAR(32) NOT NULL COMMENT '最后一次修改日期'
 )COMMENT '绩效配置子表';
 
+
+
+-- 公共配置表
+CREATE TABLE OA_SYSTEM_CONFIG
+(
+  id                      INT PRIMARY KEY NOT NULL AUTO_INCREMENT COMMENT '逻辑主键',
+  company_code            VARCHAR(32) NOT NULL COMMENT '公司码',
+  company_id              INT NOT NULL COMMENT '公司id',
+  name                    VARCHAR(32) NOT NULL COMMENT '配置key',
+  value                   VARCHAR(256) NOT NULL COMMENT '值',
+  memo                    VARCHAR(256) COMMENT '备注',
+  gmt_create              DATETIME NOT NULL COMMENT '创建日期',
+  gmt_modified            DATETIME NOT NULL COMMENT '最后修改日期',
+  operator                VARCHAR(32) NOT NULL COMMENT '操作员',
+  last_modified_oeprator  VARCHAR(32) NOT NULL COMMENT '最后一次修改日期'
+)COMMENT '公共配置表';
+
 -- 公司个税配置表
 CREATE TABLE OA_REVENUE_CONFIG
 (

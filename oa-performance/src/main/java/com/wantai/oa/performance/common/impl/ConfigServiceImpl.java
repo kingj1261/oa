@@ -181,6 +181,35 @@ public class ConfigServiceImpl extends BaseService implements ConfigService {
         return eventList;
     }
 
+    @Override
+    public SubConfigDo querySingleSubConfig(String companyCode, String companyId, String bizItem,
+                                            String bizEvent, String subEventCode, String customerId) {
+        Map<String, Object> parameter = new HashMap();
+        parameter.put("companyCode", companyCode);
+        parameter.put("companyId", companyId);
+        parameter.put("bizItem", bizItem);
+        parameter.put("bizEvent", bizEvent);
+        parameter.put("subEventCode", subEventCode);
+        String target = CustomerTypeEnum.COMPANY.getCode();
+        if (StringUtils.isNotBlank(customerId)) {
+            target = CustomerTypeEnum.CUSTOMER.getCode();
+        }
+        parameter.put("target", target);
+        parameter.put("customerId", customerId);
+        return (SubConfigDo) commonDAO.selectOne("SubConfig.querySingleSubConfig", parameter);
+    }
+
+    @Override
+    public ConfigDo queryConfig(String companyCode, String companyId, String bizItem,
+                                String bizEvent) {
+        Map<String, Object> parameter = new HashMap();
+        parameter.put("companyCode", companyCode);
+        parameter.put("companyId", companyId);
+        parameter.put("bizItem", bizItem);
+        parameter.put("bizEvent", bizEvent);
+        return (ConfigDo) commonDAO.selectOne("Config.querySingleConfig", parameter);
+    }
+
     private List<SubConfigDo> querySubConfigDOList(Long mainConfigId) {
         Map<String, Object> paramter = new HashMap<>();
         paramter.put("mainConfigId", mainConfigId);
