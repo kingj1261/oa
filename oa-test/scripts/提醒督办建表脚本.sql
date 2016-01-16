@@ -33,8 +33,8 @@ CREATE TABLE OA_MESSAGE (
   COMMENT '最后修改日期',
   operator               VARCHAR(32)     NOT NULL
   COMMENT '操作员',
-  last_modified_oeprator VARCHAR(32)     NOT NULL
-  COMMENT '最后一次修改日期'
+  last_modified_operator VARCHAR(32)     NOT NULL
+  COMMENT '最后修改人'
 )
   COMMENT '消息表';
 
