@@ -42,3 +42,10 @@ CREATE TABLE OA_REMIND
   gmt_modified            DATETIME NOT NULL COMMENT '最后修改日期'
 )COMMENT '提醒表';
 
+-- 索引
+ALTER TABLE `oa_remind`
+  ADD  UNIQUE INDEX `idx_message_id` (`message_id`);
+
+ALTER TABLE `oa_supervise`
+  ADD  UNIQUE INDEX `idx_message_id` (`message_id`);
+
