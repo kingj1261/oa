@@ -1,0 +1,100 @@
+/*中间部分左边标题*/
+.c2990cb{
+    background: #da251d;
+}
+.itemClick {
+    background: #f5e2e1;
+    color: #da251d;
+    padding: 6px 24px;
+}
+.cda251d{
+    color: #da251d;
+}
+.bgc2999{
+     background: #da251d ;
+ }
+.centerSpace{
+    color: #fff;
+    font-size: 1.2em;
+    background: #da251d;
+    height:45px ;
+    text-align: center;
+    line-height: 45px;
+    font-weight: bold;
+    font-family: '宋体';
+    margin-bottom: 8px;
+}
+.checkg{
+    display: none;
+    width: 9px;
+    height: 10px;
+    float: left;
+    color:#da251d ;
+    font-size: 1.2em;
+   margin-top: 3px;
+}
+.c0e9 { color: #da251d;}
+
+.addBtn{
+    display: block;
+    text-align: center;
+    border-radius: 5px;
+    background:#ff9900;
+    color: #fff;
+    width:98px;
+    height:35px;
+    line-height: 35px;
+    cursor: pointer;
+}
+.addBtn:hover{
+    background:#e48a03 ;
+}
+
+.selectBtn:hover{
+    background: #da251d ;
+    color: #fff;
+}
+
+.cartypeTab{
+    min-width: 460px;
+}
+.cartypeTab td,.cartypeTab th{
+    border-right: 1px solid #f8f8f8;
+    height: 40px;
+    text-align: center;
+}
+.cartypeTab td{
+    color: #787878;
+}
+.cartypeTab th{
+    color: #464646;
+    font-size: 15px;
+    font-weight: bold;
+    background:#e8e8e8 ;
+}
+.cartypeTab tr:hover{
+    background: #e8e8e8;
+}
+.cartypeTab tr:nth-child(n){
+    background:#fbf5f5;
+}
+.cartypeTab tr:nth-child(2n){
+    background:#fff;
+}
+
+.pageBtn span:hover{
+    background: #cbcbcb;
+    color: #fff;
+}
+.pageBtn em:hover{
+    background: #cbcbcb;
+    color: #fff;
+}
+/*.c0e92d2 {background:  ; }*/
+.topMenu{
+    background: #da251d;
+    width: 100%;
+    overflow: hidden;
+}
+.bgf6{background: #da251d;}
+.c0b92cc {color: #da251d}

@@ -1,0 +1,92 @@
+@charset "utf-8";
+/*
+登录、注册、忘记密码、找回密码等也忙样式，
+author：kitty
+ */
+
+.loginHead{
+    width: 75%;
+    min-width: 600px;
+    margin: auto;
+    height: 80px;
+}
+.loginLump{
+    width: 378px;
+    height: 370px;
+    /*padding: 10px;*/
+    background:rgba(0, 0, 0, 0.5)!important;
+    /*background:rgba(0, 0, 0, 0.5) none repeat scroll 0 0 !important;*/
+    /*filter:Alpha(opacity=0.5)*/
+    float: right;
+    margin-top: 3%;
+    margin-right: 15%;
+}
+.loginconter{
+    background: url("../images/loginBg.png")  no-repeat;
+    height: 465px;
+    min-width: 1135px;
+    background-size: 100% 100%;
+    -webkit-background-size:100% 100%;
+    -o-background-size:100% 100%;
+    -moz-background-size :100% 100%;
+}
+.loginKuang{
+    /*width: 85.2%;*/
+    width: 350px;
+    margin: auto;
+}
+.managerText{
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+.managerText span{
+    border-left: 2px solid #01b7eb;
+    vertical-align: middle;
+    padding-left: 10px;
+}
+.uusrName{
+    border: 1px solid #bdbdbd;
+    height: 40px;
+}
+.userNameIcon{
+    background:#f3f3f3;
+    /*width: 13%;*/
+    width: 45px;
+    height: 40px;
+    border-right: 1px solid #bdbdbd;
+}
+.userNameTxt{
+    background-color: #fff;
+    /*width: 86.694%;*/
+    width: 302px;
+    float: left;
+    overflow: hidden;
+}
+.userNameIcon img{
+    margin-top: 11px;
+}
+.userNameTxt input{
+    /*width: 96%;*/
+    /*width: 292px;*/
+    width: 302px;
+    height: 40px;
+    border: none;
+    /*padding-left: 4%;*/
+    padding-left: 10px;
+    font-size: 13px;
+    color: #000;
+    /*autocomplete:off;*/
+
+}
+.logBtn{
+    background: #0496db;
+    text-align: center;
+    color: #ffffff;
+    height: 40px;
+    line-height: 40px;
+    font-family: "微软雅黑";
+    font-size: 22px;
+    border: none;
+}
+.caf{color: #afafaf;}
+

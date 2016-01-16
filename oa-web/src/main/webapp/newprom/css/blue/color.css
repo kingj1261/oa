@@ -1,0 +1,145 @@
+@charset "utf-8";
+
+.bg{
+    background: #ffffff;
+}
+.cl{
+    color: #c40303;
+}
+.c4e{color: #4e4e4e;}
+.col43{
+    color:#434343;
+}
+.gre{
+    color: #4d4d4d;
+}
+.c68{
+    color: #686868;
+}
+.col_red{
+    color: #e5111b;
+}
+.c0l{
+    color: lightgray;
+}
+.col_red1{
+    color: #c01414;
+}
+.col_red3{
+    color: #cccccc;
+}
+.colf9{color: #f93838;}
+.white{color: #ffffff}
+.bf1{background: #f1f1f1;}
+.bd {border: 1px solid #e5e5e5;}
+
+.bdd {border-bottom: 1px solid #e5e5e5}
+
+
+.c90 {color: #909090}
+
+.c67 {color: #676767}
+.c0e9 { color: #0ca1e1;}
+.c7e {color: #7e7e7e;}
+.c7b {color: #7b7b7b;}
+.c0d91 {color: #0d91cf}
+
+/*中间部分左边标题*/
+.c2990cb{
+    background: #2990cb;
+}
+.centerSpace{
+    color: #fff;
+    font-size: 15px;
+    background: #2990cb;
+    height:43px ;
+    text-align: center;
+    line-height: 43px;
+    font-weight: bold;
+    font-family: '宋体';
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+.checkg{
+    display: none;
+    width: 9px;
+    height: 10px;
+    float: left;
+    color:#0f9ee3 ;
+    font-size: 1.2em;
+    margin-top: 3px;
+}
+/*.cff9900{background: ;}*/
+/*.addBtn:hover{*/
+    /*background:#03aa4e ;*/
+/*}*/
+
+/*.selectBtn:hover{*/
+    /*background: #1492ce;*/
+    /*color: #fff;*/
+/*}*/
+
+.cartypeTab{
+    min-width: 460px;
+}
+.cartypeTab td,.cartypeTab th{
+    border-right: 1px solid #f8f8f8;
+    height: 42px;
+    text-align: center;
+}
+.cartypeTab td{
+    color: #787878;
+    height: 45px;
+}
+.cartypeTab th{
+    color: #e3f0f7;
+    font-size: 15px;
+    font-weight: bold;
+    background:#50abd7 ;
+}
+.cartypeTab tr:hover{
+    background: #cef1ff;
+}
+/*.cartypeTab tr:nth-child(n){*/
+    /*background:#eaf1f6;*/
+/*}*/
+/*.cartypeTab tr:nth-child(2n){*/
+    /*background:#f8f8f8;*/
+/*}*/
+.pageBtn span:hover{
+    background: #5ab5e1;
+    color: #fff;
+}
+.pageBtn em:hover{
+    background: #5ab5e1;
+    color: #fff;
+}
+
+/*.c0e92d2 {background:; }*/
+.topMenu{
+    background: #0e92d2;
+    width: 100%;
+    min-width: 1260px;
+    overflow: hidden;
+}
+.bgf6{background: #f6f6f6;}
+.c0b92cc {color: #0b92cc}
+.bg0d9 {background-color: #0d92d0}
+
+
+/*车辆品牌*/
+.addblueBtn{
+    background-color: #0190d4;
+}
+
+
+/*车辆图片管理*/
+.bg0d91d0{
+    background-color: #0d91d0;
+}
+
+/*商家管理*/
+
+.bg4cb{
+    background-color: #4cbff6;
+}

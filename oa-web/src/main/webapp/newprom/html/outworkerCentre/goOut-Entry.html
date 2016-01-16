@@ -1,0 +1,231 @@
+<title>外勤中心-通用外勤中心-外出申请</title>
+<link rel="stylesheet" href="css/S-allModule.css">
+
+<!--您当前位置-->
+<div class="S-location">
+    <i class="locationImg"></i><a>您当前位置:</a><a href="">外勤中心</a>&#47;<a href="">通用外勤中心</a>&#47;
+    <a class="locC">外出申请</a>
+</div>
+<div class="mainCont">
+    <!--顶部信息~查询-->
+    <div class="S-search">
+        <ul>
+            <li>
+                <label>状态：</label>
+                <select><option value="">全部</option></select>
+            </li>
+            <li>
+                <label>申请人：</label><input type="text"/>
+            </li>
+            <li style="margin-right:2px;"><label>申请时间：</label>
+                <div class="demo fl relative" >
+                    <input class="S-modified dateImg" placeholder="全部" type="text"  onclick="laydate()">
+                </div>
+            </li>
+            <li><label style="width:30px;text-align:center;">到</label>
+                <div class="demo fl relative" >
+                    <input class="S-modified dateImg " placeholder="全部" type="text"  onclick="laydate()">
+                </div>
+            </li>
+            <li>
+                <input  type="button" value="查询" class="SearchBtn"/>
+            </li>
+        </ul>
+    </div>
+    <!--新增按钮-->
+    <div class="S-abbBox clear" style="">
+        <a class="NewAddBtn" onclick="OpenModalwindow('outwork-applyEdit')">申请外出</a>
+    </div>
+    <!--主表单-->
+    <table class="S-main-table mt20">
+        <tr>
+            <th>序号</th>
+            <th>外出单号</th>
+            <th>申请时间</th>
+            <th>申请人</th>
+            <th>预计出发时间</th>
+            <th>预计返回时间</th>
+            <th>预计费用(元)</th>
+            <th>审批时间</th>
+            <th>审批人</th>
+            <th>备注</th>
+            <th>当前状态</th>
+            <th class="w140">操作</th>
+        </tr>
+        <tr class="colorOne">
+            <td>1</td>
+            <td>XX-20151009-0001</td>
+            <td>2015-10-09 12：12：12</td>
+            <td>成成</td>
+            <td>2015-10-09 13：12：12</td>
+            <td>2015-10-15 13：12：12</td>
+            <td>12000.00</td>
+            <td>2015.11.12 12:00</td>
+            <td>圆圆</td>
+            <td></td>
+            <td class="TabRed">已驳回</td>
+            <td>
+                <div class="mr10 h35 w140">
+                    <a class="rejectBtn fr" onclick="OpenModalwindow('outwork-Reject')">驳回原因</a>
+                    <a class="editBtn fr" onclick="OpenModalwindow('outwork-applyEdit')">编辑</a>
+                </div>
+            </td>
+        </tr>
+        <tr class="colorTwo">
+            <td>2</td>
+            <td>XX-20151009-0001</td>
+            <td>2015-10-09 12：12：12</td>
+            <td>成成</td>
+            <td>2015-10-09 13：12：12</td>
+            <td>2015-10-15 13：12：12</td>
+            <td>12000.00</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>草稿</td>
+            <td>
+                <div class="mr10 h35 w140">
+                    <a class="cancelBtn fr" onclick="OpenModalwindow('outwork-Cancel')">删除</a>
+                    <a class="editBtn fr" onclick="OpenModalwindow('outwork-applyEdit')">编辑</a>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <!--分页-->
+    <div class="page">
+        <div class="mt20 mb25 fl c7e">每页显示10条 <em>共计1234条</em></div>
+        <div class="pageBtn fr">
+            <span>第一页</span>
+                <span>
+                    <img src="images/leftBtn.png">
+                </span>
+            <em>1</em>
+            <em>2</em>
+            <em>...</em>
+            <em>11</em>
+            <em>12</em>
+                <span>
+                    <img src="images/rightbtn.png">
+                </span>
+            <span>末页</span>
+        </div>
+    </div>
+</div>
+<!--弹窗部分-->
+<!--弹窗部分-->
+
+<!--弹窗（驳回原因）-->
+<div id="outwork-Reject" class="none">
+    <div class="w400 h200 S-popWindow">
+        <div class="popWTop">
+            <h2 class="popWTitle">驳 回 原 因</h2>
+            <a class="popWClose" style="position:absolute; left: 360px;top: -1px;" onclick="CloseModalwindow()">
+                <img class="middle mt15" src="images/close.png">
+            </a>
+        </div>
+        <div class="popWContent">
+            <input type="text" style="text-align: left" class="w355 h100">
+        </div>
+    </div>
+</div>
+<!--/弹出层  编辑-->
+<div id="outwork-applyEdit" class="none">
+    <div class="w600 h450 S-popWindow">
+        <div class="popWTop">
+            <h2 class="popWTitle">外 出 申 请</h2>
+            <a class="popWClose" style="position:absolute; left:560px;top: -1px;" onclick="CloseModalwindow()">
+                <img class="middle mt15" src="images/close.png">
+            </a>
+        </div>
+        <div class="popWContent">
+            <!--错误提示-->
+            <div class="tantishi TS none">
+                <img class="w20"  src="images/tip.png">
+                <label class="cd00 f12">你填写的信息有误或格式不正确，请正确填写信息！</label>
+            </div>
+            <!--表单-->
+            <table class="S-formPop mlf10" >
+                <tr>
+                    <td>
+                        <label style="width: 120px;display:block;float: left;"><a class="cd00">* </a>外出事由：</label>
+                        <input  maxlength="30" class="S-modified fl" data-valid="tannonull" type="text" />
+                        <span class="unit" style="width: 10px;margin-left:4px;float: left"></span>
+                    </td>
+                    <td>
+                        <label style="width: 120px;display:block;float: left"><a class="cd00">* </a>目的地：</label>
+                        <input  maxlength="30" class="S-modified fl" data-valid="tannonull" type="text" />
+                        <span class="unit" style="width: 10px;margin-left:4px;float: left"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label style="width: 120px;display:block;float: left"><a class="cd00">* </a>预计出发时间：</label>
+                        <input class="S-modified dateImg fl" type="text"  data-valid="tannonull"   onclick="laydate()">
+                        <span class="unit" style="width: 10px;margin-left:4px;float: left"></span>
+                    </td>
+                    <td>
+                        <label style="width: 120px;display:block;float: left"><a class="cd00">* </a>预计返回时间：</label>
+                        <input class="S-modified dateImg fl" type="text"  data-valid="tannonull"   onclick="laydate()">
+                        <span class="unit" style="width: 10px;margin-left:4px;float: left"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label style="width: 120px;display:block;float: left"><a class="cd00">* </a>预计费用：</label>
+                        <input  maxlength="30" class="S-modified fl" data-valid="tannonull" type="text" />
+                        <span class="unit" style="width: 10px;margin-left:4px;float: left">元</span>
+                    </td>
+                    <td>
+                        <label style="width: 120px;display:block;float: left"><a class="cd00">* </a>预计里程：</label>
+                        <input  maxlength="30" class="S-modified fl" data-valid="tannonull" type="text" />
+                        <span class="unit"  style="width: 10px;margin-left:4px;float: left">km</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label style="width: 120px;display:block;float: left">使用车辆：</label>
+                        <select data-valid="tannonull"  style="border-color:#d5d5d5;float: left">
+                            <option value=""></option>
+                        </select>
+                        <span class="unit" style="width: 10px;margin-left:4px;float: left"></span>
+                    </td>
+                    <td>
+                        <label style="width: 120px;display:block;float: left">车牌：</label>
+                        <input  maxlength="30" class="S-modified fl" type="text" />
+                        <span class="unit" style="width: 10px;margin-left:4px;float: left"></span>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="2"><label style="width: 120px;display:block;float: left;">备注：</label>
+                        <input maxlength="200" style="width:74%;height:90px;float: left;margin-top:10px" class="S-modified" type="text"/>
+                        <span class="unit" style="width: 10px;margin-left:4px;float: left"></span>
+                    </td>
+                </tr>
+            </table>
+            <!--按钮-->
+            <div class="popWFoot">
+                <input class="ConBtn" type="button" onclick="CloseModalwindow();keepHint()" value="保 存"/>
+                <input class="CelBtn" type="button" onclick="tannonnull()" value="提 交"/>
+            </div>
+        </div>
+    </div>
+</div>
+<!--弹窗(作废)-->
+<div id="outwork-Cancel" class="none">
+    <div class="w400 h200 S-popWindow">
+        <div class="popWTop">
+            <h2 class="popWTitle">提  示</h2>
+            <a class="popWClose" style="position:absolute; left: 360px;top: -1px;" onclick="CloseModalwindow()">
+                <img class="middle mt15" src="images/close.png">
+            </a>
+        </div>
+        <div class="popWContent">
+            <span class="TabRed hintSpan">确 定 删 除 吗？</span>
+            <div class="popWFoot">
+                <input class="ConBtn" type="button" onclick="CloseModalwindow();delHint()" value="确 定"/>
+                <input class="CelBtn" type="button" onclick="CloseModalwindow()" value="取 消"/>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,175 @@
+
+/*外勤中心主页*/
+.outworkerCentre-home{
+    width: 100%;
+    height: auto;
+    padding: 15px 10px;
+    background: #f9f9f9;
+}
+.outworkerCentre-home .out-header{
+    color: #7e7e7e;
+    margin-bottom: 20px;
+    height:50px;
+    line-height:50px;
+    border-bottom:1px solid #ededed;
+    padding-left: 20px;
+}
+.outworkerCentre-home .titleImg {
+    height:35px;
+    width:40px;
+    vertical-align: middle;
+    display: inline-block;
+    background: url("../images/legworkImg1.png")no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    background-size: cover;
+    margin-top: -10px;
+}
+.outworkerCentre-home  .titleTex {
+    font-family: "微软雅黑";
+    color: #0190d4;
+    font-size: 30px;
+    line-height: 30px;
+}
+.outworkerCentre-home .out-body {
+    width:90%;
+}
+.outworkerCentre-home .out-body-top{
+    width:100%;
+    height:170px;
+}
+.outworkerCentre-home .out-body-top .OnlyData {
+    width:31.7%;
+    min-width:240px;
+    border: 1px solid #e8e8e8;
+    font-size: 14px;
+    margin: 1% 0;
+    float:left;
+    height: 128px;
+}
+.outworkerCentre-home .OnlyData img {
+    vertical-align: middle;
+    height: 84px;
+    width: 84px;
+   }
+.outworkerCentre-home  .DataCont li:first-child {
+    font-size: 26px;
+    font-family: '微软雅黑';
+    color: #525252;
+    line-height: 1.1;
+    padding-top: 20px;
+}
+.outworkerCentre-home .DataCont :last-child {
+    font-size: 14px;
+    color: #707070; }
+.outworkerCentre-home .DataText{
+    margin-top: 20px;
+    margin-left:50px;
+    float: left
+}
+.outworkerCentre-home .DataCont{
+    margin-top:10px;
+    margin-left:5%;
+    float: left
+}
+.outworkerCentre-home .out-body-neck{
+    background:white;
+    width:100%;
+}
+.outworkerCentre-home .DataChart {
+    height: 100%;
+    width: 100%;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    border: 1px solid #e8e8e8;
+}
+.outworkerCentre-home .DataChart h3 {
+    height: 50px;
+    line-height: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #ececec;
+    text-align: center;
+    color: #676767; }
+/*行销申请  行销审批 行销执行 行销完结审批*/
+.outwork{
+    width: 100%;
+    height: 100%;
+}
+.outwork .ListDataBtn {
+    background-color: #00c261;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+    margin-left: 0;
+    padding: 0 15px;
+    color: #ffffff;
+    font-size: 14px;
+    text-align: center;
+    line-height: 35px;
+    width:70px;
+    height: 35px;
+    font-family: '微软雅黑';
+}
+.outwork .selectWhere{
+border: 1px solid transparent;
+    margin:20px 0 0 0;
+}
+
+.outwork .selectWhere li{
+    text-overflow:ellipsis;
+    height:32px;
+}
+.outwork .selectWhere li label{
+    font-size: 12px;
+}
+.outwork .selectWhere li select{
+    padding: 6px 0 6px 0;
+    width: 130px;
+    border:1px solid #c2c2c2;
+}
+.outwork .onlyWidth{
+    margin-right: 10px;
+}
+.dateImg {
+    background-image: url("../images/dateImg.png");
+    background-repeat: no-repeat;
+    background-position: 95% center;
+    -webkit-background-size: 20px 20px;
+    -moz-background-size: 20px 20px;
+    -o-background-size: 20px 20px;
+    -ms-background-size: 20px 20px;
+    background-size: 20px 20px;
+    -webkit-background-clip: border-box;
+    /*-moz-background-clip: border-box;*/
+    -o-background-clip: border-box;
+    -ms-background-clip: border-box;
+    background-clip: border-box; }
+.btn-gps {
+    margin-left:90px;
+    border: 1px solid #dadde5;
+    vertical-align: middle;
+    border-radius: 5px;
+    width:130px;
+    height: 30px;
+    float: left;
+    background: #2997CB;
+    color: #F7F7F7;
+    font-family: '宋体'; }
+/*行销执行*/
+.AddVbtn {
+    background-color: #0a9ce1;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+    margin-left: 0;
+    padding: 0 15px;
+    color: #ffffff;
+    font-size: 14px;
+    font-family: '微软雅黑'; }

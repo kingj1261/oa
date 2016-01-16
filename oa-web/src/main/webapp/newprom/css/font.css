@@ -1,0 +1,34 @@
+@font-face {
+    font-family: 'icomoon';
+    src:url('fonts/icomoon.eot?zhyobj');
+    src:url('fonts/icomoon.eot?#iefixzhyobj') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?zhyobj') format('truetype'),
+    url('fonts/icomoon.woff?zhyobj') format('woff'),
+    url('fonts/icomoon.svg?zhyobj#icomoon') format('svg');
+    /**/
+    /*src:url('fonts/vjs.eot');*/
+    /*src:url('fonts/vjs.woff') format('embedded-opentype'),*/
+    /*src: url('font/vjs.ttf') format('truetype'),*/
+    /*src:url('font/vjs.woff') format('woff'),*/
+  /**/
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    font-family: 'icomoon';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-triangle-right:before {
+    content: "\f05a";
+}

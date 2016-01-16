@@ -1,0 +1,427 @@
+<!--采购订单查看-->
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="css/T-TheVehiclePurchase.css"/>
+        <title>采购订单查看</title>
+    </head>
+    <body>
+        <div class="T-all">
+            <!--当前位置-->
+            <div class="T-Title">
+                <img class="T-TitleImg" src="images/home.png" alt=""/>  <a>您当前位置:</a>
+                <a href="">设置中心 </a>&#47;<a href="">组织机构管理 </a>&#47;<a class="T-TitleColor">审批权限设置</a>
+            </div>
+            <div class="mainCont">
+                <!--返回-->
+                <div class="T-fanhui">
+                    <div class="T-biaoti">审批权限设置</div>
+                    <div class="T-FTitleBtn" onclick="shoutye('html/T-carload/T-purchaseOrder.html', this)">
+                        <img class="T-fanhuiImg"  src="images/return.png">
+                    </div>
+                </div>
+                <div class="T-dingdantop">
+                    <ul class="T-ul lanh3 f16">
+                        <li>当前角色名称：人事行政总监</li>
+                    </ul>
+                </div>
+                <div class="T-detailsCont-footer">
+                    <ul class="T-footer-DH imgcaroutdeta mb20" style="width: 120px;height: auto;float: left;">
+                        <li onclick="morecanshu(this)" class="caroutdefau" style="float: none">整车业务</li>
+                        <li onclick="morecanshu(this)" class="ouroutother" style="float: none">配件业务</li>
+                        <li onclick="morecanshu(this)" class="ouroutother" style="float: none" >车贷业务</li>
+                        <li onclick="morecanshu(this)" class="ouroutother" style="float: none">保险业务</li>
+                        <li onclick="morecanshu(this)" class="ouroutother" style="float: none">挂靠业务</li>
+                        <li onclick="morecanshu(this)"  class="ouroutother" style="float: none">牌证业务</li>
+                        <li onclick="morecanshu(this)"  class="ouroutother" style="float: none">外勤中心</li>
+                        <li onclick="morecanshu(this)"  class="ouroutother" style="float: none">人事行政</li>
+                        <li onclick="morecanshu(this)"  class="ouroutother" style="float: none">财务</li>
+
+
+                    </ul>
+
+
+                    <div class="T-footer-DP T-TShow" style="width: 85%;float: left;margin-left: 20px;">
+                        <table class="GradeTab mt20" style="width: 92%">
+                            <tbody>
+                                <tr>
+                                    <th>审批事项类型</th>
+                                    <th>审批事项名称</th>
+                                    <th>审批事项权限</th>
+                                    <th>判断条件/单位</th>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">整车采购</td>
+                                    <td>采购订单审批</td>
+                                    <td><input type="text" /></td>
+                                    <td>采购车辆数（辆）</td>
+                                </tr>
+
+                                <tr>
+                                    <td>采购订单审批</td>
+                                    <td><input type="text" /></td>
+                                    <td>采购车辆数（辆）</td>
+                                </tr>
+
+                                <tr>
+                                    <td rowspan="2">整车销售</td>
+                                    <td>定车审批</td>
+                                    <td><input type="text" /></td>
+                                    <td>低于定价金额（元）</td>
+                                </tr>
+
+                                <tr>
+                                    <td>销售优惠</td>
+                                    <td><input type="text" /></td>
+                                    <td>优惠金额（元）</td>
+                                </tr>
+
+                                <tr>
+                                    <td>销售底价修改</td>
+                                    <td>销售低价修改审批</td>
+                                    <td><input type="text" /></td>
+                                    <td>低于成本价金额（元）</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <div class="cd00">说明：若不输入任何条件，则默认直接提交到申请人的上级进行审批。</div>
+                    </div>
+                    <div class="T-footer-DP T-none" style="width: 85%;float: left;margin-left: 20px;">
+                        <table class="GradeTab mt20" style="width: 92%">
+                            <tbody>
+                                <tr>
+                                    <th>审批事项类型</th>
+                                    <th>审批事项名称</th>
+                                    <th>审批事项权限</th>
+                                    <th>判断条件/单位</th>
+                                </tr>
+                                <tr>
+                                    <td>配件采购</td>
+                                    <td>采购审批</td>
+                                    <td><input type="text" /></td>
+                                    <td>采购金额（元）</td>
+                                </tr>
+
+                                <tr>
+                                    <td>配件销售</td>
+                                    <td>销售优惠</td>
+                                    <td><input type="text" /></td>
+                                    <td>优惠金额（元）</td>
+                                </tr>
+
+                                <tr>
+                                    <td>配件销售退货</td>
+                                    <td>退货审批</td>
+                                    <td><input type="text" /></td>
+                                    <td>退货总额（元）</td>
+                                </tr>
+                                <tr>
+                                    <td>配件损益</td>
+                                    <td>损益审批</td>
+                                    <td><input type="text" /></td>
+                                    <td>损溢金额（元）</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <div class="cd00">说明：若不输入任何条件，则默认直接提交到申请人的上级进行审批。</div>
+                    </div>
+                    <div class="T-footer-DP T-none" style="width: 85%;float: left;margin-left: 20px;">
+                        <table class="GradeTab mt20" style="width: 92%">
+                            <tbody>
+                                <tr>
+                                    <th>审批事项类型</th>
+                                    <th>审批事项名称</th>
+                                    <th>审批事项权限</th>
+                                    <th>判断条件/单位</th>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">短借业务</td>
+                                    <td>短借优惠</td>
+                                    <td><input type="text" /></td>
+                                    <td>优惠金额（元）</td>
+                                </tr>
+
+                                <tr>
+                                    <td>短借订单审批</td>
+                                    <td><input type="text" /></td>
+                                    <td>短借利率（%）</td>
+                                </tr>
+
+                                <tr>
+                                    <td rowspan="2">按揭业务</td>
+                                    <td>短借优惠</td>
+                                    <td><input type="text" /></td>
+                                    <td>优惠金额（元）</td>
+                                </tr>
+
+                                <tr>
+                                    <td>按揭订单审批</td>
+                                    <td><input type="text" /></td>
+                                    <td>首付比例（元）</td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                        <div class="cd00">说明：若不输入任何条件，则默认直接提交到申请人的上级进行审批。</div>
+                    </div>
+                    <div class="T-footer-DP T-none" style="width: 85%;float: left;margin-left: 20px;">
+                        <table class="GradeTab mt20" style="width: 92%">
+                            <tbody>
+                                <tr>
+                                    <th>审批事项类型</th>
+                                    <th>审批事项名称</th>
+                                    <th>审批事项权限</th>
+                                    <th>判断条件/单位</th>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">投保业务</td>
+                                    <td>投保优惠</td>
+                                    <td><input type="text" /></td>
+                                    <td>优惠金额（元）</td>
+                                </tr>
+
+                                <tr>
+                                    <td>投保订单审批</td>
+                                    <td><input type="text" /></td>
+                                    <td>毛利金额（元）</td>
+                                </tr>
+
+
+
+                                <tr>
+                                    <td>理赔业务</td>
+                                    <td>理赔订单审批</td>
+                                    <td><input type="text" /></td>
+                                    <td>毛利金额（元）</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <div class="cd00">说明：若不输入任何条件，则默认直接提交到申请人的上级进行审批。</div>
+                    </div>
+                    <div class="T-footer-DP T-none" style="width: 85%;float: left;margin-left: 20px;">
+                        <table class="GradeTab mt20" style="width: 92%">
+                            <tbody>
+                                <tr>
+                                    <th>审批事项类型</th>
+                                    <th>审批事项名称</th>
+                                    <th>审批事项权限</th>
+                                    <th>判断条件/单位</th>
+                                </tr>
+
+                                <tr>
+                                    <td>挂靠业务</td>
+                                    <td>挂靠优惠</td>
+                                    <td><input type="text" /></td>
+                                    <td>优惠金额（元）</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <div class="cd00">说明：若不输入任何条件，则默认直接提交到申请人的上级进行审批。</div>
+                    </div>
+                    <div class="T-footer-DP T-none" style="width: 85%;float: left;margin-left: 20px;">
+                        <table class="GradeTab mt20" style="width: 92%">
+                            <tbody>
+                                <tr>
+                                    <th>审批事项类型</th>
+                                    <th>审批事项名称</th>
+                                    <th>审批事项权限</th>
+                                    <th>判断条件/单位</th>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">新车上户</td>
+                                    <td>上户优惠</td>
+                                    <td><input type="text" /></td>
+                                    <td>优惠金额（元）</td>
+                                </tr>
+
+                                <tr>
+                                    <td>上户订单审批</td>
+                                    <td><input type="text" /></td>
+                                    <td>毛利金额（元）</td>
+                                </tr>
+
+                                <tr>
+                                    <td rowspan="2">车辆年检</td>
+                                    <td>年检优惠</td>
+                                    <td><input type="text" /></td>
+                                    <td>优惠金额（元）</td>
+                                </tr>
+
+                                <tr>
+                                    <td>年检订单审批</td>
+                                    <td><input type="text" /></td>
+                                    <td>毛利金额（元）</td>
+                                </tr>
+
+
+
+                            </tbody>
+                        </table>
+                        <div class="cd00">说明：若不输入任何条件，则默认直接提交到申请人的上级进行审批。</div>
+                    </div>
+                    <div class="T-footer-DP T-none" style="width: 85%;float: left;margin-left: 20px;">
+                        <table class="GradeTab mt20" style="width: 92%">
+                            <tbody>
+                                <tr>
+                                    <th>审批事项类型</th>
+                                    <th>审批事项名称</th>
+                                    <th>审批事项权限</th>
+                                    <th>判断条件/单位</th>
+                                </tr>
+                                <tr>
+                                    <td>行销中心</td>
+                                    <td>行销审批</td>
+                                    <td><input type="text" /></td>
+                                    <td>预计费用（元）</td>
+                                </tr>
+
+                                <tr>
+                                    <td>巡展中心</td>
+                                    <td>巡展审批</td>
+                                    <td><input type="text" /></td>
+                                    <td>预计费用（元）</td>
+                                </tr>
+
+                                <tr>
+                                    <td>会议中心</td>
+                                    <td>会议审批</td>
+                                    <td><input type="text" /></td>
+                                    <td>预计费用（元）</td>
+                                </tr>
+
+                                <tr>
+                                    <td>调查中心</td>
+                                    <td>调查审批</td>
+                                    <td><input type="text" /></td>
+                                    <td>预计费用（元）</td>
+                                </tr>
+
+                                <tr>
+                                    <td>清收中心</td>
+                                    <td>清收审批</td>
+                                    <td><input type="text" /></td>
+                                    <td>预计费用（元）</td>
+                                </tr>
+                                <tr>
+                                    <td>勘查中心</td>
+                                    <td>勘查审批</td>
+                                    <td><input type="text" /></td>
+                                    <td>预计费用（元）</td>
+                                </tr>
+
+                                <tr>
+                                    <td>外修中心</td>
+                                    <td>外修审批</td>
+                                    <td><input type="text" /></td>
+                                    <td>预计费用（元）</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <div class="cd00">说明：若不输入任何条件，则默认直接提交到申请人的上级进行审批。</div>
+                    </div>
+                    <div class="T-footer-DP T-none" style="width: 85%;float: left;margin-left: 20px;">
+                        <table class="GradeTab mt20" style="width: 92%">
+                            <tbody>
+                                <tr>
+                                    <th>审批事项类型</th>
+                                    <th>审批事项名称</th>
+                                    <th>审批事项权限</th>
+                                    <th>判断条件/单位</th>
+                                </tr>
+                                <tr>
+                                    <td rowspan="8">人事管理</td>
+                                    <td>年假审批</td>
+                                    <td><input type="text" class="S-readOnly" disabled="disabled" /></td>
+                                    <td>休假天数（天）</td>
+                                </tr>
+                                <tr>
+
+                                    <td>事假审批</td>
+                                    <td><input type="text" class="S-readOnly" disabled="disabled" /></td>
+                                    <td>休假天数（天）</td>
+                                </tr>
+                                <tr>
+
+                                    <td>病假审批</td>
+                                    <td><input type="text" class="S-readOnly" disabled="disabled" /></td>
+                                    <td>休假天数（天）</td>
+                                </tr>
+                                <tr>
+                                    <td>婚假审批</td>
+                                    <td><input type="text" class="S-readOnly" disabled="disabled" /></td>
+                                    <td>休假天数（天）</td>
+                                </tr>
+
+                                <tr>
+
+                                    <td>生育假审批</td>
+                                    <td><input type="text" class="S-readOnly" disabled="disabled" /></td>
+                                    <td>休假天数（天）</td>
+                                </tr>
+
+                                <tr>
+                                    <td>加班审批</td>
+                                    <td><input type="text" class="S-readOnly" disabled="disabled" /></td>
+                                    <td>加班天数（天）</td>
+                                </tr>
+
+                                <tr>
+
+                                    <td>补休假审批</td>
+                                    <td><input type="text" class="S-readOnly" disabled="disabled" /></td>
+                                    <td>休假天数（天）</td>
+                                </tr>
+                                <tr>
+
+                                    <td>员工调薪审批</td>
+                                    <td><input type="text" class="S-readOnly" disabled="disabled" /></td>
+                                    <td>调薪金额（元）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="cd00">说明：若不输入任何条件，则默认直接提交到申请人的上级进行审批。</div>
+                    </div>
+                    <div class="T-footer-DP T-none" style="width: 85%;float: left;margin-left: 20px;">
+                        <table class="GradeTab mt20" style="width: 92%">
+                            <tbody>
+                                <tr>
+                                    <th>审批事项类型</th>
+                                    <th>审批事项名称</th>
+                                    <th>审批事项权限</th>
+                                    <th>判断条件/单位</th>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">财务管理</td>
+                                    <td>出差费报销审批</td>
+                                    <td><input type="text" class="S-readOnly" disabled="disabled" /></td>
+                                    <td>报销金额（元）</td>
+                                </tr>
+
+                                <tr>
+                                    <td>办公用品采购报销</td>
+                                    <td><input type="text" class="S-readOnly" disabled="disabled" /></td>
+                                    <td>采购金额（元）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="cd00">说明：若不输入任何条件，则默认直接提交到申请人的上级进行审批。</div>
+                    </div>
+                </div>
+                <div class="T-footerBtn">
+                    <input class="T-baoCBtn" type="button" onclick="keepHint();shoutye('html/html/setcentre/setcantre_role.html', this)" value="保 存">
+                    <input class="T-tiJiaoBtn" type="button" onclick="shoutye('html/setcentre/setcantre_role.html', this)" value="返回">
+                </div>
+            </div>
+
+
+        </div>
+        <script src="js/home.js"></script>
+    </body>
+</html>
