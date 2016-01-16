@@ -41,6 +41,7 @@
     <!-- 静态资源文件，不会被Spring MVC拦截 -->
     <mvc:resources mapping="/diagram-viewer/**" location="/diagram-viewer/"/>
     <mvc:resources mapping="/editor-app/**" location="/editor-app/"/>
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
 
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
         <property name="messageConverters">

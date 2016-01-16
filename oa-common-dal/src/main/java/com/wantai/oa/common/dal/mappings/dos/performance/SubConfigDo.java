@@ -26,6 +26,7 @@ public class SubConfigDo extends BaseDo {
      */
     String subEventCode;
 
+    /** 子事件名称*/
     String subEventCodeName;
 
     /** 目标配置对象*/

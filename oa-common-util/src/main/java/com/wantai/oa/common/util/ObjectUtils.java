@@ -5,6 +5,12 @@
 package com.wantai.oa.common.util;
 
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.beans.BeanInfo;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
+import java.util.Map;
 
 /**
  * 对象工具类
@@ -27,5 +33,27 @@ public final class ObjectUtils {
             throw new RuntimeException(e);
         }
         return dest;
+    }
+
+    /**
+     * 将对象属性填充到map中
+     * @param bean          当前对象
+     * @param data          目标map
+     */
+    public static void populate(Object bean, Map data) {
+        try {
+            BeanInfo info = Introspector.getBeanInfo(bean.getClass());
+            PropertyDescriptor[] pds = info.getPropertyDescriptors();
+            for (PropertyDescriptor pd : pds) {
+
+                String propertyName = pd.getName();
+                if (StringUtils.equals(propertyName, "class")) {
+                    continue;
+                }
+                data.put(propertyName, pd.getReadMethod().invoke(bean));
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

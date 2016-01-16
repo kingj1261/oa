@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+  
+<mapper namespace="SystemConfig">
+
+    <!-- 更新公共配置表数据 -->
+    <update id="update">
+        update OA_SYSTEM_CONFIG set value=#{value},gmt_modified=now() where name=#{key}
+        and company_code=#{companyCode}
+        and company_id=#{companyId}
+    </update>
+
+    <!-- 查询公共配置表数据 -->
+    <select id="query" resultType="java.lang.String">
+        select value from OA_SYSTEM_CONFIG where name=#{key}
+        and company_code=#{companyCode}
+        and company_id=#{companyId}
+    </select>
+
+</mapper>

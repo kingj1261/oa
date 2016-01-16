@@ -7,6 +7,8 @@ package com.wantai.oa.performance.common;
 import com.wantai.oa.biz.shared.request.BaseRequest;
 import com.wantai.oa.biz.shared.vo.ConfigVO;
 import com.wantai.oa.biz.shared.vo.SubBizEventVO;
+import com.wantai.oa.common.dal.mappings.dos.performance.ConfigDo;
+import com.wantai.oa.common.dal.mappings.dos.performance.SubConfigDo;
 
 import java.util.List;
 
@@ -39,8 +41,31 @@ public interface ConfigService {
 
     /**
      * 根据主表id查询子表配置数据
-     * @param mainConfigId  主表配置id
-     * @return              子表数据集合
+     * @param mainConfigId          主表配置id
+     * @return                      子表数据集合
      */
     List<SubBizEventVO> querySubEventsVo(Long mainConfigId);
+
+    /**
+     * 根据业务事项事件查询子配置数据
+     * @param companyCode           公司code
+     * @param companyId             公司id
+     * @param bizItem               业务事项编号
+     * @param bizEvent              事件编号
+     * @param subEventCode          子事件编号
+     * @param customerId            客户id
+     * @return                      单条子事件配置数据
+     */
+    SubConfigDo querySingleSubConfig(String companyCode, String companyId, String bizItem,
+                                     String bizEvent, String subEventCode, String customerId);
+
+    /**
+     * 根据参数查询配置数据
+     * @param companyCode           公司code
+     * @param companyId             公司id
+     * @param bizItem               业务事项编号
+     * @param bizEvent              事件编号
+     * @return                      查询数据对象
+     */
+    ConfigDo queryConfig(String companyCode, String companyId, String bizItem, String bizEvent);
 }

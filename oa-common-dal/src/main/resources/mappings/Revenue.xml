@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<!--  个税设置 -->
+<mapper namespace="Revenue">
+
+    <!-- 个税查询resultMap -->
+    <resultMap id="revenueMap" type="com.wantai.oa.common.dal.mappings.dos.performance.RevenueDo" extends="Common.commonResultMap">
+        <result property="fromValue" column="from_value" javaType="string" jdbcType="INTEGER"/>
+        <result property="toValue" column="to_value" javaType="string" jdbcType="INTEGER"/>
+        <result property="ratio" column="revenue_ratio" javaType="string" jdbcType="INTEGER"/>
+        <result property="deducts" column="deduct_amount" javaType="string" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!-- 删除个税数据 -->
+    <delete id="delete">
+        DELETE from OA_REVENUE_CONFIG where company_code=#{companyCode} and company_id=#{companyId}
+    </delete>
+
+    <!-- 新增个税数据 -->
+    <insert id="add" parameterType="com.wantai.oa.biz.shared.vo.RevenueVO">
+        insert into OA_REVENUE_CONFIG(
+            company_code,
+            company_id,
+            from_value,
+            to_value,
+            revenue_ratio,
+            deduct_amount,
+            start_time,
+            end_time,
+            memo,
+            gmt_create,
+            gmt_modified,
+            operator,
+            last_modified_oeprator
+        )
+
+        VALUES
+        (
+            #{companyCode},
+            #{companyId},
+            #{fromValue},
+            #{toValue},
+            #{ratio},
+            #{deducts},
+            now(),
+            now(),
+            '',
+            now(),
+            now(),
+            #{operator},
+            #{lastModifiedOperator}
+        )
+    </insert>
+
+
+    <!-- 查询当前公司的个税设置 -->
+    <select id="queryRevenue" resultMap="revenueMap">
+         select
+            id,
+            company_code,
+            company_id,
+            from_value,
+            to_value,
+            revenue_ratio,
+            deduct_amount,
+            memo,
+            gmt_create,
+            gmt_modified,
+            operator,
+            last_modified_oeprator
+         from OA_REVENUE_CONFIG
+         where company_code=#{companyCode}
+         and   company_id=#{companyId}
+    </select>
+
+</mapper>
