@@ -27,7 +27,7 @@ CREATE TABLE OA_MESSAGE(
 CREATE TABLE OA_SUPERVISE(
   id                      INT PRIMARY KEY NOT NULL AUTO_INCREMENT COMMENT '逻辑主键',
   message_id              INT NOT NULL COMMENT '消息表id',
-  out_limit_dyas          INT NOT NULL DEFAULT 0 COMMENT '超期日期,单位为天',
+  out_limit_days          INT NOT NULL DEFAULT 0 COMMENT '超期日期,单位为天',
   gmt_create              DATETIME NOT NULL COMMENT '创建日期',
   gmt_modified            DATETIME NOT NULL COMMENT '最后修改日期'
 )COMMENT '督办表';
