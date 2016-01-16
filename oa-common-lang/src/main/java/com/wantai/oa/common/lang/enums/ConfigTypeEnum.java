@@ -22,7 +22,13 @@ public enum ConfigTypeEnum {
     GWTC("GWTC", "岗位提成"),
 
     /** 基础设置*/
-    JCSZ("JCSZ", "基础设置");
+    JCSZ("JCSZ", "基础设置"),
+
+    /** 督办设置*/
+    DBSZ("DBSZ", "督办设置"),
+
+    /** 提醒设置*/
+    TXSZ("TXSZ", "提醒设置");
 
     /**返回码*/
     private String code;
