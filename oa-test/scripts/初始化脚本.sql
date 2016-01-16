@@ -163,3 +163,6 @@ insert into OA_REVENUE_CONFIG(company_code, company_id, from_value, to_value, re
 insert into OA_REVENUE_CONFIG(company_code, company_id, from_value, to_value, revenue_ratio, deduct_amount, start_time, end_time, memo, gmt_create, gmt_modified, operator, last_modified_oeprator) VALUES ('99999999999',1,35000,55000,30,2755,now(),now(),'',now(),now(),'system','system');
 insert into OA_REVENUE_CONFIG(company_code, company_id, from_value, to_value, revenue_ratio, deduct_amount, start_time, end_time, memo, gmt_create, gmt_modified, operator, last_modified_oeprator) VALUES ('99999999999',1,55000,80000,35,5505,now(),now(),'',now(),now(),'system','system');
 insert into OA_REVENUE_CONFIG(company_code, company_id, from_value, to_value, revenue_ratio, deduct_amount, start_time, end_time, memo, gmt_create, gmt_modified, operator, last_modified_oeprator) VALUES ('99999999999',1,80000,999999999,45,13505,now(),now(),'',now(),now(),'system','system');
+
+-- 个税起征点
+insert into OA_SYSTEM_CONFIG(company_code, company_id, name, value, memo, gmt_create, gmt_modified, operator, last_modified_oeprator) VALUES ('99999999999',1,'revenueStart','3500','个税起征点',now(),now(),'system','system');
