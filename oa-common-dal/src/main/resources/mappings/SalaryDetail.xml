@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SalaryDetail">
+
+  <!-- subConfigMap -->
+  <resultMap id="salaryDetailMap" type="com.wantai.oa.common.dal.mappings.dos.auth.SalaryDetail">
+      <result property="id" column="id" javaType="long" jdbcType="INTEGER"/>
+      <result property="companyCode" column="company_code" javaType="string" jdbcType="VARCHAR"/>
+      <result property="companyId" column="company_id" javaType="int" jdbcType="INTEGER"/>
+      <result property="customerId" column="customer_id" javaType="int" jdbcType="INTEGER"/>
+      <result property="customerName" column="customer_name" javaType="string" jdbcType="VARCHAR"/>
+      <result property="departmentName" column="department_name" javaType="string" jdbcType="VARCHAR"/>
+      <result property="startTime" column="start_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <result property="endTime" column="end_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <result property="basicSalary" column="basic_salary" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+      <result property="startSalary" column="start_salary" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+      <result property="lowestSalary" column="lowest_salary" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+      <result property="workYearsSalary" column="work_years_salary" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+      <result property="betAmount" column="bet_amount" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+      <result property="currency" column="currency" javaType="string" jdbcType="VARCHAR"/>
+      <result property="gwjj" column="gwjj" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+      <result property="gwtc" column="gwtc" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+      <result property="ratioAmount" column="ratio_amount" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+      <result property="subsityAmount" column="subsity_amount" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+      <result property="bonusAmount" column="bonus_amount" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+      <result property="deductAmount" column="deduct_amount" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+      <result property="withholdAmount" column="withhold_amount" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+      <result property="socailAmount" column="socail_amount" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+      <result property="fundAmount" column="fund_amount" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+      <result property="revenueAmount" column="revenue_amount" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+      <result property="memo" column="memo" javaType="string" jdbcType="VARCHAR"/>
+      <result property="gmtCreate" column="gmt_create" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <result property="gmtModified" column="gmt_modified" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <result property="operator" column="operator" javaType="string" jdbcType="VARCHAR"/>
+      <result property="last_modified_oeprator" column="last_modified_oeprator" javaType="string" jdbcType="VARCHAR"/>
+  </resultMap>
+
+  <!-- 新增工资明细 -->
+  <insert id="addSalaryDetail" parameterType="com.wantai.oa.common.dal.mappings.dos.auth.SalaryDetail">
+      insert into OA_SALARY_DETAILS(
+        id,
+        company_code,
+        company_id,
+        customer_id,
+        customer_name,
+        department_name,
+        start_time,
+        end_time,
+        basic_salary,
+        start_salary,
+        lowest_salary,
+        work_years_salary,
+        bet_amount,
+        currency,
+        gwjj,
+        gwtc,
+        ratio_amount,
+        subsity_amount,
+        bonus_amount,
+        deduct_amount,
+        withhold_amount,
+        socail_amount,
+        fund_amount,
+        revenue_amount,
+        memo,
+        gmt_create,
+        gmt_modified,
+        operator,
+        last_modified_oeprator
+      )
+      VALUES (
+        #{id},
+        #{companyCode},
+        #{companyId},
+        #{customerId},
+        #{customerName},
+        #{departmentName},
+        #{startTime},
+        #{endTime},
+        #{basicSalary},
+        #{startSalary},
+        #{lowestSalary},
+        #{workYearsSalary},
+        #{betAmount},
+        #{currency},
+        #{gwjj},
+        #{gwtc},
+        #{ratioAmount},
+        #{subsityAmount},
+        #{bonusAmount},
+        #{deductAmount},
+        #{withholdAmount},
+        #{socailAmount},
+        #{fundAmount},
+        #{revenueAmount},
+        #{memo},
+        #{gmtCreate},
+        #{gmtModified},
+        #{operator},
+        #{last_modified_oeprator}
+      )
+  </insert>
+
+    <!-- 删除工资明细 -->
+    <delete id="deleteSalaryDetail">
+        delete from OA_SALARY_DETAILS where id=#{id}
+    </delete>
+
+
+    <!-- 查询所有的工资明细 -->
+    <select id="getAll">
+        select
+        gmt_create,
+        customer_id,
+        customer_name,
+        department_name,
+        basic_salary,
+        lowest_salary,
+
+    </select>
+    
+</mapper>
