@@ -4,15 +4,12 @@
  */
 package com.wantai.oa.common.dal.interceptor;
 
-import com.wantai.oa.common.dal.dialect.Dialect;
-import com.wantai.oa.common.dal.dialect.MySqlDialect;
+import java.sql.Connection;
+import java.util.Properties;
+
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
-import org.apache.ibatis.plugin.Interceptor;
-import org.apache.ibatis.plugin.Intercepts;
-import org.apache.ibatis.plugin.Invocation;
-import org.apache.ibatis.plugin.Plugin;
-import org.apache.ibatis.plugin.Signature;
+import org.apache.ibatis.plugin.*;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.factory.DefaultObjectFactory;
 import org.apache.ibatis.reflection.factory.ObjectFactory;
@@ -21,8 +18,8 @@ import org.apache.ibatis.reflection.wrapper.ObjectWrapperFactory;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.RowBounds;
 
-import java.sql.Connection;
-import java.util.Properties;
+import com.wantai.oa.common.dal.dialect.Dialect;
+import com.wantai.oa.common.dal.dialect.MySqlDialect;
 
 /**
  * mybatis物理分页拦截器
@@ -69,8 +66,12 @@ public class PaginationInterceptor implements Interceptor {
         try {
             databaseType = Dialect.Type.valueOf(configuration.getVariables().getProperty("dialect")
                 .toUpperCase());
+
         } catch (Exception e) {
             //ignore
+        }
+        if (databaseType==null) {
+            databaseType= Dialect.Type.MYSQL;
         }
         if (databaseType == null) {
             throw new RuntimeException(
@@ -80,7 +81,7 @@ public class PaginationInterceptor implements Interceptor {
         Dialect dialect = null;
         switch (databaseType) {
             case MYSQL:
-                new MySqlDialect();
+                dialect=new MySqlDialect();
                 break;
 
         }
