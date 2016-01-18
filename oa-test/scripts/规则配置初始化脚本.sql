@@ -97,7 +97,7 @@ insert into OA_RULES(company_code, company_id, config_type, biz_item, biz_event,
      $user:         User(roles contains "ppjl")
      $saleOrder:    SaleOrderDo(customerId==$user.id
                     && bizItem=="200000000000"
-                    && bizEvent="20000014")
+                    && bizEvent=="20000014")
   then
      context.caclulateRatioDetail($saleOrder.getBizItem(),$saleOrder.getBizEvent(),String.valueOf($saleOrder.getSaleCounts()),String.valueOf($user.getId()));
   end
