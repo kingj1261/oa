@@ -17509,7 +17509,7 @@ ORYX.Plugins.Edit = Clazz.extend({
         this.facade.offer({
          name: ORYX.I18N.Edit.cut,
          description: ORYX.I18N.Edit.cutDesc,
-         icon: ORYX.PATH + "images/cut.png",
+         icon: ORYX.PATH + "resources/images/cut.png",
 		 keyCodes: [{
 				metaKeys: [ORYX.CONFIG.META_KEY_META_CTRL],
 				keyCode: 88,
@@ -17525,7 +17525,7 @@ ORYX.Plugins.Edit = Clazz.extend({
         this.facade.offer({
          name: ORYX.I18N.Edit.copy,
          description: ORYX.I18N.Edit.copyDesc,
-         icon: ORYX.PATH + "images/page_copy.png",
+         icon: ORYX.PATH + "resources/images/page_copy.png",
 		 keyCodes: [{
 				metaKeys: [ORYX.CONFIG.META_KEY_META_CTRL],
 				keyCode: 67,
@@ -17541,7 +17541,7 @@ ORYX.Plugins.Edit = Clazz.extend({
         this.facade.offer({
          name: ORYX.I18N.Edit.paste,
          description: ORYX.I18N.Edit.pasteDesc,
-         icon: ORYX.PATH + "images/page_paste.png",
+         icon: ORYX.PATH + "resources/images/page_paste.png",
 		 keyCodes: [{
 				metaKeys: [ORYX.CONFIG.META_KEY_META_CTRL],
 				keyCode: 86,
@@ -17559,7 +17559,7 @@ ORYX.Plugins.Edit = Clazz.extend({
         this.facade.offer({
             name: ORYX.I18N.Edit.del,
             description: ORYX.I18N.Edit.delDesc,
-            icon: ORYX.PATH + "images/cross.png",
+            icon: ORYX.PATH + "resources/images/cross.png",
 			keyCodes: [{
 					metaKeys: [ORYX.CONFIG.META_KEY_META_CTRL],
 					keyCode: 8,
@@ -18018,7 +18018,7 @@ ORYX.Plugins.View = {
 			'name':ORYX.I18N.View.zoomIn,
 			'functionality': this.zoom.bind(this, [1.0 + ORYX.CONFIG.ZOOM_OFFSET]),
 			'group': ORYX.I18N.View.group,
-			'icon': ORYX.PATH + "images/magnifier_zoom_in.png",
+			'icon': ORYX.PATH + "resources/images/magnifier_zoom_in.png",
 			'description': ORYX.I18N.View.zoomInDesc,
 			'index': 1,
 			'minShape': 0,
@@ -18030,7 +18030,7 @@ ORYX.Plugins.View = {
 			'name':ORYX.I18N.View.zoomOut,
 			'functionality': this.zoom.bind(this, [1.0 - ORYX.CONFIG.ZOOM_OFFSET]),
 			'group': ORYX.I18N.View.group,
-			'icon': ORYX.PATH + "images/magnifier_zoom_out.png",
+			'icon': ORYX.PATH + "resources/images/magnifier_zoom_out.png",
 			'description': ORYX.I18N.View.zoomOutDesc,
 			'index': 2,
 			'minShape': 0,
@@ -18042,7 +18042,7 @@ ORYX.Plugins.View = {
 			'name':ORYX.I18N.View.zoomStandard,
 			'functionality': this.setAFixZoomLevel.bind(this, 1),
 			'group': ORYX.I18N.View.group,
-			'icon': ORYX.PATH + "images/zoom_standard.png",
+			'icon': ORYX.PATH + "resources/images/zoom_standard.png",
 			'cls' : 'icon-large',
 			'description': ORYX.I18N.View.zoomStandardDesc,
 			'index': 3,
@@ -18056,7 +18056,7 @@ ORYX.Plugins.View = {
 			'name':ORYX.I18N.View.zoomFitToModel,
 			'functionality': this.zoomFitToModel.bind(this),
 			'group': ORYX.I18N.View.group,
-			'icon': ORYX.PATH + "images/image.png",
+			'icon': ORYX.PATH + "resources/images/image.png",
 			'description': ORYX.I18N.View.zoomFitToModelDesc,
 			'index': 4,
 			'minShape': 0,
@@ -19013,7 +19013,7 @@ ORYX.Plugins.Arrangement = ORYX.Plugins.AbstractPlugin.extend({
 			'name':ORYX.I18N.Arrangement.btf,
 			'functionality': this.setZLevel.bind(this, this.setToTop),
 			'group': ORYX.I18N.Arrangement.groupZ,
-			'icon': ORYX.PATH + "images/shape_move_front.png",
+			'icon': ORYX.PATH + "resources/images/shape_move_front.png",
 			'description': ORYX.I18N.Arrangement.btfDesc,
 			'index': 1,
 			'minShape': 1});
@@ -19022,7 +19022,7 @@ ORYX.Plugins.Arrangement = ORYX.Plugins.AbstractPlugin.extend({
 			'name':ORYX.I18N.Arrangement.btb,
 			'functionality': this.setZLevel.bind(this, this.setToBack),
 			'group': ORYX.I18N.Arrangement.groupZ,
-			'icon': ORYX.PATH + "images/shape_move_back.png",
+			'icon': ORYX.PATH + "resources/images/shape_move_back.png",
 			'description': ORYX.I18N.Arrangement.btbDesc,
 			'index': 2,
 			'minShape': 1});
@@ -19031,7 +19031,7 @@ ORYX.Plugins.Arrangement = ORYX.Plugins.AbstractPlugin.extend({
 			'name':ORYX.I18N.Arrangement.bf,
 			'functionality': this.setZLevel.bind(this, this.setForward),
 			'group': ORYX.I18N.Arrangement.groupZ,
-			'icon': ORYX.PATH + "images/shape_move_forwards.png",
+			'icon': ORYX.PATH + "resources/images/shape_move_forwards.png",
 			'description': ORYX.I18N.Arrangement.bfDesc,
 			'index': 3,
 			'minShape': 1});
@@ -19040,7 +19040,7 @@ ORYX.Plugins.Arrangement = ORYX.Plugins.AbstractPlugin.extend({
 			'name':ORYX.I18N.Arrangement.bb,
 			'functionality': this.setZLevel.bind(this, this.setBackward),
 			'group': ORYX.I18N.Arrangement.groupZ,
-			'icon': ORYX.PATH + "images/shape_move_backwards.png",
+			'icon': ORYX.PATH + "resources/images/shape_move_backwards.png",
 			'description': ORYX.I18N.Arrangement.bbDesc,
 			'index': 4,
 			'minShape': 1});
@@ -19050,7 +19050,7 @@ ORYX.Plugins.Arrangement = ORYX.Plugins.AbstractPlugin.extend({
 			'name':ORYX.I18N.Arrangement.ab,
 			'functionality': this.alignShapes.bind(this, [ORYX.CONFIG.EDITOR_ALIGN_BOTTOM]),
 			'group': ORYX.I18N.Arrangement.groupA,
-			'icon': ORYX.PATH + "images/shape_align_bottom.png",
+			'icon': ORYX.PATH + "resources/images/shape_align_bottom.png",
 			'description': ORYX.I18N.Arrangement.abDesc,
 			'index': 1,
 			'minShape': 2});
@@ -19061,7 +19061,7 @@ ORYX.Plugins.Arrangement = ORYX.Plugins.AbstractPlugin.extend({
 			'name':ORYX.I18N.Arrangement.at,
 			'functionality': this.alignShapes.bind(this, [ORYX.CONFIG.EDITOR_ALIGN_TOP]),
 			'group': ORYX.I18N.Arrangement.groupA,
-			'icon': ORYX.PATH + "images/shape_align_top.png",
+			'icon': ORYX.PATH + "resources/images/shape_align_top.png",
 			'description': ORYX.I18N.Arrangement.atDesc,
 			'index': 3,
 			'minShape': 2});
@@ -19070,7 +19070,7 @@ ORYX.Plugins.Arrangement = ORYX.Plugins.AbstractPlugin.extend({
 			'name':ORYX.I18N.Arrangement.al,
 			'functionality': this.alignShapes.bind(this, [ORYX.CONFIG.EDITOR_ALIGN_LEFT]),
 			'group': ORYX.I18N.Arrangement.groupA,
-			'icon': ORYX.PATH + "images/shape_align_left.png",
+			'icon': ORYX.PATH + "resources/images/shape_align_left.png",
 			'description': ORYX.I18N.Arrangement.alDesc,
 			'index': 4,
 			'minShape': 2});
@@ -19079,7 +19079,7 @@ ORYX.Plugins.Arrangement = ORYX.Plugins.AbstractPlugin.extend({
 			'name':ORYX.I18N.Arrangement.ar,
 			'functionality': this.alignShapes.bind(this, [ORYX.CONFIG.EDITOR_ALIGN_RIGHT]),
 			'group': ORYX.I18N.Arrangement.groupA,
-			'icon': ORYX.PATH + "images/shape_align_right.png",
+			'icon': ORYX.PATH + "resources/images/shape_align_right.png",
 			'description': ORYX.I18N.Arrangement.arDesc,
 			'index': 6,
 			'minShape': 2});
@@ -19090,7 +19090,7 @@ ORYX.Plugins.Arrangement = ORYX.Plugins.AbstractPlugin.extend({
 			'name':ORYX.I18N.Arrangement.am,
 			'functionality': this.alignShapes.bind(this, [ORYX.CONFIG.EDITOR_ALIGN_MIDDLE]),
 			'group': ORYX.I18N.Arrangement.groupA,
-			'icon': ORYX.PATH + "images/shape_align_middle.png",
+			'icon': ORYX.PATH + "resources/images/shape_align_middle.png",
 			'description': ORYX.I18N.Arrangement.amDesc,
 			'index': 1,
 			'minShape': 2});
@@ -19099,7 +19099,7 @@ ORYX.Plugins.Arrangement = ORYX.Plugins.AbstractPlugin.extend({
 			'name':ORYX.I18N.Arrangement.ac,
 			'functionality': this.alignShapes.bind(this, [ORYX.CONFIG.EDITOR_ALIGN_CENTER]),
 			'group': ORYX.I18N.Arrangement.groupA,
-			'icon': ORYX.PATH + "images/shape_align_center.png",
+			'icon': ORYX.PATH + "resources/images/shape_align_center.png",
 			'description': ORYX.I18N.Arrangement.acDesc,
 			'index': 2,
 			'minShape': 2});
@@ -19109,7 +19109,7 @@ ORYX.Plugins.Arrangement = ORYX.Plugins.AbstractPlugin.extend({
 			'name':ORYX.I18N.Arrangement.as,
 			'functionality': this.alignShapes.bind(this, [ORYX.CONFIG.EDITOR_ALIGN_SIZE]),
 			'group': ORYX.I18N.Arrangement.groupA,
-			'icon': ORYX.PATH + "images/shape_align_size.png",
+			'icon': ORYX.PATH + "resources/images/shape_align_size.png",
 			'description': ORYX.I18N.Arrangement.asDesc,
 			'index': 3,
 			'minShape': 2});

@@ -1,6 +1,0 @@
-﻿
-info    绩效
-
-setcentre  设置中心
-
-outworkerCentre   通用中心

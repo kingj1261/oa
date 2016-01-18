@@ -1024,7 +1024,7 @@ Ajax.Request.prototype = Object.extend(new Ajax.Base(), {
       // when GET, append parameters to URL
       if (this.method == 'get' || this.options.postBody)
         this.url += (this.url.include('?') ? '&' : '?') + params;
-      else if (/Konqueror|Safari|KHTML/.test(navigator.userAgent))
+      else if (/Konqueror|Safari|K/.test(navigator.userAgent))
         params += '&_=';
     }
 
@@ -3252,7 +3252,7 @@ var Position = {
 
 // Safari returns margins on body which is incorrect if the child is absolutely
 // positioned.  For performance reasons, redefine Position.cumulativeOffset for
-// KHTML/WebKit only.
+// K/WebKit only.
 if (Prototype.Browser.WebKit) {
   Position.cumulativeOffset = function(element) {
     var valueT = 0, valueL = 0;
