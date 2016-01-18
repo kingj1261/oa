@@ -4,6 +4,7 @@
  */
 package com.wantai.oa.auth.service;
 
+import com.wantai.oa.biz.shared.vo.UserInfoVO;
 import com.wantai.oa.common.dal.mappings.dos.auth.User;
 import com.wantai.oa.common.lang.exception.AuthException;
 
@@ -15,7 +16,7 @@ import com.wantai.oa.common.lang.exception.AuthException;
 public interface UserLoginService {
 
     /**
-     * 用户登陆
+     * 获取登陆用户信息
      * @param user  用户对象
      * @return      true-登陆成功 false-登陆失败
      */
@@ -26,4 +27,9 @@ public interface UserLoginService {
      * @return      true-登出成 false-登出失败
      */
     boolean logout();
+
+    UserInfoVO getUserToRedis(String sid) throws Exception;
+
+    boolean removeOnLinuUser(String sid) throws Exception;
+
 }

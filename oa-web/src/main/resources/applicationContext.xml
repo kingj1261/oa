@@ -26,6 +26,7 @@
 		<property name="locations">
 			<list>
 				<value>classpath:jdbc.properties</value>
+                <value>classpath:redis.properties</value>
 			</list>
 		</property>
 	</bean>
@@ -76,4 +77,7 @@
             <value>PROPAGATION_REQUIRED</value>
         </property>
     </bean>
+
+    <!-- 引入spring-redis.xml文件 -->
+    <import resource="spring-redis.xml"/>
 </beans>

@@ -7,6 +7,8 @@ package com.wantai.oa.auth.service.impl;
 import com.wantai.oa.auth.core.UserHolder;
 import com.wantai.oa.auth.service.UserLoginService;
 import com.wantai.oa.auth.service.UserService;
+import com.wantai.oa.biz.shared.vo.UserInfoVO;
+import com.wantai.oa.biz.shared.service.SessionOperation;
 import com.wantai.oa.common.dal.mappings.dos.auth.User;
 import com.wantai.oa.common.lang.enums.ErrorCodeEnum;
 import com.wantai.oa.common.lang.exception.AuthException;
@@ -30,6 +32,8 @@ public class UserLoginServiceImpl implements UserLoginService {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private SessionOperation sessionOperation;
 
     @Override
     public boolean login(User user) throws AuthenticationException {
@@ -55,4 +59,15 @@ public class UserLoginServiceImpl implements UserLoginService {
         UserHolder.remove();
         return true;
     }
+
+    @Override
+    	public UserInfoVO getUserToRedis(String sid) throws Exception {
+        UserInfoVO userInfo = sessionOperation.getOnLinuUser(sid, null);
+    		return userInfo;
+    	}
+
+    	@Override
+    	public boolean removeOnLinuUser(String sid) throws Exception {
+    		return sessionOperation.removeOnLineUser(sid, null);
+    	}
 }

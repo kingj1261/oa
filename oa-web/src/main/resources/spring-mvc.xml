@@ -79,4 +79,12 @@
     <bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"></bean>
     <bean id="restResponseFactory" class="org.activiti.rest.service.api.RestResponseFactory"/>
     <bean id="contentTypeResolver" class="org.activiti.rest.common.application.DefaultContentTypeResolver"/>
+
+    <!-- SpringMVC的拦截器配置 -->
+    <!--<mvc:interceptors>
+            <mvc:interceptor>
+                <mvc:mapping path="/**" />
+                <bean class="com.wantai.oa.web.interceptor.AuthInterceptor"></bean>
+            </mvc:interceptor>
+        </mvc:interceptors>-->
 </beans>
