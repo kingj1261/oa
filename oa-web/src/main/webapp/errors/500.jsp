@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <html>
 <header>
-    <meta http-equiv="Content-Type" content="text/html;charset=gbk"/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
     <style type="text/css">
         .error{
             width:100px;
