@@ -413,7 +413,7 @@ function encodeEntities(value) {
 }
 
 /**
- * create an HTML/XML writer which writes to buffer
+ * create an /XML writer which writes to buffer
  * @param {Array} buf use buf.jain('') to get out sanitized html string
  * @returns {object} in the form of {
  *     start: function(tag, attrs, unary) {},

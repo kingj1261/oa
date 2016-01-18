@@ -31,6 +31,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.wantai.oa</groupId>
+            <artifactId>oa-message</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>org.springframework.test</artifactId>
             <version>3.0.5.RELEASE</version>

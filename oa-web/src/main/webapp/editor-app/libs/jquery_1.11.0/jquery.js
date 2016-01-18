@@ -7817,7 +7817,7 @@ jQuery.extend({
 
 		contents: {
 			xml: /xml/,
-			html: /html/,
+			html: //,
 			json: /json/
 		},
 

@@ -78,21 +78,21 @@ var EXPANDED_SUBPROCESS_CORNER_ROUND = 10;
 // icons
 var ICON_SIZE = 16;
 var ICON_PADDING = 4;
-var USERTASK_IMAGE = 		"images/deployer/user.png";
-var SCRIPTTASK_IMAGE = 		"images/deployer/script.png";
-var SERVICETASK_IMAGE = 	"images/deployer/service.png";
-var RECEIVETASK_IMAGE = 	"images/deployer/receive.png";
-var SENDTASK_IMAGE = 		"images/deployer/send.png";
-var MANUALTASK_IMAGE = 		"images/deployer/manual.png";
-var BUSINESS_RULE_TASK_IMAGE = "images/deployer/business_rule.png";
-var TIMER_IMAGE = 			"images/deployer/timer.png";
-var MESSAGE_CATCH_IMAGE = 	"images/deployer/message_catch.png";
-var MESSAGE_THROW_IMAGE = 	"images/deployer/message_throw.png";
-var ERROR_THROW_IMAGE = 	"images/deployer/error_throw.png";
-var ERROR_CATCH_IMAGE = 	"images/deployer/error_catch.png";
-var SIGNAL_CATCH_IMAGE = 	"images/deployer/signal_catch.png";
-var SIGNAL_THROW_IMAGE = 	"images/deployer/signal_throw.png";
-var MULTIPLE_CATCH_IMAGE = 	"images/deployer/multiple_catch.png";
+var USERTASK_IMAGE = 		"resources/images/deployer/user.png";
+var SCRIPTTASK_IMAGE = 		"resources/images/deployer/script.png";
+var SERVICETASK_IMAGE = 	"resources/images/deployer/service.png";
+var RECEIVETASK_IMAGE = 	"resources/images/deployer/receive.png";
+var SENDTASK_IMAGE = 		"resources/images/deployer/send.png";
+var MANUALTASK_IMAGE = 		"resources/images/deployer/manual.png";
+var BUSINESS_RULE_TASK_IMAGE = "resources/images/deployer/business_rule.png";
+var TIMER_IMAGE = 			"resources/images/deployer/timer.png";
+var MESSAGE_CATCH_IMAGE = 	"resources/images/deployer/message_catch.png";
+var MESSAGE_THROW_IMAGE = 	"resources/images/deployer/message_throw.png";
+var ERROR_THROW_IMAGE = 	"resources/images/deployer/error_throw.png";
+var ERROR_CATCH_IMAGE = 	"resources/images/deployer/error_catch.png";
+var SIGNAL_CATCH_IMAGE = 	"resources/images/deployer/signal_catch.png";
+var SIGNAL_THROW_IMAGE = 	"resources/images/deployer/signal_throw.png";
+var MULTIPLE_CATCH_IMAGE = 	"resources/images/deployer/multiple_catch.png";
 
 
 var ObjectType = {

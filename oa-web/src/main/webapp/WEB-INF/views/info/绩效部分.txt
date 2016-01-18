@@ -1,0 +1,49 @@
+绩效基础设置 info_setbase.html
+绩效系数设置 info_setfactor.html
+岗位奖金设置 info_setbonus.html
+点击【特殊人员查询】info_special.html 点击【编辑】info_seteits.html
+
+岗位提成设置
+ info_setpush.html
+点击【特殊人员查询】info_special_1.html 点击【编辑】info_seteits_1.html
+
+岗位绩效设置 info_seteffect.html
+工资设置查询 info_setsalary.html
+
+我的工资构成 info_setsalary.html
+
+我的奖金标准 info_minebonus.html
+
+我的提成标准 info_minepush.html
+
+我的工资 info_minesalary.html
+
+工资报表 info_salaryreport.html 点击【查看】 info_minesalary_1.html
+
+
+工资统计 info_salarystat.html
+
+督办扣款设置: info_Oversee-deductions.html
+我的督办扣款标准: info_Oversee-standard.html
+
+
+
+
+---------------------督办提醒-------------------------
+
+
+督办列表  remind_remlist.html
+
+
+提醒列表  remind_superlist.html
+
+消息列表  remind_measslist.html
+    内容跳转：Message-page.html
+
+
+督办设置  remind_setbus.html
+
+提醒设置  remind_setrem.html
+
+
+提醒统计  remind_tool.html
