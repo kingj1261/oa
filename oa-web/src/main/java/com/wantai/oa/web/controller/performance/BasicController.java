@@ -33,19 +33,24 @@ import java.util.Set;
 public class BasicController extends BaseController {
 
     @Autowired
-    protected Validator   validator;
+    protected Validator validator;
 
-    /** 配置服务对象 */
+    /**
+     * 配置服务对象
+     */
     @Autowired
     private ConfigService configService;
 
-    /** 基础配置服务*/
+    /**
+     * 基础配置服务
+     */
     @Autowired
-    private BasicService  basicService;
+    private BasicService basicService;
 
     /**
      * 保存基础配置对象
-     * @return              修改结果
+     *
+     * @return 修改结果
      */
     @RequestMapping(value = "/basic/add", method = RequestMethod.POST)
     public Status addBasicConfig(HttpServletRequest request) {
@@ -58,7 +63,7 @@ public class BasicController extends BaseController {
             try {
                 BasicRequest basicRequest = JSON.parseObject(datas, BasicRequest.class);
                 Set<ConstraintViolation<BasicRequest>> validations = validator
-                    .validate(basicRequest);
+                        .validate(basicRequest);
 
                 if (validations.size() > 0) {
                     throw new RuntimeException("数据请求错误");
@@ -74,15 +79,24 @@ public class BasicController extends BaseController {
 
     /**
      * 公共配置数据查询接口
-     * @param request       http请求对象
-     * @return              配置数据对象
+     *
+     * @param request http请求对象
+     * @return 配置数据对象
      */
     @RequestMapping(value = "/basic/list", method = RequestMethod.GET)
     public Status queryBasicConfig(HttpServletRequest request) {
-        return execute(status -> {
+        Status status1 = execute(status -> {
             BasicConfigVO configVO = basicService.queryBasicConfig(UserHolder.getUser()
-                .getCompanyCode(), UserHolder.getUser().getCompanyId() + "");
+                    .getCompanyCode(), UserHolder.getUser().getCompanyId() + "");
             status.setData(configVO);
         });
+        return status1;
     }
+
+
+    @RequestMapping(value = "/basic/set", method = RequestMethod.GET)
+    public String queryBasicSet() {
+        return "info/info_setbase";
+    }
+
 }

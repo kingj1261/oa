@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Message">
+
+    <!-- 消息resultMap -->
+    <resultMap id="messageMap" type="com.wantai.oa.common.dal.mappings.dos.message.MessageDo">
+        <result property="id" column="id"  jdbcType="BIGINT"/>
+        <result property="companyCode" column="company_code"  jdbcType="VARCHAR"/>
+        <result property="companyId" column="company_id"  jdbcType="INTEGER"/>
+        <result property="bizItem" column="biz_item"  jdbcType="VARCHAR"/>
+        <result property="bizEvent" column="biz_event"  jdbcType="VARCHAR"/>
+        <result property="customerId" column="customer_id"  jdbcType="VARCHAR"/>
+        <result property="customerName" column="customer_name"  jdbcType="VARCHAR"/>
+        <result property="endTime" column="end_time"  jdbcType="DATE"/>
+        <result property="readStatus" column="read_status"  jdbcType="VARCHAR"/>
+        <result property="messageType" column="message_type"  jdbcType="VARCHAR"/>
+        <result property="messageBody" column="message_body"  jdbcType="VARCHAR"/>
+        <result property="memo" column="memo"  jdbcType="VARCHAR"/>
+        <result property="gmtCreate" column="gmt_create"  jdbcType="DATE"/>
+        <result property="gmtModified" column="gmt_modified"  jdbcType="DATE"/>
+        <result property="operator" column="operator"  jdbcType="VARCHAR"/>
+        <result property="lastModifiedOperator" column="last_modified_operator"  jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- 督办消息 resultMap -->
+    <resultMap id="superviseMap" type="com.wantai.oa.common.dal.mappings.dos.message.SuperviseDo">
+        <result property="id" column="id"  jdbcType="BIGINT"/>
+        <result property="messageId" column="message_id"  jdbcType="INTEGER"/>
+        <result property="outLimitDays" column="out_limit_days"  jdbcType="INTEGER"/>
+        <result property="gmtCreate" column="gmt_create"  jdbcType="DATE"/>
+        <result property="gmtModified" column="gmt_modified"  jdbcType="DATE"/>
+        <association property="messageDo" column="messageId" javaType="com.wantai.oa.common.dal.mappings.dos.message.MessageDo" resultMap="messageMap"/>
+    </resultMap>
+
+    <resultMap id="remindMap" type="com.wantai.oa.common.dal.mappings.dos.message.RemindDo">
+        <result property="id" column="id" javaType="long" jdbcType="INTEGER"/>
+        <result property="messageId" column="message_id"  jdbcType="INTEGER"/>
+        <result property="remindType" column="remind_type"  jdbcType="VARCHAR"/>
+        <result property="gmtCreate" column="gmt_create"  jdbcType="DATE"/>
+        <result property="gmtModified" column="gmt_modified"  jdbcType="DATE"/>
+        <association property="messageDo" column="messageId" javaType="com.wantai.oa.common.dal.mappings.dos.message.MessageDo" resultMap="messageMap"/>
+    </resultMap>
+
+    <sql id="messageColumn">
+        om.company_id,
+        om.company_code,
+        om.customer_id,
+        om.customer_name,
+        om.read_status,
+        om.biz_event,
+        om.biz_item,
+        om.message_type,
+        om.message_body,
+        om.memo,
+        om.end_time,
+        om.gmt_create,
+        om.gmt_modified,
+        om.operator,
+        om.last_modified_operator
+    </sql>
+
+    <sql id="messageWhere">
+        and om.company_id=#{companyId}
+        and om.company_code=#{companyCode}
+        and om.customer_id=#{customerId}
+        and om.customer_name=#{customerName}
+    </sql>
+
+    <sql id="messageConditions">
+        <if test="readStatus!='all'">
+            and om.read_status=#{readStatus}
+        </if>
+        <if test="messageType!='all'">
+            and om.message_type=#{messageType}
+        </if>
+    </sql>
+
+    <sql id="dateCondition">
+        <if test="beginDate!=null">
+            and om.gmt_create &gt;=#{beginDate}
+        </if>
+        <if test="endDate!=null">
+            and om.gmt_create &lt;=#{endDate}
+        </if>
+    </sql>
+
+    <!-- 消息查询 -->
+    <select id="queryMessage" parameterType="com.wantai.oa.message.request.MessageRequest" resultMap="messageMap">
+        SELECT
+        <include refid="messageColumn"/>
+        FROM oa_message om
+        <where>
+            <include refid="messageWhere"/>
+            <include refid="messageConditions"/>
+            <include refid="dateCondition"/>
+        </where>
+
+    </select>
+
+    <sql id="superviseColumn">
+        os.id,
+        os.message_id,
+        os.out_limit_days,
+        <include refid="messageColumn"/>
+    </sql>
+
+    <sql id="bizItemConditions">
+        <if test="bizItem !=null and bizItem !=all">
+            and om.biz_item =#{bizItem}
+        </if>
+    </sql>
+
+    <sql id="superviseConditions">
+        <if test="customerName !=null">
+          and om.customer_name like concat('%',#{customerName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="outLimitDays !=null and outLimitDays >0">
+          and os.out_limit_days =#{outLimitDays}
+        </if>
+        <include refid="bizItemConditions"/>
+        <include refid="dateCondition"/>
+    </sql>
+
+    <!-- 督办查询 -->
+    <select id="querySupervise" parameterType="com.wantai.oa.message.request.SuperviseRequest" resultMap="superviseMap">
+        SELECT
+        <include refid="superviseColumn"/>
+        FROM oa_message om
+        JOIN oa_supervise os
+        ON om.id=os.message_id
+        <where>
+            <include refid="messageWhere"/>
+            <include refid="superviseConditions"/>
+        </where>
+    </select>
+
+    <sql id="remindConditions">
+        <if test="remindType !=null">
+            and ore.remind_type =#{remindType}
+        </if>
+        <include refid="bizItemConditions"/>
+        <include refid="dateCondition"/>
+    </sql>
+
+    <sql id="remindColumn">
+        ore.id,
+        ore.message_id,
+        ore.remind_type,
+        <include refid="messageColumn"/>
+    </sql>
+
+    <!-- 提醒查询 -->
+    <select id="queryRemind" parameterType="com.wantai.oa.message.request.RemindRequest" resultMap="remindMap">
+        SELECT
+        <include refid="remindColumn"/>
+        FROM oa_message om
+        join oa_remind ore
+        on om.id=ore.message_id
+        <where>
+            <include refid="messageWhere"/>
+            <include refid="remindConditions"/>
+        </where>
+    </select>
+
+    <!-- 新增消息 -->
+    <insert id="addMessage" parameterType="com.wantai.oa.common.dal.mappings.dos.message.MessageDo" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert INTO oa_message(company_code,company_id,biz_item,biz_event,end_time,customer_id,customer_name,read_status,message_type,message_body,memo,operator,last_modified_operator)
+        values(
+          #{companyCode},#{companyId},#{bizItem},#{bizEvent},#{endTime},#{customerId},#{customerName},#{readStatus},#{messageType},#{messageBody},#{memo},#{operator},#{lastModifiedOperator}
+        )
+    </insert>
+
+    <!-- 新增督办 -->
+    <insert id="addSupervise" parameterType="com.wantai.oa.common.dal.mappings.dos.message.SuperviseDo" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO oa_supervise(message_id,out_limit_days)
+          VALUES (
+            #{messageId},#{outLimitDays}
+          )
+    </insert>
+
+    <!-- 新增提醒 -->
+    <insert id="addRemind" parameterType="com.wantai.oa.common.dal.mappings.dos.message.RemindDo" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO oa_remind(message_id,remind_type)
+        VALUES (
+          #{messageId},#{remindType}
+        )
+    </insert>
+
+    <!-- 查询督办消息详情 -->
+    <select id="findSuperviseById" parameterType="long" resultMap="superviseMap">
+        SELECT
+        <include refid="superviseColumn"/>
+        FROM oa_message om
+        JOIN oa_supervise os
+        ON om.id=os.message_id
+        <where>
+            <include refid="messageWhere"/>
+            and os.id =#{superviseId}
+        </where>
+    </select>
+
+    <!-- 查询提醒消息详情 -->
+    <select id="findRemindById" parameterType="long" resultMap="remindMap">
+        SELECT
+        <include refid="remindColumn"/>
+        FROM oa_message om
+        JOIN oa_remind ore
+        ON om.id=ore.message_id
+        <where>
+            <include refid="messageWhere"/>
+            and ore.id =${id}
+        </where>
+    </select>
+</mapper>
