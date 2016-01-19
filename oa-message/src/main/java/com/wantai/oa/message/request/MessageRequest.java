@@ -1,34 +1,65 @@
 package com.wantai.oa.message.request;
 
-import com.wantai.oa.common.dal.mappings.dos.message.MessageDo;
-
 import java.util.Date;
 
 /**
  * 消息列表查询对象
  * @author Sharpe on 2016-01-16.
  */
-public class MessageRequest extends MessageDo {
+public class MessageRequest {
 
-    /** 开始时间 **/
-    private Date beginDate;
+	/** 阅读状态 **/
+	private String readStatus;
 
-    /** 结束时间 **/
-    private Date endDate;
+	/** 消息类别 **/
+	private String messageType;
 
-    public Date getBeginDate() {
-        return beginDate;
-    }
+	/** 开始时间 **/
+	private Date beginDate;
 
-    public void setBeginDate(Date beginDate) {
-        this.beginDate = beginDate;
-    }
+	/** 结束时间 **/
+	private Date endDate;
 
-    public Date getEndDate() {
-        return endDate;
-    }
+	public String getReadStatus() {
+		return readStatus;
+	}
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
+	public void setReadStatus(String readStatus) {
+		this.readStatus = readStatus;
+	}
+
+	public String getMessageType() {
+		return messageType;
+	}
+
+	public void setMessageType(String messageType) {
+		this.messageType = messageType;
+	}
+
+	public Date getBeginDate() {
+		return beginDate;
+	}
+
+	public void setBeginDate(Date beginDate) {
+		this.beginDate = beginDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	@Override
+	public String toString() {
+		final StringBuilder sb = new StringBuilder("MessageRequest{");
+		sb.append("readStatus='").append(readStatus).append('\'');
+		sb.append(", messageType='").append(messageType).append('\'');
+		sb.append(", beginDate=").append(beginDate);
+		sb.append(", endDate=").append(endDate);
+		sb.append('}');
+		return sb.toString();
+	}
 }
