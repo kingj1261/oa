@@ -1,0 +1,21 @@
+ package com.wantai.oa.rules.defination.common;
+
+ dialect "mvel"
+
+ import java.util.*;
+ import com.wantai.oa.common.dal.mappings.dos.auth.User;
+ import com.wantai.oa.rules.core.service.context.RuleRuntimeContext;
+
+ global RuleRuntimeContext context;
+
+ rule "事业部长系数(200000000000,20000013)"
+ when
+     $user: User()
+     $score: HashMap(containsKey("gwxs")
+     && containsKey("customerId")
+     && get("customerId")==$user.id
+     && get("bizItem")=="200000000000"
+     && get("bizEvent")=="20000013")
+  then
+     context.caclulateRatioDetail((String)$score.get("bizItem"),(String)$score.get("bizEvent"),(String)$score.get("scores"),String.valueOf($user.getId()));
+  end

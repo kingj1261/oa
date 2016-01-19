@@ -6,6 +6,9 @@ package com.wantai.oa.common.dal.mappings.dos.rule;
 
 import com.wantai.oa.common.dal.mappings.dos.BaseDo;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 规则do对象
  *
@@ -17,32 +20,37 @@ public class RuleDo extends BaseDo {
     /**
      * 配置类型
      */
-    String configType;
+    String                      configType;
 
     /**
      * 业务事项
      */
-    String bizItem;
+    String                      bizItem;
 
     /**
      * 业务事件
      */
-    String bizEvent;
+    String                      bizEvent;
 
     /**
      * 规则内容
      */
-    String rules;
+    String                      rules;
 
     /**
      * 数据抽取器
      */
-    String dataExtractor;
+    String                      dataExtractor;
 
     /**
      * 数据抽取脚本
      */
-    String dataExtractShell;
+    String                      dataExtractShell;
+
+    String                      context;
+
+    /** 数据容器*/
+    private Map<String, Object> data = new HashMap<>();
 
     public String getConfigType() {
         return configType;
@@ -90,5 +98,57 @@ public class RuleDo extends BaseDo {
 
     public void setDataExtractShell(String dataExtractShell) {
         this.dataExtractShell = dataExtractShell;
+    }
+
+    /**
+     * 添加属性
+     * @param key           属性名称
+     * @param value         属性值
+     */
+    public void addAttribute(String key, Object value) {
+        data.put(key, value);
+    }
+
+    /**
+     * 获取属性对象
+     * @param key           属性名称
+     * @return              属性值
+     */
+    public Object getAttribute(String key) {
+        return data.get(key);
+    }
+
+    /**
+     * 获取string数据
+     * @param key           属性名称
+     * @return              属性值
+     */
+    public String getString(String key) {
+        return (String) data.get(key);
+    }
+
+    /**
+     * 获取int数据
+     * @param key           属性名称
+     * @return              整形值
+     */
+    public int getInt(String key) {
+        return (Integer) data.get(key);
+    }
+
+    public Map<String, Object> getData() {
+        return data;
+    }
+
+    public void setData(Map<String, Object> data) {
+        this.data = data;
+    }
+
+    public String getContext() {
+        return context;
+    }
+
+    public void setContext(String context) {
+        this.context = context;
     }
 }

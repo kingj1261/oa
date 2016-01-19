@@ -16,10 +16,13 @@ public class Role implements Serializable {
     Integer id;
 
     /** 角色名称*/
-    String name;
+    String  name;
 
     /** 父角色编号*/
     Integer parentId;
+
+    /** 角色编码*/
+    String  code;
 
     public Integer getId() {
         return id;
@@ -43,5 +46,13 @@ public class Role implements Serializable {
 
     public void setParentId(Integer parentId) {
         this.parentId = parentId;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

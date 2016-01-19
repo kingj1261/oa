@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+  
+<mapper namespace="RatioDetail">
+
+    <!-- 新增绩效系数流水 -->
+    <insert id="addRatioDetail" parameterType="com.wantai.oa.common.dal.mappings.dos.performance.RatioDetailDo">
+
+        insert into OA_PERFORMANCE_DETAILS
+        (
+            company_code          ,
+            company_id            ,
+            customer_id           ,
+            start_time            ,
+            end_time              ,
+            config_type           ,
+            biz_item              ,
+            biz_event             ,
+            value                 ,
+            unit                  ,
+            count                 ,
+            total                 ,
+            out_biz_date          ,
+            memo                  ,
+            gmt_create            ,
+            gmt_modified          ,
+            operator              ,
+            last_modified_oeprator
+        )
+        values(
+           #{companyCode},
+           #{companyId},
+           #{customerId},
+           now(),
+           now(),
+           #{configType},
+           #{bizItem},
+           #{bizEvent},
+           #{value},
+           #{unit},
+           #{count},
+           #{total},
+           now(),
+           #{memo},
+           now(),
+           now(),
+           #{operator},
+           #{lastModifiedOperator}
+        )
+    </insert>
+
+</mapper>

@@ -1,0 +1,20 @@
+ package com.wantai.oa.rules.defination.common;
+
+ dialect "mvel"
+
+ import java.util.*;
+ import com.wantai.oa.common.dal.mappings.dos.auth.User;
+ import com.wantai.oa.common.dal.mappings.dos.performance.SaleOrderDo;
+ import com.wantai.oa.rules.core.service.context.RuleRuntimeContext;
+
+ global RuleRuntimeContext context;
+
+ rule "品牌经理目标系数(200000000000,20000014)"
+ when
+     $user:         User(roles contains "ppjl")
+     $saleOrder:    SaleOrderDo(customerId==$user.id
+                    && bizItem=="200000000000"
+                    && bizEvent=="20000014")
+  then
+     context.caclulateRatioDetail($saleOrder.getBizItem(),$saleOrder.getBizEvent(),String.valueOf($saleOrder.getSaleCounts()),String.valueOf($user.getId()));
+  end

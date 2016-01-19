@@ -31,13 +31,14 @@ import java.util.stream.Collectors;
  * 绩效系数管理控制器
  *
  * @author maping.mp
- * @version $Id: PerformanceController.java, v 0.1 2015-1-04 下午10:55:39 maping.mp Exp $
+ * @version $Id: ConfigController.java, v 0.1 2015-1-04 下午10:55:39 maping.mp Exp $
  */
 @RestController
-public class PerformanceController extends BaseController {
+public class ConfigController extends BaseController {
 
     @Autowired
     protected Validator   validator;
+
     /** 配置服务对象 */
     @Autowired
     private ConfigService configService;

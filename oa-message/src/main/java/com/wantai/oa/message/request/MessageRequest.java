@@ -1,8 +1,8 @@
 package com.wantai.oa.message.request;
 
-import java.util.Date;
-
 import com.wantai.oa.common.dal.mappings.dos.message.MessageDo;
+
+import java.util.Date;
 
 /**
  * 消息列表查询对象
@@ -10,25 +10,25 @@ import com.wantai.oa.common.dal.mappings.dos.message.MessageDo;
  */
 public class MessageRequest extends MessageDo {
 
-	/** 开始时间 **/
-	private Date beginDate;
+    /** 开始时间 **/
+    private Date beginDate;
 
-	/** 结束时间 **/
-	private Date endDate;
+    /** 结束时间 **/
+    private Date endDate;
 
-	public Date getBeginDate() {
-		return beginDate;
-	}
+    public Date getBeginDate() {
+        return beginDate;
+    }
 
-	public void setBeginDate(Date beginDate) {
-		this.beginDate = beginDate;
-	}
+    public void setBeginDate(Date beginDate) {
+        this.beginDate = beginDate;
+    }
 
-	public Date getEndDate() {
-		return endDate;
-	}
+    public Date getEndDate() {
+        return endDate;
+    }
 
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
 }

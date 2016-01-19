@@ -1,0 +1,22 @@
+ package com.wantai.oa.rules.defination.common;
+
+ dialect "mvel"
+
+ import java.util.*;
+ import com.wantai.oa.common.dal.mappings.dos.auth.User;
+ import com.wantai.oa.rules.core.service.context.RuleRuntimeContext;
+
+ global RuleRuntimeContext context;
+
+
+ rule "操行系数规则定义(100000000000,10000001)"
+ when
+    $user:  User()
+    $score: HashMap(containsKey("gwxs")
+            && containsKey("customerId")
+            && get("customerId")==$user.id
+            && get("bizItem")=="100000000000"
+            && get("bizEvent")=="10000001")
+ then
+    context.caclulateRatioDetail((String)$score.get("bizItem"),(String)$score.get("bizEvent"),(String)$score.get("scores"),String.valueOf($user.getId()));
+ end

@@ -2,7 +2,7 @@
  * Wantai.com Inc.
  * Copyright (c) 2004-2012 All Rights Reserved.
  */
-package com.wantai.oa.auth.service;
+package com.wantai.oa.biz.shared.service;
 
 import com.wantai.oa.common.dal.mappings.dos.auth.Role;
 

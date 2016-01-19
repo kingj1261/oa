@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+  
+<mapper namespace="Performance">
+
+    <!-- 查询当前部门下所有车辆销售记录 -->
+    <select id="findAllSaleOrders" resultType="com.wantai.oa.common.dal.mappings.dos.performance.SaleOrderDo">
+           select
+                  orders.customer_id customerId,
+                  users.depart_id departId,
+                  '${bizItem}' bizItem,
+                  '${bizEvent}' bizEvent,
+                  COALESCE(sum(orders.sale_count),0) saleCounts
+           from m_c_sale_order orders,(
+                           select id,depart_id from m_b_user where depart_id in (
+                             SELECT DISTINCT user.depart_id
+                             FROM
+                               m_b_role role,
+                               m_b_user_role userRole,
+                               m_b_user user
+                             WHERE role.id = userRole.role_id
+                                   AND role.jm = #{role}
+                                   AND user.id = userRole.user_id
+                           )
+                         )users
+                 where orders.order_status=(
+                   select max(status) from m_menu where menu_jm='ZCXSWJ'
+                   group by menu_jm
+                 )
+                 and orders.company_code=#{companyCode}
+                 and orders.company_id=#{companyId}
+                 and orders.customer_id=users.id
+                 and orders.operate_person_1=users.id
+                 group by orders.customer_id
+    </select>
+</mapper>

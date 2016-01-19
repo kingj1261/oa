@@ -5,6 +5,8 @@
 package com.wantai.oa.common.dal.mappings.dos.auth;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 用户信息
@@ -17,28 +19,34 @@ public class User implements Serializable {
     /**
      * 用户编号
      */
-    Integer id;
+    Integer      id;
 
     /**
      * 用户名称
      */
-    String  name;
+    String       name;
 
     /**
      * 用户登录名称
      */
-    String  loginName;
+    String       loginName;
 
     /**
      * 登陆密码
      */
-    String  password;
+    String       password;
 
     /** 公司编码*/
-    String  companyCode = "99999999999";
+    String       companyCode = "99999999999";
 
     /** 公司id*/
-    int     companyId   = 1;
+    Integer      companyId   = 1;
+
+    /** 用户角色*/
+    List<String> roles       = new ArrayList();
+
+    /** 所属部门编号*/
+    Integer      departId;
 
     public Integer getId() {
         return id;
@@ -84,7 +92,27 @@ public class User implements Serializable {
         return companyId;
     }
 
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
+    }
+
     public void setCompanyId(int companyId) {
         this.companyId = companyId;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
+
+    public Integer getDepartId() {
+        return departId;
+    }
+
+    public void setDepartId(Integer departId) {
+        this.departId = departId;
     }
 }

@@ -12,11 +12,6 @@
     <artifactId>oa-performance</artifactId>
 
     <dependencies>
-        <dependency>
-            <groupId>com.wantai.oa</groupId>
-            <artifactId>oa-rules</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
 
         <dependency>
             <groupId>com.wantai.oa</groupId>

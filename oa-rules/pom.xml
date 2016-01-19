@@ -42,6 +42,12 @@
             <artifactId>oa-biz-shared</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.wantai.oa</groupId>
+            <artifactId>oa-performance</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>

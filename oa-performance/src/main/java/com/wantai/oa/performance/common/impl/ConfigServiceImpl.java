@@ -12,8 +12,11 @@ import com.wantai.oa.biz.shared.vo.BizItemVO;
 import com.wantai.oa.biz.shared.vo.ConfigVO;
 import com.wantai.oa.biz.shared.vo.SubBizEventVO;
 import com.wantai.oa.common.dal.mappings.dos.performance.ConfigDo;
+import com.wantai.oa.common.dal.mappings.dos.performance.RatioDetailDo;
 import com.wantai.oa.common.dal.mappings.dos.performance.SubConfigDo;
+import com.wantai.oa.common.lang.constants.Constants;
 import com.wantai.oa.common.lang.enums.CustomerTypeEnum;
+import com.wantai.oa.common.lang.enums.UnitEnum;
 import com.wantai.oa.performance.common.ConfigService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -210,6 +213,68 @@ public class ConfigServiceImpl extends BaseService implements ConfigService {
         return (ConfigDo) commonDAO.selectOne("Config.querySingleConfig", parameter);
     }
 
+    @Override
+    public String getConfigValue(String companyCode, String companyId, String bizItem,
+                                 String bizEvent, String data) {
+        Map<String, Object> parameter = new HashMap();
+        parameter.put("companyCode", companyCode);
+        parameter.put("companyId", companyId);
+        parameter.put("bizItem", bizItem);
+        parameter.put("bizEvent", bizEvent);
+
+        List<SubConfigDo> subConfigs = (List<SubConfigDo>) commonDAO.findAll(
+            "SubConfig.findAllSubConfig", parameter);
+        Assert.notEmpty(subConfigs, "业务事项(" + bizItem + "," + bizEvent + ")子项配置为空!");
+
+        String result = data;
+        double value = Double.parseDouble(data);
+        for (int i = 0; i < subConfigs.size(); i++) {
+            SubConfigDo config = subConfigs.get(i);
+
+            double from = Double.parseDouble(config.getFromValue());
+            double to = Double.parseDouble(config.getToValue());
+
+            if (from <= value && value <= to) {
+                result = config.getValue();
+            }
+        }
+
+        //如果超出最大区间值,则取最大值
+
+        double maxValue = subConfigs.stream()
+            .mapToDouble(config -> Double.parseDouble(config.getToValue())).max().getAsDouble();
+
+        if (value >= maxValue) {
+            result = maxValue + "";
+        }
+
+        return result;
+    }
+
+    @Override
+    public void addRatioDetail(String companyCode, String companyId, String bizItem,
+                               String bizEvent, String data, String customerId) {
+        execute(() -> {
+            ConfigDo config = queryConfig(companyCode, companyId, bizItem, bizEvent);
+            Assert.notNull(config,
+                String.format("(%s,%s,%s,%s)主配置对象为空!", companyCode, companyId, bizItem, bizEvent));
+
+            RatioDetailDo detailDo = new RatioDetailDo();
+            detailDo.setCompanyCode(companyCode);
+            detailDo.setCompanyId(companyId);
+            detailDo.setOperator(Constants.SYSTEM);
+            detailDo.setLastModifiedOperator(Constants.SYSTEM);
+            detailDo.setBizItem(bizItem);
+            detailDo.setBizEvent(bizEvent);
+            detailDo.setValue(data);
+            detailDo.setTotal(detailDo.getCount() * Double.parseDouble(data));
+            detailDo.setCustomerId(customerId);
+            detailDo.setConfigType(config.getConfigType());
+            detailDo.setUnit(UnitEnum.FEN.getMessage());
+            commonDAO.insert("RatioDetail.addRatioDetail", detailDo);
+        });
+    }
+
     private List<SubConfigDo> querySubConfigDOList(Long mainConfigId) {
         Map<String, Object> paramter = new HashMap<>();
         paramter.put("mainConfigId", mainConfigId);
@@ -223,4 +288,5 @@ public class ConfigServiceImpl extends BaseService implements ConfigService {
         paramter.put("configType", configType);
         return (List<ConfigDo>) commonDAO.findAll("Config.queryConfigs", paramter);
     }
+
 }

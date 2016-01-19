@@ -141,4 +141,32 @@
         </if>
     </select>
 
+    <!-- 根据主表id查询子表配置数据-单条记录 -->
+    <select id="findAllSubConfig" resultMap="subConfigMap">
+        select
+        subConfig.id                    ,
+        subConfig.business_config_id    ,
+        subConfig.sub_event_code        ,
+        subConfig.sub_event_code_name   ,
+        subConfig.target                ,
+        subConfig.customer_id           ,
+        subConfig.value                 ,
+        subConfig.from_value            ,
+        subConfig.to_value              ,
+        subConfig.unit                  ,
+        subConfig.memo                  ,
+        subConfig.orders                ,
+        subConfig.gmt_create            ,
+        subConfig.gmt_modified          ,
+        subConfig.operator              ,
+        subConfig.last_modified_oeprator
+        from  OA_SUB_BUSINESS_CONFIG subConfig,
+        OA_BUSINESS_CONFIG config
+        where config.company_code=#{companyCode}
+        and   config.company_id=#{companyId}
+        and   config.biz_item=#{bizItem}
+        and   config.biz_event=#{bizEvent}
+        and   config.id=subConfig.business_config_id
+    </select>
+
 </mapper>

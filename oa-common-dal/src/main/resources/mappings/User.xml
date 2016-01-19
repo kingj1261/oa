@@ -4,17 +4,24 @@
   
 <mapper namespace="User">
 
-  <!-- 用户resultMap -->
-  <resultMap id="userMap" type="com.wantai.oa.common.dal.mappings.dos.auth.User">
-      <result property="id" column="id" javaType="int" jdbcType="INTEGER"/>
-      <result property="name" column="name" javaType="string" jdbcType="VARCHAR"/>
-      <result property="loginName" column="login_name" javaType="string" jdbcType="VARCHAR"/>
-      <result property="password" column="password" javaType="string" jdbcType="VARCHAR"/>
-  </resultMap>
+    <!-- 用户resultMap -->
+    <resultMap id="userMap" type="com.wantai.oa.common.dal.mappings.dos.auth.User">
+        <result property="id" column="id" javaType="int" jdbcType="INTEGER"/>
+        <result property="name" column="name" javaType="string" jdbcType="VARCHAR"/>
+        <result property="loginName" column="login_name" javaType="string" jdbcType="VARCHAR"/>
+        <result property="password" column="password" javaType="string" jdbcType="VARCHAR"/>
+        <result property="departId" column="depart_id" javaType="int" jdbcType="INTEGER"/>
+    </resultMap>
 
-  <!-- USER QUERY BY NAME -->
-  <select id="findByName" parameterType="java.lang.String" resultMap="userMap">
-    select * from  m_b_user where login_name=#{name}
-  </select>
+    <!-- USER QUERY BY NAME -->
+    <select id="findByName" parameterType="java.lang.String" resultMap="userMap">
+        select * from  m_b_user where login_name=#{name}
+    </select>
+
+
+    <!-- 查询当前公司下所有用户 -->
+    <select id="findUsers" resultMap="userMap">
+        select * from  m_b_user where company_code=#{companyCode} and company_id=#{companyId}
+    </select>
 
 </mapper>

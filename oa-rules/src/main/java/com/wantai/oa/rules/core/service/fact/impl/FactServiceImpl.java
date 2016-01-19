@@ -6,9 +6,11 @@ package com.wantai.oa.rules.core.service.fact.impl;
 
 import com.wantai.oa.biz.shared.service.BaseService;
 import com.wantai.oa.common.dal.mappings.dos.rule.RuleDo;
+import com.wantai.oa.common.lang.enums.RuleDataExtractTypeEnum;
+import com.wantai.oa.common.util.SpringContextHolder;
 import com.wantai.oa.rules.core.service.fact.FactService;
 import com.wantai.oa.rules.core.service.fact.loader.FactLoader;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,11 +23,15 @@ import java.util.List;
 @Service
 public class FactServiceImpl extends BaseService implements FactService {
 
-    @Autowired
-    private FactLoader factLoader;
-
     @Override
     public List loadFactDatas(RuleDo ruleDo) {
-        return factLoader.load(ruleDo);
+        RuleDataExtractTypeEnum type = RuleDataExtractTypeEnum.getByCode(ruleDo.getDataExtractor());
+        ApplicationContext context = SpringContextHolder.getContext();
+        if (RuleDataExtractTypeEnum.SQL == type) {
+            FactLoader sqlLoader = context.getBean("sqlFactLoader", FactLoader.class);
+            return sqlLoader.load(ruleDo);
+        } else {
+            return context.getBean(ruleDo.getDataExtractShell(), FactLoader.class).load(ruleDo);
+        }
     }
 }

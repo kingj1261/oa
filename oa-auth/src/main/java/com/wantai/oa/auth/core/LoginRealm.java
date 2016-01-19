@@ -5,8 +5,8 @@
 package com.wantai.oa.auth.core;
 
 import com.wantai.oa.auth.service.MenuService;
-import com.wantai.oa.auth.service.RoleService;
-import com.wantai.oa.auth.service.UserService;
+import com.wantai.oa.biz.shared.service.RoleService;
+import com.wantai.oa.biz.shared.service.UserService;
 import com.wantai.oa.common.dal.mappings.dos.auth.Menu;
 import com.wantai.oa.common.dal.mappings.dos.auth.Role;
 import com.wantai.oa.common.dal.mappings.dos.auth.User;

@@ -35,4 +35,12 @@ public final class LoggerUtil {
     public static void caughtException(Logger logger, Exception e) {
         logger.info(e);
     }
+
+    /**
+     * 打印error日志
+     * @param logger            日志
+     */
+    public static void caughtException(Logger logger, Exception e, String message) {
+        logger.info(message, e);
+    }
 }

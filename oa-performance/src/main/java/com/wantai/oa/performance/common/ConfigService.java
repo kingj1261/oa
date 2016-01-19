@@ -68,4 +68,30 @@ public interface ConfigService {
      * @return                      查询数据对象
      */
     ConfigDo queryConfig(String companyCode, String companyId, String bizItem, String bizEvent);
+
+    /**
+     * 根据当前data值和业务事项事件配置的数据区间定为到最终得分
+     * @param companyCode           公司code
+     * @param companyId             公司id
+     * @param bizItem               业务事项
+     * @param bizEvent              业务事件
+     * @param data                  当前实际数据值
+     * @return                      配置的最终得分
+     */
+    String getConfigValue(String companyCode, String companyId, String bizItem, String bizEvent,
+                          String data);
+
+    /**
+     * 新增系数计算流水
+     * @param companyCode           公司code
+     * @param companyId             公司id
+     * @param bizItem               业务事项
+     * @param bizEvent              业务事件
+     * @param data                  当前实际数据值
+     * @param customerId            客户编号
+     * @return                      配置的最终得分
+     */
+    void addRatioDetail(String companyCode, String companyId, String bizItem, String bizEvent,
+                        String data, String customerId);
+
 }

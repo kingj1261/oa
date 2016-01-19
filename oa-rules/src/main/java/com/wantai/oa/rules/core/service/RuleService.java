@@ -29,7 +29,28 @@ public interface RuleService {
 
     /**
      * 加载所有数据库配置的规则
+     *
      * @return                  规则DO对象集合
      */
     List<RuleDo> findAllRules();
+
+    /**
+     * 加载所有数据库配置的规则
+     *
+     * @param companyCode       公司code
+     * @param companyId         公司id
+     * @return                  规则DO对象集合
+     */
+    List<RuleDo> findAllRulesWithCompany(String companyCode, String companyId);
+
+    /**
+     * 触发所有的规则执行器
+     *
+     * @param companyCode       公司code
+     * @param companyId         公司id
+     *
+     * 该方法将查询所有的规则并根据规则定义的数据进行试算
+     */
+    void fireAllRules(String companyCode, String companyId);
+
 }

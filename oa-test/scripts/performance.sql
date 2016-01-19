@@ -154,6 +154,7 @@ CREATE TABLE OA_RULES(
   data_extract_type       VARCHAR(16) DEFAULT 'SQL' NOT NULL COMMENT '获取数据方式 ，默认为SQL',
   data_extract_shell      TEXT COMMENT '数据抽取脚本，默认为SQL语句',
   memo                    VARCHAR(256) COMMENT '备注',
+  context                 TEXT COMMENT '扩展上下文字段,json格式存储',
   gmt_create              DATETIME NOT NULL COMMENT '创建日期',
   gmt_modified            DATETIME NOT NULL COMMENT '最后修改日期',
   operator                VARCHAR(32) NOT NULL COMMENT '操作员',
@@ -213,3 +214,4 @@ CREATE TABLE OA_SALARY_DETAILS(
   operator                VARCHAR(32) NOT NULL COMMENT '操作员',
   last_modified_oeprator  VARCHAR(32) NOT NULL COMMENT '最后一次修改日期'
 )COMMENT '实际工资发放流水';
+

@@ -2,7 +2,7 @@ package com.wantai.oa.test.auth;
 
 import com.wantai.oa.auth.core.LoginRealm;
 import com.wantai.oa.auth.service.UserLoginService;
-import com.wantai.oa.auth.service.UserService;
+import com.wantai.oa.biz.shared.service.UserService;
 import com.wantai.oa.common.dal.mappings.dos.auth.User;
 import com.wantai.oa.common.lang.enums.ErrorCodeEnum;
 import com.wantai.oa.common.lang.exception.AuthException;

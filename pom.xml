@@ -16,6 +16,7 @@
         <module>oa-test</module>
         <module>oa-rules</module>
         <module>oa-biz-shared</module>
+        <module>oa-message</module>
     </modules>
     <name>Wantai OA Maven Webapp</name>
 
@@ -254,6 +255,20 @@
             <artifactId>jedis</artifactId>
             <version>${redis.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>1.6.2.RELEASE</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
@@ -311,6 +326,7 @@
                     <port>8080</port>
                     <path>/oa</path>
                     <uriEncoding>UTF-8</uriEncoding>
+
                 </configuration>
             </plugin>
 

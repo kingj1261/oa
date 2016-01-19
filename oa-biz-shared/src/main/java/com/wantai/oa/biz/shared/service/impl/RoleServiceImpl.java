@@ -1,7 +1,7 @@
-package com.wantai.oa.auth.service.impl;
+package com.wantai.oa.biz.shared.service.impl;
 
-import com.wantai.oa.auth.service.RoleService;
 import com.wantai.oa.biz.shared.service.BaseService;
+import com.wantai.oa.biz.shared.service.RoleService;
 import com.wantai.oa.common.dal.mappings.dos.auth.Role;
 import org.springframework.stereotype.Service;
 

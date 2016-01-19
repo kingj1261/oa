@@ -12,11 +12,17 @@
       <result property="rules" column="rules" javaType="string" jdbcType="CLOB"/>
       <result property="dataExtractor" column="data_extract_type" javaType="string" jdbcType="VARCHAR"/>
       <result property="dataExtractShell" column="data_extract_shell" javaType="string" jdbcType="CLOB"/>
+      <result property="context" column="context" javaType="string" jdbcType="CLOB"/>
   </resultMap>
 
   <!-- RULE QUERY BY NAME -->
-  <select id="findAllRules"  resultMap="ruleMap">
-     select * from OA_RULES order by gmt_create asc
-  </select>
+    <select id="findAllRules"  resultMap="ruleMap">
+        select * from OA_RULES order by gmt_create asc
+    </select>
+
+    <select id="findAllRulesWithCompany"  resultMap="ruleMap">
+        select * from OA_RULES where company_code=#{companyCode} and company_id=#{companyId}
+        order by gmt_create asc
+    </select>
 
 </mapper>

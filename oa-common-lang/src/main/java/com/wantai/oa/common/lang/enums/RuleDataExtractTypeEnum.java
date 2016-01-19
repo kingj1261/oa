@@ -5,24 +5,18 @@
 package com.wantai.oa.common.lang.enums;
 
 /**
- * 单位定义
+ * 规则数据抽取类型枚举
  *
  * @author maping.mp
- * @version $Id: UnitEnum.java, v 0.1 2015-1-04 下午10:55:39 maping.mp Exp $
+ * @version $Id: RuleDataExtractTypeEnum.java, v 0.1 2015-1-04 下午10:55:39 maping.mp Exp $
  */
-public enum UnitEnum {
+public enum RuleDataExtractTypeEnum {
 
-    /** 币种-元 */
-    CNY("156", "币种-元"),
+    /** SQL数据抽取类型 */
+    SQL("SQL", "SQL数据抽取类型"),
 
-    /** 百分比*/
-    PERCENT("%", "百分比"),
-
-    /** 分*/
-    FEN("F", "分"),
-
-    /** 辆*/
-    CARS("cars", "辆");
+    /** 自定义bean规则抽取类型*/
+    BEAN("BEAN", "自定义bean规则抽取类型");
 
     /**返回码*/
     private String code;
@@ -34,7 +28,7 @@ public enum UnitEnum {
      * @param code
      * @param message
      */
-    private UnitEnum(String code, String message) {
+    private RuleDataExtractTypeEnum(String code, String message) {
         this.code = code;
         this.message = message;
     }
@@ -44,8 +38,8 @@ public enum UnitEnum {
      * @param code 枚举值
      * @return  枚举对象
      */
-    public static UnitEnum getByCode(String code) {
-        for (UnitEnum result : values()) {
+    public static RuleDataExtractTypeEnum getByCode(String code) {
+        for (RuleDataExtractTypeEnum result : values()) {
             if (result.getCode().equals(code)) {
                 return result;
             }

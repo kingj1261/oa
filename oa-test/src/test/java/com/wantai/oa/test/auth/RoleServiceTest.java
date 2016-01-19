@@ -1,6 +1,6 @@
 package com.wantai.oa.test.auth;
 
-import com.wantai.oa.auth.service.RoleService;
+import com.wantai.oa.biz.shared.service.RoleService;
 import com.wantai.oa.common.dal.mappings.dos.auth.Role;
 import com.wantai.oa.test.BaseTest;
 import org.junit.Test;

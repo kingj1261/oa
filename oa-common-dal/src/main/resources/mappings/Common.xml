@@ -8,7 +8,7 @@
   <resultMap id="commonResultMap" type="com.wantai.oa.common.dal.mappings.dos.BaseDo">
       <result property="id" column="id" javaType="long" jdbcType="INTEGER"/>
       <result property="companyCode" column="company_code" javaType="string" jdbcType="VARCHAR"/>
-      <result property="companyId" column="company_id" javaType="long" jdbcType="INTEGER"/>
+      <result property="companyId" column="company_id" javaType="string" jdbcType="INTEGER"/>
       <result property="memo" column="memo" javaType="string" jdbcType="VARCHAR"/>
       <result property="gmtCreate" column="gmt_create" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
       <result property="gmtModified" column="gmt_modified" javaType="java.util.Date" jdbcType="TIMESTAMP"/>

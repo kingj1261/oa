@@ -6,9 +6,9 @@ package com.wantai.oa.auth.service.impl;
 
 import com.wantai.oa.auth.core.UserHolder;
 import com.wantai.oa.auth.service.UserLoginService;
-import com.wantai.oa.auth.service.UserService;
-import com.wantai.oa.biz.shared.vo.UserInfoVO;
 import com.wantai.oa.biz.shared.service.SessionOperation;
+import com.wantai.oa.biz.shared.service.UserService;
+import com.wantai.oa.biz.shared.vo.UserInfoVO;
 import com.wantai.oa.common.dal.mappings.dos.auth.User;
 import com.wantai.oa.common.lang.enums.ErrorCodeEnum;
 import com.wantai.oa.common.lang.exception.AuthException;
@@ -31,8 +31,7 @@ import org.springframework.stereotype.Service;
 public class UserLoginServiceImpl implements UserLoginService {
 
     @Autowired
-    private UserService userService;
-    @Autowired
+    private UserService      userService;
     private SessionOperation sessionOperation;
 
     @Override
@@ -61,13 +60,13 @@ public class UserLoginServiceImpl implements UserLoginService {
     }
 
     @Override
-    	public UserInfoVO getUserToRedis(String sid) throws Exception {
+    public UserInfoVO getUserToRedis(String sid) throws Exception {
         UserInfoVO userInfo = sessionOperation.getOnLinuUser(sid, null);
-    		return userInfo;
-    	}
+        return userInfo;
+    }
 
-    	@Override
-    	public boolean removeOnLinuUser(String sid) throws Exception {
-    		return sessionOperation.removeOnLineUser(sid, null);
-    	}
+    @Override
+    public boolean removeOnLinuUser(String sid) throws Exception {
+        return sessionOperation.removeOnLineUser(sid, null);
+    }
 }
