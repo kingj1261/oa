@@ -5,24 +5,18 @@
 package com.wantai.oa.common.lang.enums;
 
 /**
- * 通用错误码枚举定义
+ * 绩效系数计算方式
  *
  * @author maping.mp
- * @version $Id: ErrorCodeEnum.java, v 0.1 2015-1-04 下午10:55:39 maping.mp Exp $
+ * @version $Id: CacluTypeEnum.java, v 0.1 2015-1-04 下午10:55:39 maping.mp Exp $
  */
-public enum ErrorCodeEnum {
+public enum CacluTypeEnum {
 
-    /** 用户不存在 */
-    LOGIN_ERROR_USER_NOT_EXISTS("LOGIN_ERROR_USER_NOT_EXISTS", "用户不存在"),
+    /** 平均系数 */
+    AVG("AVG", "平均系数"),
 
-    /**用户密码错误*/
-    LOGIN_ERROR_USER_PASSWORD_INVALID("LOGIN_ERROR_USER_PASSWORD_INVALID", "用户密码错误"),
-
-    /** 规则配置错误*/
-    RULE_ERROR_NOT_VALID("RULE_ERROR_NOT_VALID", "规则配置错误"),
-
-    /** 不支持的配置类型*/
-    RULE_ERROR_NOT_SUPPORT_CONFIG_TYPE("RULE_ERROR_NOT_SUPPORT_CONFIG_TYPE", "不支持的配置类型");
+    /** 系数叠乘*/
+    MUL("MUL", "系数叠乘");
 
     /**返回码*/
     private String code;
@@ -34,7 +28,7 @@ public enum ErrorCodeEnum {
      * @param code
      * @param message
      */
-    private ErrorCodeEnum(String code, String message) {
+    private CacluTypeEnum(String code, String message) {
         this.code = code;
         this.message = message;
     }
@@ -44,8 +38,8 @@ public enum ErrorCodeEnum {
      * @param code 枚举值
      * @return  枚举对象
      */
-    public static ErrorCodeEnum getByCode(String code) {
-        for (ErrorCodeEnum result : values()) {
+    public static CacluTypeEnum getByCode(String code) {
+        for (CacluTypeEnum result : values()) {
             if (result.getCode().equals(code)) {
                 return result;
             }

@@ -7,6 +7,7 @@ package com.wantai.oa.web.controller.common;
 import com.wantai.oa.biz.shared.result.Status;
 import com.wantai.oa.common.lang.enums.ErrorCodeEnum;
 import com.wantai.oa.common.lang.exception.CommonException;
+import org.apache.http.HttpStatus;
 
 /**
  * 公共控制器
@@ -41,6 +42,8 @@ public class BaseController {
                 status.setErrorCode(e.getMessage());
                 status.setErrorMessage(e.getMessage());
             }
+
+            status.setResponseStatus(HttpStatus.SC_NOT_FOUND);
         }
         return status;
     }

@@ -115,10 +115,10 @@ public class MessageServiceTest extends BaseTest {
         testAddSupervise();
         SuperviseRequest messageReques = new SuperviseRequest();
 
-        messageReques.setCompanyCode("99999999999");
-        messageReques.setCompanyId("1");
+        //messageReques.setCompanyCode("99999999999");
+        //messageReques.setCompanyId("1");
 
-        messageReques.setCustomerId("99999");
+        //messageReques.setCustomerId("99999");
         messageReques.setCustomerName("sharpe");
 
         PageRequest pageRequest = new PageRequest(1, 20);
@@ -133,11 +133,11 @@ public class MessageServiceTest extends BaseTest {
 
         RemindRequest messageReques = new RemindRequest();
 
-        messageReques.setCompanyCode("99999999999");
-        messageReques.setCompanyId("1");
-
-        messageReques.setCustomerId("99999");
-        messageReques.setCustomerName("sharpe");
+        //        messageReques.setCompanyCode("99999999999");
+        //        messageReques.setCompanyId("1");
+        //
+        //        messageReques.setCustomerId("99999");
+        //        messageReques.setCustomerName("sharpe");
 
         PageRequest pageRequest = new PageRequest(1, 20);
         List<RemindDo> remindDos = messageService.queryRemind(messageReques, pageRequest);
@@ -151,11 +151,11 @@ public class MessageServiceTest extends BaseTest {
 
         MessageRequest messageReques = new MessageRequest();
 
-        messageReques.setCompanyCode("99999999999");
-        messageReques.setCompanyId("1");
-
-        messageReques.setCustomerId("99999");
-        messageReques.setCustomerName("sharpe");
+        //        messageReques.setCompanyCode("99999999999");
+        //        messageReques.setCompanyId("1");
+        //
+        //        messageReques.setCustomerId("99999");
+        //        messageReques.setCustomerName("sharpe");
 
         PageRequest pageRequest = new PageRequest(1, 20);
         List<MessageDo> messageDos = messageService.queryMessage(messageReques, pageRequest);

@@ -71,18 +71,23 @@ public interface ConfigService {
 
     /**
      * 根据当前data值和业务事项事件配置的数据区间定为到最终得分
+     *
+     * @param configType            配置类型
      * @param companyCode           公司code
      * @param companyId             公司id
      * @param bizItem               业务事项
      * @param bizEvent              业务事件
      * @param data                  当前实际数据值
+     * @param customerId            用户id
      * @return                      配置的最终得分
      */
-    String getConfigValue(String companyCode, String companyId, String bizItem, String bizEvent,
-                          String data);
+    String getConfigValue(String configType, String companyCode, String companyId, String bizItem,
+                          String bizEvent, String data, String customerId);
 
     /**
      * 新增系数计算流水
+     *
+     * @param configType            配置类型
      * @param companyCode           公司code
      * @param companyId             公司id
      * @param bizItem               业务事项
@@ -91,7 +96,7 @@ public interface ConfigService {
      * @param customerId            客户编号
      * @return                      配置的最终得分
      */
-    void addRatioDetail(String companyCode, String companyId, String bizItem, String bizEvent,
-                        String data, String customerId);
+    void addRatioDetail(String configType, String companyCode, String companyId, String bizItem,
+                        String bizEvent, String data, String customerId);
 
 }

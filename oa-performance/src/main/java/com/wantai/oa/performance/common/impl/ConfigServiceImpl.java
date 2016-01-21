@@ -15,8 +15,11 @@ import com.wantai.oa.common.dal.mappings.dos.performance.ConfigDo;
 import com.wantai.oa.common.dal.mappings.dos.performance.RatioDetailDo;
 import com.wantai.oa.common.dal.mappings.dos.performance.SubConfigDo;
 import com.wantai.oa.common.lang.constants.Constants;
+import com.wantai.oa.common.lang.enums.ConfigTypeEnum;
 import com.wantai.oa.common.lang.enums.CustomerTypeEnum;
+import com.wantai.oa.common.lang.enums.ErrorCodeEnum;
 import com.wantai.oa.common.lang.enums.UnitEnum;
+import com.wantai.oa.common.lang.exception.CommonException;
 import com.wantai.oa.performance.common.ConfigService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -28,6 +31,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -214,11 +218,12 @@ public class ConfigServiceImpl extends BaseService implements ConfigService {
     }
 
     @Override
-    public String getConfigValue(String companyCode, String companyId, String bizItem,
-                                 String bizEvent, String data) {
+    public String getConfigValue(String configType, String companyCode, String companyId,
+                                 String bizItem, String bizEvent, String data, String userId) {
         Map<String, Object> parameter = new HashMap();
         parameter.put("companyCode", companyCode);
         parameter.put("companyId", companyId);
+        parameter.put("configType", configType);
         parameter.put("bizItem", bizItem);
         parameter.put("bizEvent", bizEvent);
 
@@ -226,6 +231,70 @@ public class ConfigServiceImpl extends BaseService implements ConfigService {
             "SubConfig.findAllSubConfig", parameter);
         Assert.notEmpty(subConfigs, "业务事项(" + bizItem + "," + bizEvent + ")子项配置为空!");
 
+        ConfigTypeEnum type = ConfigTypeEnum.getByCode(configType.toUpperCase());
+        if (type == null) {
+            throw new CommonException(ErrorCodeEnum.RULE_ERROR_NOT_SUPPORT_CONFIG_TYPE);
+        }
+
+        StringBuilder value = new StringBuilder();
+
+        // 岗位系数计算公式为当前用户完成指标情况获取已配置好的区间系数值
+        if (type == ConfigTypeEnum.GWXS) {
+            value.append(getGwxs(data, subConfigs));
+        }
+
+        // 岗位奖金和岗位提成,计算公式为当前用户完成指标数*单价
+        if (type == ConfigTypeEnum.GWJJ || type == ConfigTypeEnum.GWTC) {
+            value.append(getGwjjOrGwtc(userId, data, subConfigs));
+        }
+
+        return value.length() == 0 ? "0" : value.toString();
+    }
+
+    /**
+     * 计算岗位奖金或者岗位提成
+     *
+     * @param userId            用户id
+     * @param data              当前用户指标完成情况
+     * @param subConfigs        当前业务配置的系数区间值列表
+     * @return                  根据公式计算得出
+     */
+    private String getGwjjOrGwtc(String userId, String data, List<SubConfigDo> subConfigs) {
+        double price = getCustomConfigValue(userId, subConfigs);
+        double counts = Double.parseDouble(data);
+        return price * counts + "";
+    }
+
+    private double getCustomConfigValue(String userId, List<SubConfigDo> subConfigs) {
+        double result = 0d;
+        Optional<SubConfigDo> customerValue = subConfigs
+            .stream()
+            .filter(
+                config -> StringUtils.equals(config.getTarget(),
+                    CustomerTypeEnum.CUSTOMER.getCode())
+                          && StringUtils.equals(userId, config.getCustomerId())).findFirst();
+
+        Optional<SubConfigDo> companyValue = subConfigs
+            .stream()
+            .filter(
+                config -> StringUtils.equals(config.getTarget(), CustomerTypeEnum.COMPANY.getCode()))
+            .findAny();
+
+        if (customerValue.isPresent()) {
+            result = Double.parseDouble(customerValue.get().getValue());
+        } else {
+            result = Double.parseDouble(companyValue.get().getValue());
+        }
+        return result;
+    }
+
+    /**
+     * 计算岗位系数值
+     * @param data              当前用户指标完成情况
+     * @param subConfigs        当前业务配置的系数区间值列表
+     * @return                  完成指标匹配区间对应的系数值
+     */
+    private String getGwxs(String data, List<SubConfigDo> subConfigs) {
         String result = data;
         double value = Double.parseDouble(data);
         for (int i = 0; i < subConfigs.size(); i++) {
@@ -240,20 +309,18 @@ public class ConfigServiceImpl extends BaseService implements ConfigService {
         }
 
         //如果超出最大区间值,则取最大值
-
         double maxValue = subConfigs.stream()
             .mapToDouble(config -> Double.parseDouble(config.getToValue())).max().getAsDouble();
 
         if (value >= maxValue) {
             result = maxValue + "";
         }
-
         return result;
     }
 
     @Override
-    public void addRatioDetail(String companyCode, String companyId, String bizItem,
-                               String bizEvent, String data, String customerId) {
+    public void addRatioDetail(String configType, String companyCode, String companyId,
+                               String bizItem, String bizEvent, String data, String customerId) {
         execute(() -> {
             ConfigDo config = queryConfig(companyCode, companyId, bizItem, bizEvent);
             Assert.notNull(config,
@@ -269,7 +336,7 @@ public class ConfigServiceImpl extends BaseService implements ConfigService {
             detailDo.setValue(data);
             detailDo.setTotal(detailDo.getCount() * Double.parseDouble(data));
             detailDo.setCustomerId(customerId);
-            detailDo.setConfigType(config.getConfigType());
+            detailDo.setConfigType(configType);
             detailDo.setUnit(UnitEnum.FEN.getMessage());
             commonDAO.insert("RatioDetail.addRatioDetail", detailDo);
         });

@@ -7,17 +7,15 @@ package com.wantai.oa.message.request;
 public class SuperviseRequest extends MessageRequest {
 
     /** 被督办人 **/
-	private String customerName;
+    private String  customerName;
 
     /** 超期时间 **/
     private Integer outLimitDays;
 
-    @Override
     public String getCustomerName() {
         return customerName;
     }
 
-    @Override
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
     }

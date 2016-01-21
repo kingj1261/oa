@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<!-- 用户工资计算公式配置表 -->
+<mapper namespace="UserSalaryFormula">
+
+    <resultMap id="userFormulaResultMap" type="com.wantai.oa.common.dal.mappings.dos.performance.UserFormula" extends="Common.commonResultMap">
+        <result property="customerId" column="customer_id" javaType="string" jdbcType="VARCHAR"/>
+        <result property="bizItem" column="biz_item" javaType="string" jdbcType="VARCHAR"/>
+        <result property="bizEvent" column="biz_event" javaType="string" jdbcType="VARCHAR"/>
+        <result property="startTime"   column="start_time" javaType="date" jdbcType="DATE"/>
+        <result property="endTime" column="end_time" javaType="date" jdbcType="DATE"/>
+        <result property="hasBasicSalary" column="has_basic_salary" javaType="string" jdbcType="VARCHAR"/>
+        <result property="hasStartSalary" column="has_start_salary" javaType="string" jdbcType="VARCHAR"/>
+        <result property="hasLowestSalary" column="has_lowest_salary" javaType="string" jdbcType="VARCHAR"/>
+        <result property="hasWorkYearsSalary" column="has_work_years_salary" javaType="string" jdbcType="VARCHAR"/>
+        <result property="checkRule" column="check_rule" javaType="string" jdbcType="VARCHAR"/>
+        <result property="ratioCacluType" column="ratio_caclu_type" javaType="string" jdbcType="VARCHAR"/>
+        <result property="hasSubsitySalary" column="has_subsity_salary" javaType="string" jdbcType="VARCHAR"/>
+        <result property="hasBonusSalary" column="has_bonus_salary" javaType="string" jdbcType="VARCHAR"/>
+        <result property="hasDeductSalary" column="has_deduct_salary" javaType="string" jdbcType="VARCHAR"/>
+        <result property="hasWithholdSalary" column="has_withhold_salary" javaType="string" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- 查询当前用户的计算公式 -->
+    <select id="queryUserSalaryFormula" resultMap="userFormulaResultMap">
+         select
+            id                    ,
+            company_code          ,
+            company_id            ,
+            customer_id           ,
+            start_time            ,
+            end_time              ,
+            has_basic_salary      ,
+            has_start_salary      ,
+            has_lowest_salary     ,
+            has_work_years_salary ,
+            check_rule            ,
+            ratio_caclu_type      ,
+            has_subsity_salary    ,
+            has_bonus_salary      ,
+            has_deduct_salary     ,
+            has_withhold_salary   ,
+            memo                  ,
+            gmt_create            ,
+            gmt_modified          ,
+            operator              ,
+            last_modified_oeprator
+         from OA_SALARY_CACULATE_FORMULA
+         where  customer_id=#{customerId}
+         and    company_code=#{companyCode}
+         and    company_id=#{companyId}
+    </select>
+
+
+    <!-- 删除用户公式 -->
+    <delete id="deleteUserSalaryFormula">
+        delete from OA_SALARY_CACULATE_FORMULA where  company_code=#{companyCode}
+        and company_id=#{companyId}
+        and customer_id=#{customerId}
+    </delete>
+    
+    <!-- 新增用户公式设置 -->
+    <insert id="addUserSalaryFormula" parameterType="com.wantai.oa.common.dal.mappings.dos.performance.UserFormula">
+          insert into OA_SALARY_CACULATE_FORMULA
+          (
+            company_code          ,
+            company_id            ,
+            customer_id           ,
+            start_time            ,
+            end_time              ,
+            has_basic_salary      ,
+            has_start_salary      ,
+            has_lowest_salary     ,
+            has_work_years_salary ,
+            check_rule            ,
+            ratio_caclu_type      ,
+            has_subsity_salary    ,
+            has_bonus_salary      ,
+            has_deduct_salary     ,
+            has_withhold_salary   ,
+            memo                  ,
+            gmt_create            ,
+            gmt_modified          ,
+            operator              ,
+            last_modified_oeprator
+          )VALUES (
+            #{companyCode},
+            #{companyId},
+            #{customerId},
+            now(),
+            now(),
+            #{hasBasicSalary},
+            #{hasStartSalary},
+            #{hasLowestSalary},
+            #{hasWorkYearsSalary},
+            #{checkRule},
+            #{ratioCacluType},
+            #{hasSubsitySalary},
+            #{hasBonusSalary},
+            #{hasDeductSalary},
+            #{hasWithholdSalary},
+            '',
+            now(),
+            now(),
+            #{operator},
+            #{lastModifiedOperator}
+          )
+    </insert>
+
+</mapper>

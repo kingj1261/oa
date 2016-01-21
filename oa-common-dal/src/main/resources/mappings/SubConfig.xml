@@ -164,6 +164,7 @@
         OA_BUSINESS_CONFIG config
         where config.company_code=#{companyCode}
         and   config.company_id=#{companyId}
+        and   config.config_type=#{configType}
         and   config.biz_item=#{bizItem}
         and   config.biz_event=#{bizEvent}
         and   config.id=subConfig.business_config_id
