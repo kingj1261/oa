@@ -38,12 +38,12 @@ public class BizBonusVO implements Serializable {
     /**
      * 公司值
      */
-    String  companyValue;
+    String  companyValue = "0";
 
     /**
      * 个人值
      */
-    String  customValue;
+    String  customValue  = "0";
 
     /**
      * 客户id
@@ -53,12 +53,12 @@ public class BizBonusVO implements Serializable {
     /**
      * 是否启用
      */
-    boolean enable;
+    boolean enable       = true;
 
     /**
      * 单位
      */
-    String  unit;
+    String  unit         = "元/次";
 
     public Long getConfigId() {
         return configId;

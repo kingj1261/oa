@@ -18,7 +18,7 @@ import com.wantai.oa.performance.common.ConfigService;
 import com.wantai.oa.performance.common.WorkPerformanceService;
 import com.wantai.oa.performance.common.request.BizConfigVO;
 import com.wantai.oa.performance.common.request.SalaryFormuaVO;
-import com.wantai.oa.performance.common.request.WorkPerformanceRequest;
+import com.wantai.oa.performance.common.request.WorkPerformance;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +52,7 @@ public class WorkPerformanceServiceImpl extends BaseService implements WorkPerfo
      * @param result                公共配置VO对象
      */
     private void queryGjjConfig(String companyCode, String companyId, String customerId,
-                                WorkPerformanceRequest result) {
+                                WorkPerformance result) {
         SubConfigDo wjjBasic = configService.querySingleSubConfig(companyCode, companyId,
             Constants.JCSZ_BIZ_ITEM, Constants.JCSZ_GJJ_EVENT, Constants.GJJ_BASIC, customerId);
 
@@ -82,7 +82,7 @@ public class WorkPerformanceServiceImpl extends BaseService implements WorkPerfo
      * @param result                公共配置VO对象
      */
     private void querySocialConfig(String companyCode, String companyId, String customerId,
-                                   WorkPerformanceRequest result) {
+                                   WorkPerformance result) {
         SubConfigDo socialBasic = configService.querySingleSubConfig(companyCode, companyId,
             Constants.JCSZ_BIZ_ITEM, Constants.JCSZ_SOCIAL_EVENT, Constants.SOCIAL_BASIC,
             customerId);
@@ -107,7 +107,7 @@ public class WorkPerformanceServiceImpl extends BaseService implements WorkPerfo
     }
 
     @Override
-    public void addWorkPerformance(WorkPerformanceRequest request) {
+    public void addWorkPerformance(WorkPerformance request) {
         execute(() -> {
             //修改基本工资设置
             updateOrSaveBaseInfo(request);
@@ -124,7 +124,7 @@ public class WorkPerformanceServiceImpl extends BaseService implements WorkPerfo
      * 更新或者新增用户工资计算公式
      * @param request                   请求对象
      */
-    private void updateOrSaveUserFormlua(WorkPerformanceRequest request) {
+    private void updateOrSaveUserFormlua(WorkPerformance request) {
         //删除用户公式设置
         //先删除配置
         Map<String, Object> parameter = new HashMap<>();
@@ -162,7 +162,7 @@ public class WorkPerformanceServiceImpl extends BaseService implements WorkPerfo
      * @param performanceDo     用户绩效设置对象
      * @param request           当前请求对象
      */
-    private void setBaseInfo(PerformanceDo performanceDo, WorkPerformanceRequest request) {
+    private void setBaseInfo(PerformanceDo performanceDo, WorkPerformance request) {
         performanceDo.setCustomerId(request.getCustomerId());
         performanceDo.setOperator(request.getOperator());
         performanceDo.setLastModifiedOperator(request.getOperator());
@@ -190,7 +190,7 @@ public class WorkPerformanceServiceImpl extends BaseService implements WorkPerfo
      * 设置用户业务事项事件配置
      * @param request           当前请求对象
      */
-    private void updateOrSaveUserBizEvents(WorkPerformanceRequest request) {
+    private void updateOrSaveUserBizEvents(WorkPerformance request) {
         //先删除配置
         Map<String, Object> parameter = new HashMap<>();
         parameter.put("companyCode", request.getCompanyCode());
@@ -220,7 +220,7 @@ public class WorkPerformanceServiceImpl extends BaseService implements WorkPerfo
      * 设置用户业基础信息
      * @param request           当前请求对象
      */
-    private void updateOrSaveBaseInfo(WorkPerformanceRequest request) {
+    private void updateOrSaveBaseInfo(WorkPerformance request) {
         List<PerformanceDo> userPerformances = queryUserPerformances(request.getCompanyCode(),
             request.getCompanyId(), request.getCustomerId());
         if (CollectionUtils.isEmpty(userPerformances)) {
@@ -236,9 +236,9 @@ public class WorkPerformanceServiceImpl extends BaseService implements WorkPerfo
     }
 
     @Override
-    public WorkPerformanceRequest queryWorkPerformance(String companyCode, String companyId,
-                                                       String customerId) {
-        WorkPerformanceRequest result = new WorkPerformanceRequest();
+    public WorkPerformance queryWorkPerformance(String companyCode, String companyId,
+                                                String customerId) {
+        WorkPerformance result = new WorkPerformance();
 
         //查询社保设置
         querySocialConfig(companyCode, companyId, customerId, result);
@@ -270,7 +270,7 @@ public class WorkPerformanceServiceImpl extends BaseService implements WorkPerfo
      * @param result                    结果
      */
     private void queryFormulaConfig(String companyCode, String companyId, String customerId,
-                                    WorkPerformanceRequest result) {
+                                    WorkPerformance result) {
         Map<String, Object> parameter = new HashMap<>();
         parameter.put("companyCode", companyCode);
         parameter.put("companyId", companyId);
@@ -302,7 +302,7 @@ public class WorkPerformanceServiceImpl extends BaseService implements WorkPerfo
      * @param result                    结果
      */
     private void queryBizItemAndEvents(String companyCode, String companyId, String customerId,
-                                       WorkPerformanceRequest result) {
+                                       WorkPerformance result) {
 
         //获取岗位绩效系数中配置的业务事项和事件
         List<BizConfigVO> events = getBizConfigVOs(companyCode, companyId);
@@ -365,7 +365,7 @@ public class WorkPerformanceServiceImpl extends BaseService implements WorkPerfo
      * @param result                    结果
      */
     private void queryBaseSalaryConfig(String companyCode, String companyId, String customerId,
-                                       WorkPerformanceRequest result) {
+                                       WorkPerformance result) {
 
         List<PerformanceDo> performanceList = queryUserPerformances(companyCode, companyId,
             customerId);

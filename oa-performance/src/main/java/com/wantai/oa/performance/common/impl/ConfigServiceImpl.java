@@ -4,7 +4,6 @@
  */
 package com.wantai.oa.performance.common.impl;
 
-import com.wantai.oa.auth.core.UserHolder;
 import com.wantai.oa.biz.shared.request.BaseRequest;
 import com.wantai.oa.biz.shared.service.BaseService;
 import com.wantai.oa.biz.shared.vo.BizEventVO;
@@ -22,6 +21,7 @@ import com.wantai.oa.common.lang.enums.UnitEnum;
 import com.wantai.oa.common.lang.exception.CommonException;
 import com.wantai.oa.performance.common.ConfigService;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
@@ -45,44 +45,18 @@ import java.util.stream.Collectors;
 @Service
 public class ConfigServiceImpl extends BaseService implements ConfigService {
 
+    @Autowired
+    private BizConvertor bizConvertor;
+
     @Override
     public void addConfig(Long busConfigId, List<? extends BaseRequest> requests) {
         execute(() -> {
             commonDAO.delete("SubConfig.deleteSubConfig", busConfigId);
             requests.forEach(request -> {
-                commonDAO.insert("SubConfig.addSubConfig", convert(request, new SubConfigDo()));
+                commonDAO.insert("SubConfig.addSubConfig",
+                    bizConvertor.convertRequest2SubConfig(request));
             });
         });
-    }
-
-    private Object convert(BaseRequest request, SubConfigDo subConfigDo) {
-        subConfigDo.setBusinessConfigId(request.getBusinessConfigId());
-        ConfigDo configDo = (ConfigDo) commonDAO.selectOne("Config.queryById", request);
-        if (StringUtils.isBlank(request.getSubEventCode())) {
-            subConfigDo.setSubEventCode(configDo.getBizEvent());
-        } else {
-            subConfigDo.setSubEventCode(request.getSubEventCode());
-        }
-
-        if (StringUtils.isBlank(request.getSubEventCodeName())) {
-            subConfigDo.setSubEventCodeName(configDo.getBizEventName());
-        } else {
-            subConfigDo.setSubEventCodeName(request.getSubEventCodeName());
-
-        }
-
-        //如果客户类型为空,则默认为公司
-        subConfigDo.setTarget(StringUtils.isBlank(request.getTarget()) ? CustomerTypeEnum.COMPANY
-            .getCode() : request.getTarget());
-
-        subConfigDo.setCustomerId(request.getCustomerId());
-        subConfigDo.setValue(request.getValue());
-        subConfigDo.setFromValue(request.getFromValue());
-        subConfigDo.setToValue(request.getToValue());
-        subConfigDo.setUnit(request.getUnit());
-        subConfigDo.setOperator(UserHolder.getUser().getLoginName());
-        subConfigDo.setLastModifiedOperator(UserHolder.getUser().getLoginName());
-        return subConfigDo;
     }
 
     @Override
@@ -134,22 +108,22 @@ public class ConfigServiceImpl extends BaseService implements ConfigService {
         // 是否加载子事件
         if (loadAllEvent) {
             items.forEach(item -> {
-                List<ConfigDo> events = configDoList.stream()
+                List<ConfigDo> configList = configDoList.stream()
                     .filter(config -> StringUtils.equals(item.getBizItem(), config.getBizItem()))
                     .collect(Collectors.toList());
-                List<BizEventVO> eventVOs = new ArrayList<>(events.size());
-                events.forEach(event -> {
+                List<BizEventVO> eventVOs = new ArrayList<>(configList.size());
+                configList.forEach(config -> {
                     BizEventVO eventVO = new BizEventVO();
-                    eventVO.setConfigId(event.getId());
-                    eventVO.setBizItem(event.getBizItem());
-                    eventVO.setBizEvent(event.getBizEvent());
-                    eventVO.setBizEventName(event.getBizEventName());
-                    eventVO.setOrder(event.getBizEventOrder());
-                    eventVO.setEnable(Boolean.parseBoolean(event.getEnable()));
-                    eventVO.setUnit(event.getUnit());
-                    eventVO.setSubEventList(querySubEventsVo(event.getId()));
+
+                    eventVO.setConfigId(config.getId());
+                    eventVO.setBizItem(config.getBizItem());
+                    eventVO.setBizEvent(config.getBizEvent());
+                    eventVO.setBizEventName(config.getBizEventName());
+                    eventVO.setOrder(config.getBizEventOrder());
+                    eventVO.setSubEventList(querySubEventsVo(config.getId()));
                     eventVOs.add(eventVO);
                 });
+
                 eventVOs.sort(Comparator.comparing(BizEventVO::getOrder));
                 item.setBizEvents(eventVOs);
             });
@@ -181,6 +155,7 @@ public class ConfigServiceImpl extends BaseService implements ConfigService {
                 event.setUnit(config.getUnit());
                 event.setTarget(config.getTarget());
                 event.setCustomerId(config.getCustomerId());
+                event.setEnable(config.getEnable());
                 eventList.add(event);
             });
         }

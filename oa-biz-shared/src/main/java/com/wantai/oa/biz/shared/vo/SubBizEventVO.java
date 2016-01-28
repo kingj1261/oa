@@ -30,6 +30,8 @@ public class SubBizEventVO implements Serializable {
 
     String unit;
 
+    String enable;
+
     int    order;
 
     String target;
@@ -122,6 +124,14 @@ public class SubBizEventVO implements Serializable {
 
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
+    }
+
+    public String getEnable() {
+        return enable;
+    }
+
+    public void setEnable(String enable) {
+        this.enable = enable;
     }
 
     @Override

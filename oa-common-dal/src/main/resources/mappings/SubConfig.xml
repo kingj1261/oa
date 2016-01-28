@@ -16,6 +16,7 @@
       <result property="fromValue" column="from_value" javaType="string" jdbcType="VARCHAR"/>
       <result property="toValue" column="to_value" javaType="string" jdbcType="VARCHAR"/>
       <result property="unit" column="unit" javaType="string" jdbcType="VARCHAR"/>
+      <result property="enable" column="enable" javaType="string" jdbcType="VARCHAR"/>
       <result property="order" column="orders" javaType="int" jdbcType="INTEGER"/>
       <result property="gmtCreate" column="gmt_create" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
       <result property="gmtModified" column="gmt_modified" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
@@ -36,6 +37,7 @@
         from_value,
         to_value,
         unit,
+        enable,
         memo,
         gmt_create,
         gmt_modified,
@@ -53,6 +55,7 @@
         #{fromValue},
         #{toValue},
         #{unit},
+        #{enable},
         #{memo},
         now(),
         now(),
@@ -96,6 +99,7 @@
             from_value            ,
             to_value              ,
             unit                  ,
+            enable                ,
             memo                  ,
             orders                ,
             gmt_create            ,
@@ -119,7 +123,7 @@
             subConfig.value                 ,
             subConfig.from_value            ,
             subConfig.to_value              ,
-            subConfig.unit                  ,
+            subConfig.unit                  ,                    querySubConfigs
             subConfig.memo                  ,
             subConfig.orders                ,
             subConfig.gmt_create            ,

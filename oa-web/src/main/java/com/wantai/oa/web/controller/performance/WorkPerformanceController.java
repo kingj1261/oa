@@ -8,7 +8,7 @@ import com.alibaba.fastjson.JSON;
 import com.wantai.oa.auth.core.UserHolder;
 import com.wantai.oa.biz.shared.result.Status;
 import com.wantai.oa.performance.common.WorkPerformanceService;
-import com.wantai.oa.performance.common.request.WorkPerformanceRequest;
+import com.wantai.oa.performance.common.request.WorkPerformance;
 import com.wantai.oa.web.controller.common.BaseController;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +49,8 @@ public class WorkPerformanceController extends BaseController {
             }
             String companyCode = UserHolder.getUser().getCompanyCode();
             int companyId = UserHolder.getUser().getCompanyId();
-            WorkPerformanceRequest config = workPerformanceService.queryWorkPerformance(
-                companyCode, companyId + "", customerId);
+            WorkPerformance config = workPerformanceService.queryWorkPerformance(companyCode,
+                companyId + "", customerId);
             status.setData(config);
         });
     }
@@ -68,11 +68,9 @@ public class WorkPerformanceController extends BaseController {
             }
 
             try {
-                WorkPerformanceRequest workConfig = JSON.parseObject(datas,
-                    WorkPerformanceRequest.class);
+                WorkPerformance workConfig = JSON.parseObject(datas, WorkPerformance.class);
 
-                Set<ConstraintViolation<WorkPerformanceRequest>> errors = validator
-                    .validate(workConfig);
+                Set<ConstraintViolation<WorkPerformance>> errors = validator.validate(workConfig);
                 if (errors.size() > 0) {
                     throw new RuntimeException("请求参数数据错误,错误数[" + errors.size() + "]");
                 }

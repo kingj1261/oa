@@ -12,9 +12,9 @@ import java.util.List;
  * 岗位绩效请求(系数设置)请求对象
  *
  * @author maping.mp
- * @version $Id: WorkPerformanceRequest.java, v 0.1 2015-1-04 下午10:55:39 maping.mp Exp $
+ * @version $Id: WorkPerformance.java, v 0.1 2015-1-04 下午10:55:39 maping.mp Exp $
  */
-public class WorkPerformanceRequest implements Serializable {
+public class WorkPerformance implements Serializable {
 
     /** 公司编码*/
     private String            companyCode;

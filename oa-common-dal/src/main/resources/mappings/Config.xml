@@ -40,7 +40,7 @@
         memo,gmt_create,gmt_modified,
         operator,last_modified_oeprator
         from   OA_BUSINESS_CONFIG
-        where id=#{businessConfigId}
+        where id=#{configId}
     </select>
 
 
@@ -57,5 +57,6 @@
         and   company_id=#{companyId}
         and   biz_item=#{bizItem}
         and   biz_event=#{bizEvent}
+        and   config_type=#{configType}
     </select>
 </mapper>

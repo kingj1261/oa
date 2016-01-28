@@ -13,8 +13,9 @@ import com.wantai.oa.biz.shared.vo.BizItemVO;
 import com.wantai.oa.biz.shared.vo.ConfigVO;
 import com.wantai.oa.biz.shared.vo.SubBizEventVO;
 import com.wantai.oa.common.lang.enums.CustomerTypeEnum;
+import com.wantai.oa.performance.common.BonusService;
 import com.wantai.oa.performance.common.ConfigService;
-import com.wantai.oa.performance.common.request.RatioRequest;
+import com.wantai.oa.performance.common.request.BonusRequest;
 import com.wantai.oa.web.controller.common.BaseController;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,9 @@ public class BonusController extends BaseController {
     @Autowired
     private ConfigService configService;
 
+    @Autowired
+    private BonusService  bonusService;
+
     /**
      * 根据业务事项查询其事件列表
      * @return              配置数据对象
@@ -61,9 +65,16 @@ public class BonusController extends BaseController {
                 true, bizItem);
 
             if (configVO != null && configVO.getBizItems() != null) {
-                Set<BizItemVO> itemVOList = configVO.getBizItems().stream()
-                    .filter(bizItemVO -> StringUtils.equals(bizItemVO.getBizItem(), bizItem))
-                    .collect(Collectors.toSet());
+
+                Set<BizItemVO> itemVOList = null;
+                if (StringUtils.isNotBlank(bizItem)) {
+                    itemVOList = configVO.getBizItems().stream()
+                        .filter(bizItemVO -> StringUtils.equals(bizItemVO.getBizItem(), bizItem))
+                        .collect(Collectors.toSet());
+                } else {
+                    itemVOList = configVO.getBizItems();
+                }
+
                 List<BizEventVO> events = itemVOList.size() == 0 ? new ArrayList<>() : itemVOList
                     .iterator().next().getBizEvents();
 
@@ -76,13 +87,19 @@ public class BonusController extends BaseController {
                     vo.setBizEventName(event.getBizEventName());
                     vo.setBizItem(event.getBizItem());
                     vo.setOrder(event.getOrder());
-                    vo.setEnable(event.isEnable());
-                    vo.setUnit(event.getUnit());
-                    vo.setCompanyValue(getValue(event, CustomerTypeEnum.COMPANY));
 
+                    //设置单位
+                    vo.setUnit(getUnit(event));
+
+                    //设置是否启用
+                    vo.setEnable(getEnableStatus(event, CustomerTypeEnum.COMPANY));
+
+                    //设置值
+                    vo.setCompanyValue(getValue(event, CustomerTypeEnum.COMPANY));
                     if (StringUtils.isNotBlank(customerId)) {
                         vo.setCustomerId(customerId);
                         vo.setCustomValue(getValue(event, CustomerTypeEnum.CUSTOMER));
+                        vo.setEnable(getEnableStatus(event, CustomerTypeEnum.CUSTOMER));
                     }
 
                     list.add(vo);
@@ -92,6 +109,26 @@ public class BonusController extends BaseController {
                 status.setData(new ArrayList<>());
             }
         });
+    }
+
+    private boolean getEnableStatus(BizEventVO event, CustomerTypeEnum customer) {
+        boolean result = false;
+        if (!CollectionUtils.isEmpty(event.getSubEventList())) {
+            Optional<SubBizEventVO> found = event.getSubEventList().stream()
+                .filter(data -> StringUtils.equals(data.getTarget(), customer.getCode()))
+                .findFirst();
+            result = found.isPresent() ? Boolean.parseBoolean(found.get().getEnable()) : false;
+        }
+        return result;
+    }
+
+    private String getUnit(BizEventVO event) {
+        StringBuilder sb = new StringBuilder();
+        if (!CollectionUtils.isEmpty(event.getSubEventList())) {
+            Optional<SubBizEventVO> found = event.getSubEventList().stream().findFirst();
+            sb.append(found.isPresent() ? "元/次" : found.get().getValue());
+        }
+        return sb.toString();
     }
 
     /**
@@ -107,7 +144,7 @@ public class BonusController extends BaseController {
                 .filter(data -> StringUtils.equals(data.getTarget(), customer.getCode()))
                 .findFirst();
             sb.setLength(0);
-            sb.append(found == Optional.<SubBizEventVO> empty() ? "0" : found.get().getValue());
+            sb.append(found.isPresent() ? found.get().getValue() : "0");
         }
         return sb.toString();
     }
@@ -117,28 +154,23 @@ public class BonusController extends BaseController {
      * @return              配置数据对象
      */
     @RequestMapping(value = "/bonus/add", method = RequestMethod.POST)
-    public Status addBonusConfig(HttpServletRequest request, Long businessConfigId) {
+    public Status addBonusConfig(HttpServletRequest request) {
         return execute(status -> {
             String datas = request.getParameter(getDataKey());
             if (StringUtils.isBlank(datas)) {
                 throw new RuntimeException("请求参数为空");
             }
 
-            if (businessConfigId == null) {
-                throw new RuntimeException("主配置id不能为空");
-            }
-
             try {
-                List<RatioRequest> requests = JSON.parseArray(datas, RatioRequest.class);
-                requests.forEach(ratio -> {
-                    Set<ConstraintViolation<RatioRequest>> errors = validator.validate(ratio);
-                    if (errors.size() > 0) {
-                        throw new RuntimeException("请求参数数据错误,错误数[" + errors.size() + "]");
-                    }
-                });
-                configService.addConfig(businessConfigId, requests);
+                BonusRequest bonusRequest = JSON.parseObject(datas, BonusRequest.class);
+                Set<ConstraintViolation<BonusRequest>> errors = validator.validate(bonusRequest);
+                if (errors.size() > 0) {
+                    throw new RuntimeException("请求参数数据错误,错误数[" + errors.size() + "]");
+                }
+
+                bonusService.addBonusConfig(bonusRequest);
             } catch (Exception e) {
-                throw new RuntimeException("绩效系数数据解析错误");
+                throw new RuntimeException("岗位奖金(提成)系数数据解析错误");
             }
         });
     }
