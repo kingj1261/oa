@@ -18,7 +18,7 @@ public class RevenueVO implements Serializable {
     private int    order;
 
     /** 区间最小值*/
-    private String fromValue;
+    private String fromValue = "0";
 
     /** 区间最大值*/
     private String toValue;

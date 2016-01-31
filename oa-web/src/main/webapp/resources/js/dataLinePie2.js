@@ -1,9 +1,12 @@
-$(function () {
-    lineChart('#LineData1', 'spline');
-    lineChart1('#LineData2', 'line');
-    pieChart('#PieData', 'pie');
-});
+try {
+    $(function () {
+        lineChart('#LineData1', 'spline');
+        lineChart1('#LineData2', 'line');
+        pieChart('#PieData', 'pie');
+    });
+} catch (e) {
 
+}
 
 
 
@@ -21,7 +24,9 @@ function lineChart1(id, type) {
         colors: ['#a463a7', '#e96e9a', '#efd26a', '#dbac74', '#93b964', '#30a0ea',
             , '#ddf2ad', '#cca9ad', 'rgb(0,205,205)', 'rgb(0,215,215)'],
         chart: {
-            type: type},
+            type: type,
+            height: 360
+        },
         //版权credits
         credits: {
             enabled: false
@@ -78,7 +83,9 @@ function lineChart(id, type) {
         colors: ['#a463a7', '#e96e9a', '#efd26a', '#dbac74', '#93b964', '#30a0ea',
             , '#ddf2ad', '#cca9ad', 'rgb(0,205,205)', 'rgb(0,215,215)'],
         chart: {
-            type: type},
+            type: type,
+            height: 360
+        },
         //版权credits
         credits: {
             enabled: false
@@ -130,7 +137,8 @@ function pieChart(id, type) {
         chart: {
             options3d: {
                 alpha: 0.2
-            }
+            },
+            height: 360
         }, //版权credits
         credits: {
             enabled: false,

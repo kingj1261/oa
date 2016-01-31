@@ -123,7 +123,7 @@
             subConfig.value                 ,
             subConfig.from_value            ,
             subConfig.to_value              ,
-            subConfig.unit                  ,                    querySubConfigs
+            subConfig.unit                  ,
             subConfig.memo                  ,
             subConfig.orders                ,
             subConfig.gmt_create            ,

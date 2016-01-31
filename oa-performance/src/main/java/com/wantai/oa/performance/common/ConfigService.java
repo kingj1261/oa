@@ -70,6 +70,18 @@ public interface ConfigService {
     ConfigDo queryConfig(String companyCode, String companyId, String bizItem, String bizEvent);
 
     /**
+     * 根据参数查询配置数据
+     * @param companyCode           公司code
+     * @param companyId             公司id
+     * @param configType            配置类型
+     * @param bizItem               业务事项编号
+     * @param bizEvent              事件编号
+     * @return                      查询数据对象
+     */
+    ConfigDo queryConfig(String companyCode, String companyId, String configType, String bizItem,
+                         String bizEvent);
+
+    /**
      * 根据当前data值和业务事项事件配置的数据区间定为到最终得分
      *
      * @param configType            配置类型

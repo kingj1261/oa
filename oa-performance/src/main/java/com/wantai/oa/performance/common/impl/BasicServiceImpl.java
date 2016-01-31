@@ -12,6 +12,7 @@ import com.wantai.oa.common.dal.mappings.dos.performance.ConfigDo;
 import com.wantai.oa.common.dal.mappings.dos.performance.RevenueDo;
 import com.wantai.oa.common.dal.mappings.dos.performance.SubConfigDo;
 import com.wantai.oa.common.lang.constants.Constants;
+import com.wantai.oa.common.lang.enums.ConfigTypeEnum;
 import com.wantai.oa.common.lang.enums.CustomerTypeEnum;
 import com.wantai.oa.common.util.ObjectUtils;
 import com.wantai.oa.performance.common.BasicService;
@@ -69,6 +70,8 @@ public class BasicServiceImpl extends BaseService implements BasicService {
         //查询工龄工资设置
         SubConfigDo salary = configService.querySingleSubConfig(companyCode, companyId,
             Constants.JCSZ_BIZ_ITEM, Constants.JCSZ_GLGZ_EVENT, Constants.WORKYEAR_SALARY, null);
+
+        Assert.notNull(salary, "工龄工资基础设置未配置!");
         configVO.setWorkYearSalary(salary.getValue());
         configVO.setMaxSalaryPerMonth(salary.getToValue());
 
@@ -240,8 +243,8 @@ public class BasicServiceImpl extends BaseService implements BasicService {
     private void updateSocialConfig(String customerId, String socialBasic, String socialRatio) {
 
         ConfigDo configDo = configService.queryConfig(UserHolder.getUser().getCompanyCode(),
-            UserHolder.getUser().getCompanyId() + "", Constants.JCSZ_BIZ_ITEM,
-            Constants.JCSZ_SOCIAL_EVENT);
+            UserHolder.getUser().getCompanyId() + "", ConfigTypeEnum.JCSZ.getCode(),
+            Constants.JCSZ_BIZ_ITEM, Constants.JCSZ_SOCIAL_EVENT);
         Assert.notNull(configDo, "社保配置对象不能为空");
         updateSubConfig(customerId, configDo.getId() + "", Constants.SOCIAL_BASIC, socialBasic);
         updateSubConfig(customerId, configDo.getId() + "", Constants.SOCIAL_RATIO, socialRatio);
@@ -255,8 +258,8 @@ public class BasicServiceImpl extends BaseService implements BasicService {
      */
     private void updateGjjConfig(String customerId, String gjjBasic, String gjjRatio) {
         ConfigDo configDo = configService.queryConfig(UserHolder.getUser().getCompanyCode(),
-            UserHolder.getUser().getCompanyId() + "", Constants.JCSZ_BIZ_ITEM,
-            Constants.JCSZ_GJJ_EVENT);
+            UserHolder.getUser().getCompanyId() + "", ConfigTypeEnum.JCSZ.getCode(),
+            Constants.JCSZ_BIZ_ITEM, Constants.JCSZ_GJJ_EVENT);
         Assert.notNull(configDo, "公积金配置对象不能为空");
 
         updateSubConfig(customerId, configDo.getId() + "", Constants.GJJ_BASIC, gjjBasic);
@@ -271,8 +274,8 @@ public class BasicServiceImpl extends BaseService implements BasicService {
      */
     private void updateWorkSalary(String customerId, String salaryPerMonth, String maxSalaryPerMonth) {
         ConfigDo configDo = configService.queryConfig(UserHolder.getUser().getCompanyCode(),
-            UserHolder.getUser().getCompanyId() + "", Constants.JCSZ_BIZ_ITEM,
-            Constants.JCSZ_GLGZ_EVENT);
+            UserHolder.getUser().getCompanyId() + "", ConfigTypeEnum.JCSZ.getCode(),
+            Constants.JCSZ_BIZ_ITEM, Constants.JCSZ_GLGZ_EVENT);
         Assert.notNull(configDo, "工龄工资配置对象不能为空");
         updateSubConfig(customerId, configDo.getId() + "", Constants.WORKYEAR_SALARY,
             salaryPerMonth, maxSalaryPerMonth);

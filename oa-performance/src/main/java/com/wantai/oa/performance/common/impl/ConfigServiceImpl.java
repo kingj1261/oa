@@ -4,6 +4,8 @@
  */
 package com.wantai.oa.performance.common.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.wantai.oa.biz.shared.request.BaseRequest;
 import com.wantai.oa.biz.shared.service.BaseService;
 import com.wantai.oa.biz.shared.vo.BizEventVO;
@@ -19,6 +21,7 @@ import com.wantai.oa.common.lang.enums.CustomerTypeEnum;
 import com.wantai.oa.common.lang.enums.ErrorCodeEnum;
 import com.wantai.oa.common.lang.enums.UnitEnum;
 import com.wantai.oa.common.lang.exception.CommonException;
+import com.wantai.oa.common.util.LoggerUtil;
 import com.wantai.oa.performance.common.ConfigService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +88,12 @@ public class ConfigServiceImpl extends BaseService implements ConfigService {
             configVO.setConfigType(configDo.getConfigType());
             BizItemVO itemVO = new BizItemVO();
 
+            //设置扩展字段
+            setBizItemContext(itemVO, configDo);
+
+            //备注
+            itemVO.setMemo(configDo.getMemo());
+
             //如果指定了具体的业务事项事件
             if (StringUtils.isNotBlank(bizItem)) {
 
@@ -121,6 +130,8 @@ public class ConfigServiceImpl extends BaseService implements ConfigService {
                     eventVO.setBizEventName(config.getBizEventName());
                     eventVO.setOrder(config.getBizEventOrder());
                     eventVO.setSubEventList(querySubEventsVo(config.getId()));
+                    eventVO.setMemo(config.getMemo());
+
                     eventVOs.add(eventVO);
                 });
 
@@ -130,6 +141,24 @@ public class ConfigServiceImpl extends BaseService implements ConfigService {
         }
         configVO.setBizItems(items);
         return configVO;
+    }
+
+    /**
+     * 设置扩展字段
+     * @param itemVO            业务对象
+     * @param configDo          do
+     */
+    private void setBizItemContext(BizItemVO itemVO, ConfigDo configDo) {
+        if (StringUtils.isNotBlank(configDo.getContext())) {
+            try {
+                JSONObject context = JSON.parseObject(configDo.getContext());
+                for (String key : context.keySet()) {
+                    itemVO.getContext().put(key, context.get(key));
+                }
+            } catch (Exception e) {
+                LoggerUtil.caughtException(logger, e);
+            }
+        }
     }
 
     /**
@@ -187,6 +216,18 @@ public class ConfigServiceImpl extends BaseService implements ConfigService {
         Map<String, Object> parameter = new HashMap();
         parameter.put("companyCode", companyCode);
         parameter.put("companyId", companyId);
+        parameter.put("bizItem", bizItem);
+        parameter.put("bizEvent", bizEvent);
+        return (ConfigDo) commonDAO.selectOne("Config.querySingleConfig", parameter);
+    }
+
+    @Override
+    public ConfigDo queryConfig(String companyCode, String companyId, String configType,
+                                String bizItem, String bizEvent) {
+        Map<String, Object> parameter = new HashMap();
+        parameter.put("companyCode", companyCode);
+        parameter.put("companyId", companyId);
+        parameter.put("configType", configType);
         parameter.put("bizItem", bizItem);
         parameter.put("bizEvent", bizEvent);
         return (ConfigDo) commonDAO.selectOne("Config.querySingleConfig", parameter);

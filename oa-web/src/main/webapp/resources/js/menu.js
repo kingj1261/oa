@@ -4,13 +4,19 @@ $(function () {
     $('#load_content').load("main.html");
     $(".checkg").hide();
     //主项
+    $(".parentitem").next().hide(10);
     $(".parentitem").click(function () {
-        if ($(this).next().is(":hidden"))
+        $(this).addClass("centerSpace");
+        $("h2.parentitem").not(this).removeClass("centerSpace").addClass("itemTitle");
+        if ($(this).next().is(":hidden")){
             $(this).next().show(10);
+            $("h2.parentitem").not(this).next().hide(10);
+    }
         else {
             $(this).next().hide(10);
         }
     });
+
     //子项
     $(".itemSpace li a").mouseover(function () {
         HideJJ();
@@ -59,13 +65,13 @@ function HideItemClick(pd) {
 
 
 function shoutye(index, t) {
+    $("#load_content").remove();
     $('#load_content').load('./' + index);
     //变更网站地图名称
     var pname = $(t).parent().parent().prev().text();
-    //alert(pname)
-    var name = $(t).children().eq(1).text();
+    var name = $(t).children().eq(0).text();
     var c = $("#mapAdds").children();
-    c.eq(1).text(pname);
+    c.eq(0).text(pname);
     c.eq(3).text(name);
 }
 
@@ -105,21 +111,34 @@ function shoutye(index, t) {
     var c = $("#mapAdds").children();
     c.eq(1).text(pname);
     c.eq(3).text(name);
+    try {
+        lineChart('#LineData1', 'spline');
+        lineChart1('#LineData2', 'line');
+        lineChart('#LineData3', 'spline');
+        lineChart('#LineData4', 'spline');
+        lineChart('#LineData5', 'spline');
+        lineChart('#LineData6', 'spline');
+        lineChart('#LineData7', 'spline');
+        lineChart('#LineData8', 'spline');
+        pieChart('#PieData', 'pie');
+    } catch (e) {
+
+    }
 }
-function goMain(){
-    inform();
+function goMain() {
+//    inform();
     //$(".infolb").hide()
-    $(".all").css('background','url("resources/images/indexbgImg.jpg")');
+    $(".all").css('background', '#f5f5f5');
 }
-function  noMain(){
+function  noMain() {
     $("#inform").removeClass("hide");
     $("#inform").addClass("show");
     //$(".infolb").show();
-    $(".all").css('background','#fff');
-    $('#load_content').load("/html/carload/kong.html");
+    $(".all").css('background', '#fff');
+    $('#load_content').load("html/alltool/kong.html");
     lunbo();
 }
-function inform(){
+function inform() {
     $("#inform").addClass("hide");
     $("#inform").removeClass("show");
 }
@@ -175,38 +194,46 @@ $(function () {
         //初始化
         h = c.eq(0).show().height();
         var w = c.eq(0).show().width();
-        $("#messge").parent().css("height", h + "px").css("width", w + "px").css("overflow-y", "hidden").css("position", "relative");
+        $("#messge").parent().css("height", h + "px").css("width", w + "px").css({'overflow':'hidden','position': 'relative'});
         $("#messge").mouseout(function () {
             time_pd = false;
             window.setTimeout(function () {
-                if (!time_pd && !time_pd2) lunbo();
+                if (!time_pd && !time_pd2)
+                    lunbo();
             }, 2000);
         });
         $("#messge").css("position", "absolute");
         //开始动画
-        window.setTimeout(lunbo, 1000);
+        window.setInterval(function(){lunbo()},1000);
         $("#messge,#messge li,#messge li div").mouseover(function () {
             time_pd = true;
         });
     }
 });
-
-
+//横向
 function lunbo() {
-    if (time_pd) return;
-    time_pd2 = true;
-    $("#messge").stop(true).animate({ top: "-=" + h + "px" }, time_time, function () {
-        var l = $("#messge").children().first();
-        $("#messge").append(l);
-        $("#messge").css("top", "0px");
-        //停顿
-        if (time_pd) {
-            time_pd2 = false;
-            return;
-        }
-        time_lb = window.setTimeout(lunbo(), 1000);
+    $(".lunboInfo").animate({left: "-510px"}, 10000, function () {
+        $(".lunboInfo").css({left: "0"}).children('li').last().after(
+            $('.lunboInfo').children('li').first());
     });
 }
+//纵向
+//function lunbo() {
+//    if (time_pd)
+//        return;
+//    time_pd2 = true;
+//    $("#messge").stop(true).animate({top: "-=" + h + "px"}, time_time, function () {
+//        var l = $("#messge").children().first();
+//        $("#messge").append(l);
+//        $("#messge").css("top", "0px");
+//        //停顿
+//        if (time_pd) {
+//            time_pd2 = false;
+//            return;
+//        }
+//        time_lb = window.setTimeout(lunbo(), 1000);
+//    });
+//}
 
 
 //子菜单数据模型 构建
@@ -338,7 +365,9 @@ $(function () {
     }).mouseout(function () {
         Itemli_out();
     });
-    $(".titleMain li a").mouseover(function () { pd_Main = true });
+    $(".titleMain li a").mouseover(function () {
+        pd_Main = true
+    });
 });
 //单击子菜单，下侧左边菜单对应选中
 function ClickItem_li2(t) {
@@ -368,7 +397,7 @@ function ClickItem_li(t) {
     var id = $(t).attr("data-id");
     //获取当前等级
     var level = parseInt($(t).parent().attr("level"));
-    //修改当前选中样式 
+    //修改当前选中样式
     $("ul[level=" + level + "]").children().removeClass("menuIcoClick_li");
     $(t).addClass("menuIcoClick_li");
     //生成下一级菜单
@@ -403,11 +432,11 @@ function Itemli_out() {
 }
 
 
-function helpShow(){
+function helpShow() {
     $(".hh1").hide()
     $(".helpBox").show()
 }
-function helpHide(){
+function helpHide() {
     $(".helpBox").hide();
     $(".hh1").show()
 }

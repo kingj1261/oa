@@ -46,6 +46,8 @@ public class BizEventVO implements Serializable {
      */
     String              unit;
 
+    String              memo;
+
     /** 子表配置*/
     List<SubBizEventVO> subEventList;
 
@@ -129,5 +131,13 @@ public class BizEventVO implements Serializable {
     @Override
     public int hashCode() {
         return bizEvent.hashCode();
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 }

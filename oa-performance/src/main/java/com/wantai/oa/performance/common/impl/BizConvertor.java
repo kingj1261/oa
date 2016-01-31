@@ -16,6 +16,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 配置服务
  *
@@ -36,7 +39,9 @@ public class BizConvertor {
     public SubConfigDo convertRequest2SubConfig(BaseRequest request) {
         SubConfigDo subConfigDo = new SubConfigDo();
         subConfigDo.setBusinessConfigId(request.getBusinessConfigId());
-        ConfigDo configDo = (ConfigDo) commonDAO.selectOne("Config.queryById", request);
+        Map<String, Object> parameter = new HashMap<>();
+        parameter.put("configId", request.getBusinessConfigId());
+        ConfigDo configDo = (ConfigDo) commonDAO.selectOne("Config.queryById", parameter);
         if (StringUtils.isBlank(request.getSubEventCode())) {
             subConfigDo.setSubEventCode(configDo.getBizEvent());
         } else {
@@ -59,6 +64,7 @@ public class BizConvertor {
         subConfigDo.setFromValue(request.getFromValue());
         subConfigDo.setToValue(request.getToValue());
         subConfigDo.setUnit(request.getUnit());
+        subConfigDo.setEnable(request.isEnable() + "");
         subConfigDo.setOperator(UserHolder.getUser().getLoginName());
         subConfigDo.setLastModifiedOperator(UserHolder.getUser().getLoginName());
         return subConfigDo;

@@ -33,7 +33,7 @@ import java.util.Set;
 public class BasicController extends BaseController {
 
     @Autowired
-    protected Validator validator;
+    protected Validator   validator;
 
     /**
      * 配置服务对象
@@ -45,7 +45,7 @@ public class BasicController extends BaseController {
      * 基础配置服务
      */
     @Autowired
-    private BasicService basicService;
+    private BasicService  basicService;
 
     /**
      * 保存基础配置对象
@@ -60,20 +60,15 @@ public class BasicController extends BaseController {
                 throw new RuntimeException("请求参数为空");
             }
 
-            try {
-                BasicRequest basicRequest = JSON.parseObject(datas, BasicRequest.class);
-                Set<ConstraintViolation<BasicRequest>> validations = validator
-                        .validate(basicRequest);
+            BasicRequest basicRequest = JSON.parseObject(datas, BasicRequest.class);
+            Set<ConstraintViolation<BasicRequest>> validations = validator.validate(basicRequest);
 
-                if (validations.size() > 0) {
-                    throw new RuntimeException("数据请求错误");
-                }
-
-                basicService.addBasicConfig(basicRequest);
-
-            } catch (Exception e) {
-                throw new RuntimeException("公共数据解析错误", e);
+            if (validations.size() > 0) {
+                throw new RuntimeException("数据请求错误");
             }
+
+            basicService.addBasicConfig(basicRequest);
+
         });
     }
 
@@ -85,18 +80,10 @@ public class BasicController extends BaseController {
      */
     @RequestMapping(value = "/basic/list", method = RequestMethod.GET)
     public Status queryBasicConfig(HttpServletRequest request) {
-        Status status1 = execute(status -> {
+        return execute(status -> {
             BasicConfigVO configVO = basicService.queryBasicConfig(UserHolder.getUser()
-                    .getCompanyCode(), UserHolder.getUser().getCompanyId() + "");
+                .getCompanyCode(), UserHolder.getUser().getCompanyId() + "");
             status.setData(configVO);
         });
-        return status1;
     }
-
-
-    @RequestMapping(value = "/basic/set", method = RequestMethod.GET)
-    public String queryBasicSet() {
-        return "info/info_setbase";
-    }
-
 }

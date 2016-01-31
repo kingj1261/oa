@@ -22,17 +22,10 @@
         <%@ include file="../common/left.jsp" %>
     </div>
 
-    <!--footer-->
-    <%@ include file="../common/footer.jsp" %>
-
     <!--弹出层的遮罩层 begin-->
     <div class="mask">&nbsp;&nbsp;</div>
     <!--弹出层的遮罩层 end-->
     <!--操作提示框-->
-</div>
-<div class="T-CZTiShiKuang">
-    <div class="T-CZTiShiKuang-hrad"><span>提  示</span></div>
-    <div class="T-CZTiShiKuang-cont"><span>驳回成功！</span></div>
 </div>
 </body>
 </html>

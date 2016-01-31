@@ -121,6 +121,61 @@ function clickTime(t) {
 }
 
 
+function showModelDialog(id, data) {
+    var div_height=($("#" + id).height());
+
+    var html = "<div class='Modalwindow'>";
+    html += "</div>";
+    //统计目前已打开的窗口个数
+    var openLength = $(".Modalwindow").length;
+    //获取遮罩
+    var zz = $(".mask");
+    //获取目前最顶上窗口的z-index
+    var zindex = $(".Modalwindow").last().css("z-index");
+    $(zz).show();
+    //创建一个窗口到body
+    $("body").append(html);
+    var mw = $(".Modalwindow").last();
+    //添加传入的元素
+    $(mw).html($("#" + id).render(data));
+    if (openLength > 0) {
+        $(mw).css("z-index", (parseInt(zindex) + 1));
+        $(zz).css("z-index", (parseInt(zindex) + 1));
+    }
+    //遮罩背景由浅变深  【只打开第一个窗口才开启遮罩背景动画】
+    if (openLength == 0) {
+//        $(zz).css("opacity", "0").stop(true).animate({ opacity: "0.57" }, 10);
+        $(zz).css("opacity", "0.57");
+
+
+    }
+    $(mw).show();
+    //弹窗背景由浅变深
+    $(mw).css("opacity", "1");
+    //计算弹出的位置
+    var _height = (document.documentElement.clientHeight);
+    var _width = (document.documentElement.clientWidth);
+    var boxHeight = $(mw).height();
+    //alert(boxHeight)
+    //判断计算后的top值如果小于0，就生成滚动条
+    //alert(_height+"~~"+boxHeight);
+    var top_new = (_height - div_height) / 2 ;
+    if (top_new < 0) {
+        //生成滚动条后的top值
+        top_new = 10;
+        $(mw).css("top", top_new + 'px').css("height", (_height - (top_new * 2)) + "px").css("overflow-y", "scroll");
+    } else {
+        $(mw).css("top", top_new + 'px');
+    }
+    var boxWdith = $(mw).width();
+    $(mw).css("left", ((_width - boxWdith) / 2) + 'px');
+    //隐藏body的滚动条
+    if (openLength == 0) {
+        $('body').attr("oldoverflow", $('body').css("overflow-y")).css("overflow-y", "hidden");
+    }
+}
+
+
 
 //推广补贴审批 点击审批 后页面弹窗出现的回调函数
 function clickImage() {
@@ -172,6 +227,7 @@ function imgcarchang(t){
     p.eq($(t).index() + 1).show();
     $(".outimgdef").removeClass("outimgdef").addClass("outimgother");
     $(t).removeClass("outimgother").addClass("outimgdef");
+
 }
 
 
@@ -196,9 +252,9 @@ function morecanshu(t){
     p.eq($(t).index() + 1).show();
     $(".caroutdefau").removeClass("caroutdefau").addClass("ouroutother");
     $(t).removeClass("ouroutother").addClass("caroutdefau");
-
+    $(t).find('.DataTextBox').css('top', '-22px');
+    $(t).siblings().find('.DataTextBox').css('top', '0');
 }
-
 //相册移上去显示
 $(".photoshover li").mouseover(
     function () {
@@ -218,11 +274,11 @@ function titlehide(t){
     var pd = $(p).is(":hidden");
     if (pd) {
         $(p).show();
-        $(t).children().last().attr("src","resources/images/up.png")
+        $(t).children().last().attr("src","images/up.png")
     }
     else {
         $(p).hide();
-        $(t).children().last().attr("src","resources/images/down.png")
+        $(t).children().last().attr("src","images/down.png")
     }
 
 }

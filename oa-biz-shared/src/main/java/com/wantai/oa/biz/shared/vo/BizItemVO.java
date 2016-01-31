@@ -6,7 +6,9 @@ package com.wantai.oa.biz.shared.vo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 业务事项VO
@@ -20,22 +22,31 @@ public class BizItemVO implements Serializable {
     /**
      * 业务事项编号
      */
-    String           bizItem;
+    String              bizItem;
 
     /**
      * 业务事项名称
      */
-    String           bizItemName;
+    String              bizItemName;
 
     /**
      * 排序
      */
-    int              order;
+    int                 order;
+
+    /**
+     * 备注
+     */
+    String              memo;
+    /**
+     * 业务扩展字段
+     */
+    Map<String, Object> context   = new HashMap<>();
 
     /**
      * 业务事件集合
      */
-    List<BizEventVO> bizEvents = new ArrayList<>();
+    List<BizEventVO>    bizEvents = new ArrayList<>();
 
     public String getBizItem() {
         return bizItem;
@@ -85,5 +96,21 @@ public class BizItemVO implements Serializable {
     @Override
     public int hashCode() {
         return bizItem.hashCode();
+    }
+
+    public Map<String, Object> getContext() {
+        return context;
+    }
+
+    public void setContext(Map<String, Object> context) {
+        this.context = context;
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 }
