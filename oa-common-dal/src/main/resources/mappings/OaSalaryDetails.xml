@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Salary" >
+
+  <resultMap id="BaseResultMap" type="com.wantai.oa.common.dal.mappings.dos.salary.OaSalaryDetails" >
+    <!-- all have -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="company_code" property="companyCode" jdbcType="VARCHAR" />
+    <result column="company_id" property="companyId" jdbcType="INTEGER" />
+    <result column="customer_id" property="customerId" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="basic_salary" property="basicSalary" jdbcType="DECIMAL" />
+    <result column="start_salary" property="startSalary" jdbcType="DECIMAL" />
+    <result column="lowest_salary" property="lowestSalary" jdbcType="DECIMAL" />
+    <result column="work_years_salary" property="workYearsSalary" jdbcType="DECIMAL" />
+    <result column="bet_amount" property="betAmount" jdbcType="DECIMAL" />
+    <result column="currency" property="currency" jdbcType="VARCHAR" />
+    <result column="gwjj" property="gwjj" jdbcType="DECIMAL" />
+    <result column="gwtc" property="gwtc" jdbcType="DECIMAL" />
+    <result column="ratio_amount" property="ratioAmount" jdbcType="DECIMAL" />
+    <result column="subsity_amount" property="subsityAmount" jdbcType="DECIMAL" />
+    <result column="bonus_amount" property="bonusAmount" jdbcType="DECIMAL" />
+    <result column="deduct_amount" property="deductAmount" jdbcType="DECIMAL" />
+    <result column="withhold_amount" property="withholdAmount" jdbcType="DECIMAL" />
+    <result column="socail_amount" property="socailAmount" jdbcType="DECIMAL" />
+    <result column="fund_amount" property="fundAmount" jdbcType="DECIMAL" />
+    <result column="revenue_amount" property="revenueAmount" jdbcType="DECIMAL" />
+    <result column="lowest_salary_difference" property="lowestSalaryDifference" jdbcType="DECIMAL" />
+    <result column="gross_salary" property="grossSalary" jdbcType="DECIMAL" />
+    <result column="total_withholding_amount" property="totalWithholdingAmount" jdbcType="DECIMAL" />
+    <result column="net_salary" property="netSalary" jdbcType="DECIMAL" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="last_modified_oeprator" property="lastModifiedOeprator" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <!-- all have -->
+    delete from OA_SALARY_DETAILS
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wantai.oa.common.dal.mappings.dos.salary.OaSalaryDetails" >
+    <!-- all have -->
+    insert into OA_SALARY_DETAILS (id, company_code, company_id, 
+      customer_id, start_time, end_time, 
+      basic_salary, start_salary, lowest_salary, 
+      work_years_salary, bet_amount, currency, 
+      gwjj, gwtc, ratio_amount, 
+      subsity_amount, bonus_amount, deduct_amount, 
+      withhold_amount, socail_amount, fund_amount, 
+      revenue_amount, lowest_salary_difference, 
+      gross_salary, total_withholding_amount, net_salary, 
+      memo, gmt_create, gmt_modified, 
+      operator, last_modified_oeprator)
+    values (#{id,jdbcType=INTEGER}, #{companyCode,jdbcType=VARCHAR}, #{companyId,jdbcType=INTEGER}, 
+      #{customerId,jdbcType=VARCHAR}, DATE_SUB(CURRENT_DATE, INTERVAL DAYOFMONTH(CURRENT_DATE)-1 DAY), LAST_DAY(CURRENT_DATE),
+      #{basicSalary,jdbcType=DECIMAL}, #{startSalary,jdbcType=DECIMAL}, #{lowestSalary,jdbcType=DECIMAL}, 
+      #{workYearsSalary,jdbcType=DECIMAL}, #{betAmount,jdbcType=DECIMAL}, #{currency,jdbcType=VARCHAR}, 
+      #{gwjj,jdbcType=DECIMAL}, #{gwtc,jdbcType=DECIMAL}, #{ratioAmount,jdbcType=DECIMAL}, 
+      #{subsityAmount,jdbcType=DECIMAL}, #{bonusAmount,jdbcType=DECIMAL}, #{deductAmount,jdbcType=DECIMAL}, 
+      #{withholdAmount,jdbcType=DECIMAL}, #{socailAmount,jdbcType=DECIMAL}, #{fundAmount,jdbcType=DECIMAL}, 
+      #{revenueAmount,jdbcType=DECIMAL}, #{lowestSalaryDifference,jdbcType=DECIMAL}, 
+      #{grossSalary,jdbcType=DECIMAL}, #{totalWithholdingAmount,jdbcType=DECIMAL}, #{netSalary,jdbcType=DECIMAL}, 
+      #{memo,jdbcType=VARCHAR}, now(), now(),
+      #{operator,jdbcType=VARCHAR}, #{lastModifiedOeprator,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.wantai.oa.common.dal.mappings.dos.salary.OaSalaryDetails" >
+    <!-- all have -->
+    update OA_SALARY_DETAILS
+    set company_code = #{companyCode,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=INTEGER},
+      customer_id = #{customerId,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      basic_salary = #{basicSalary,jdbcType=DECIMAL},
+      start_salary = #{startSalary,jdbcType=DECIMAL},
+      lowest_salary = #{lowestSalary,jdbcType=DECIMAL},
+      work_years_salary = #{workYearsSalary,jdbcType=DECIMAL},
+      bet_amount = #{betAmount,jdbcType=DECIMAL},
+      currency = #{currency,jdbcType=VARCHAR},
+      gwjj = #{gwjj,jdbcType=DECIMAL},
+      gwtc = #{gwtc,jdbcType=DECIMAL},
+      ratio_amount = #{ratioAmount,jdbcType=DECIMAL},
+      subsity_amount = #{subsityAmount,jdbcType=DECIMAL},
+      bonus_amount = #{bonusAmount,jdbcType=DECIMAL},
+      deduct_amount = #{deductAmount,jdbcType=DECIMAL},
+      withhold_amount = #{withholdAmount,jdbcType=DECIMAL},
+      socail_amount = #{socailAmount,jdbcType=DECIMAL},
+      fund_amount = #{fundAmount,jdbcType=DECIMAL},
+      revenue_amount = #{revenueAmount,jdbcType=DECIMAL},
+      lowest_salary_difference = #{lowestSalaryDifference,jdbcType=DECIMAL},
+      gross_salary = #{grossSalary,jdbcType=DECIMAL},
+      total_withholding_amount = #{totalWithholdingAmount,jdbcType=DECIMAL},
+      net_salary = #{netSalary,jdbcType=DECIMAL},
+      memo = #{memo,jdbcType=VARCHAR},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      operator = #{operator,jdbcType=VARCHAR},
+      last_modified_oeprator = #{lastModifiedOeprator,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    <!-- all have -->
+    select id, company_code, company_id, customer_id, start_time, end_time, basic_salary, 
+    start_salary, lowest_salary, work_years_salary, bet_amount, currency, gwjj, gwtc, 
+    ratio_amount, subsity_amount, bonus_amount, deduct_amount, withhold_amount, socail_amount, 
+    fund_amount, revenue_amount, lowest_salary_difference, gross_salary, total_withholding_amount, 
+    net_salary, memo, gmt_create, gmt_modified, operator, last_modified_oeprator
+    from OA_SALARY_DETAILS
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    <!-- all have -->
+    select id, company_code, company_id, customer_id, start_time, end_time, basic_salary, 
+    start_salary, lowest_salary, work_years_salary, bet_amount, currency, gwjj, gwtc, 
+    ratio_amount, subsity_amount, bonus_amount, deduct_amount, withhold_amount, socail_amount, 
+    fund_amount, revenue_amount, lowest_salary_difference, gross_salary, total_withholding_amount, 
+    net_salary, memo, gmt_create, gmt_modified, operator, last_modified_oeprator
+    from OA_SALARY_DETAILS
+  </select>
+</mapper>

@@ -18,4 +18,9 @@ public interface SalaryService {
      * @param companyId             公司id
      */
     void caculateSalary(String companyCode, String companyId);
+
+    /**
+     * 计算所有公司的薪资
+     */
+    void caculateSalary();
 }

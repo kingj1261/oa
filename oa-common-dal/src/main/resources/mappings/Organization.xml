@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Organization" >
+  <resultMap id="BaseResultMap" type="com.wantai.oa.common.dal.mappings.dos.auth.Organization" >
+    <!-- all have -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <id column="account_name" property="accountName" jdbcType="VARCHAR" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="cid" property="cid" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="jm" property="jm" jdbcType="CHAR" />
+    <result column="type" property="type" jdbcType="BIT" />
+    <result column="law_person" property="lawPerson" jdbcType="VARCHAR" />
+    <result column="business_scope" property="businessScope" jdbcType="VARCHAR" />
+    <result column="website" property="website" jdbcType="VARCHAR" />
+    <result column="open_bank" property="openBank" jdbcType="CHAR" />
+    <result column="mobile_phone" property="mobilePhone" jdbcType="CHAR" />
+    <result column="fixed_phone" property="fixedPhone" jdbcType="VARCHAR" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="company_code" property="companyCode" jdbcType="VARCHAR" />
+    <result column="is_head" property="isHead" jdbcType="BIT" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="create_person" property="createPerson" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="INTEGER" />
+    <result column="update_person" property="updatePerson" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="INTEGER" />
+    <result column="is_del" property="isDel" jdbcType="BIT" />
+  </resultMap>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    <!-- all have -->
+    select DISTINCT  id, account_name, pid, cid, name, jm, type, law_person, business_scope, website,
+    open_bank, mobile_phone, fixed_phone, account, address, company_code, is_head, remark, 
+    create_person, create_time, update_person, update_time, is_del
+    from m_b_organization
+  </select>
+</mapper>

@@ -108,17 +108,4 @@
         delete from OA_SALARY_DETAILS where id=#{id}
     </delete>
 
-
-    <!-- 查询所有的工资明细 -->
-    <select id="getAll">
-        select
-        gmt_create,
-        customer_id,
-        customer_name,
-        department_name,
-        basic_salary,
-        lowest_salary,
-
-    </select>
-    
 </mapper>

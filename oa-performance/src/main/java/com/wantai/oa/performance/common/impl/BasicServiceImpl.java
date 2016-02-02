@@ -6,6 +6,7 @@ package com.wantai.oa.performance.common.impl;
 
 import com.wantai.oa.auth.core.UserHolder;
 import com.wantai.oa.biz.shared.service.BaseService;
+import com.wantai.oa.biz.shared.service.SystemConfigService;
 import com.wantai.oa.biz.shared.vo.BasicConfigVO;
 import com.wantai.oa.biz.shared.vo.RevenueVO;
 import com.wantai.oa.common.dal.mappings.dos.performance.ConfigDo;
@@ -40,7 +41,11 @@ public class BasicServiceImpl extends BaseService implements BasicService {
 
     /** 配置服务*/
     @Autowired
-    private ConfigService configService;
+    private ConfigService       configService;
+
+    /** 基础配置服务*/
+    @Autowired
+    private SystemConfigService systemConfigService;
 
     @Override
     public void addBasicConfig(BasicRequest request) {
@@ -60,7 +65,39 @@ public class BasicServiceImpl extends BaseService implements BasicService {
 
             //更新个税设置
             updateTaxConfig(request);
+
+            //更新基础开关设置
+            updateBasicVale(request);
         });
+    }
+
+    /**
+     * 更新社保设置方式
+     * @param request
+     */
+    private void updateBasicVale(BasicRequest request) {
+        String companyCode = UserHolder.getUser().getCompanyCode();
+        String companyId = UserHolder.getUser().getCompanyId() + "";
+
+        //更新税收是否启用
+        systemConfigService.update(companyCode, companyId, Constants.REVENUE_ENABLE,
+            request.isRevenueStartEnable());
+
+        //更新社保是否启用
+        systemConfigService.update(companyCode, companyId, Constants.SOCIAL_ENABLE,
+            request.isRevenueStartEnable());
+
+        //社保设置方式
+        systemConfigService.update(companyCode, companyId, Constants.SOCIAL_SETTING_TYPE,
+            request.getSocialSettingType());
+
+        //更新公积金是否启用
+        systemConfigService.update(companyCode, companyId, Constants.FUND_ENABLE,
+            request.isFundEnable());
+
+        //公积金设置方式
+        systemConfigService.update(companyCode, companyId, Constants.FUND_SETTING_TYPE,
+            request.getFundSettingType());
     }
 
     @Override
@@ -87,7 +124,33 @@ public class BasicServiceImpl extends BaseService implements BasicService {
         //查询公积金设置
         queryGjjConfig(companyCode, companyId, configVO);
 
+        //查询基础设置开关配置
+        queryConfigVale(companyCode, companyId, configVO);
+
         return configVO;
+    }
+
+    /**
+     * 查询基础设置开关配置
+     * @param companyCode           公司码
+     * @param companyId             公司id
+     * @param configVO              配置VO对象
+     */
+    private void queryConfigVale(String companyCode, String companyId, BasicConfigVO configVO) {
+        configVO.setRevenueStartEnable(systemConfigService.getBoolean(companyCode, companyId,
+            Constants.REVENUE_ENABLE));
+
+        configVO.setSocialEnable(systemConfigService.getBoolean(companyCode, companyId,
+            Constants.SOCIAL_ENABLE));
+
+        configVO.setSocialSettingType(systemConfigService.getString(companyCode, companyId,
+            Constants.SOCIAL_SETTING_TYPE));
+
+        configVO.setFundEnable(systemConfigService.getBoolean(companyCode, companyId,
+            Constants.FUND_ENABLE));
+
+        configVO.setFundSettingType(systemConfigService.getString(companyCode, companyId,
+            Constants.FUND_SETTING_TYPE));
     }
 
     /**

@@ -8,8 +8,12 @@ import com.wantai.oa.biz.shared.service.BaseService;
 import com.wantai.oa.biz.shared.service.UserService;
 import com.wantai.oa.biz.shared.vo.BasicConfigVO;
 import com.wantai.oa.biz.shared.vo.RevenueVO;
+import com.wantai.oa.common.dal.mappings.dos.auth.Organization;
 import com.wantai.oa.common.dal.mappings.dos.auth.User;
+import com.wantai.oa.common.dal.mappings.dos.salary.OaSalaryDetails;
 import com.wantai.oa.common.dal.mappings.dos.salary.SalaryDo;
+import com.wantai.oa.common.lang.constants.Constants;
+import com.wantai.oa.common.lang.enums.UnitEnum;
 import com.wantai.oa.common.util.LoggerUtil;
 import com.wantai.oa.performance.common.BasicService;
 import com.wantai.oa.performance.common.ConfigService;
@@ -18,9 +22,13 @@ import com.wantai.oa.performance.common.WorkPerformanceService;
 import com.wantai.oa.performance.common.request.BizConfigVO;
 import com.wantai.oa.performance.common.request.WorkPerformance;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -32,6 +40,7 @@ import java.util.stream.Collectors;
  * @version $Id: SalaryServiceImpl.java, v 0.1 2015-1-04 下午10:55:39 maping.mp Exp $
  */
 @Service
+@Qualifier("salaryService")
 public class SalaryServiceImpl extends BaseService implements SalaryService {
 
     /** 配置服务*/
@@ -52,6 +61,13 @@ public class SalaryServiceImpl extends BaseService implements SalaryService {
         //查询当前公司下所有用户信息
         List<User> users = userService.findUsers(companyCode, companyId);
         users.forEach(user -> caculateSalaryByCustomer(companyCode, companyId, user));
+    }
+
+    @Override
+    public void caculateSalary() {
+        List<Organization> organizations = (List<Organization>) commonDAO.findAll(
+            "Organization.selectAll", new HashMap());
+        organizations.forEach(org -> caculateSalary(org.getCompanyCode(), org.getId() + ""));
     }
 
     /**
@@ -123,8 +139,41 @@ public class SalaryServiceImpl extends BaseService implements SalaryService {
             cacludateRealSalary(companyCode, companyId, user, salaryDo);
 
             //保存实发工资
-            commonDAO.insert("Salary.addSalary", salaryDo);
+            commonDAO.insert("Salary.insert", convert2SalaryDetail(salaryDo));
         });
+    }
+
+    private OaSalaryDetails convert2SalaryDetail(SalaryDo salaryDo) {
+        OaSalaryDetails detail = new OaSalaryDetails();
+        detail.setMemo(salaryDo.getMemo());
+        detail.setBasicSalary(new BigDecimal(salaryDo.getBasicSalary()));
+        detail.setBetAmount(new BigDecimal(0));
+        detail.setBonusAmount(new BigDecimal(salaryDo.getBonusSalary()));
+        detail.setCompanyCode(salaryDo.getCompanyCode());
+        detail.setCompanyId(Integer.parseInt(salaryDo.getCompanyId()));
+        detail.setCurrency(UnitEnum.CNY.getCode());
+        detail.setCustomerId(salaryDo.getCustomerId());
+        detail.setDeductAmount(new BigDecimal(salaryDo.getDuductSalary()));
+        detail.setEndTime(new Date());
+        detail.setFundAmount(new BigDecimal(salaryDo.getFundAmunt()));
+        detail.setGrossSalary(new BigDecimal(salaryDo.getGrossSalary()));
+        detail.setGwjj(new BigDecimal(salaryDo.getJjSalary()));
+        detail.setGwtc(new BigDecimal(salaryDo.getTcSalary()));
+        detail.setLastModifiedOeprator(Constants.SYSTEM);
+        detail.setLowestSalary(new BigDecimal(salaryDo.getLowestSalary()));
+        detail.setLowestSalaryDifference(new BigDecimal(salaryDo.getLowestSalaryDifference()));
+        detail.setNetSalary(new BigDecimal(salaryDo.getRealSalary()));
+        detail.setOperator(Constants.SYSTEM);
+        detail.setRatioAmount(new BigDecimal(salaryDo.getKpi()));
+        detail.setRevenueAmount(new BigDecimal(salaryDo.getRevenueAmount()));
+        detail.setSocailAmount(new BigDecimal(salaryDo.getSocailAmount()));
+        detail.setStartSalary(new BigDecimal(salaryDo.getStarSalary()));
+        detail.setStartTime(new Date());
+        detail.setSubsityAmount(new BigDecimal(salaryDo.getSubsitySalary()));
+        detail.setTotalWithholdingAmount(new BigDecimal(salaryDo.getTotalWithholdingAmount()));
+        detail.setWithholdAmount(new BigDecimal(salaryDo.getWithholdSalary()));
+        detail.setWorkYearsSalary(new BigDecimal(salaryDo.getWorkYearSalary()));
+        return detail;
     }
 
     /**
@@ -134,7 +183,7 @@ public class SalaryServiceImpl extends BaseService implements SalaryService {
      */
     private double caculdateTotalWithhold(User user, SalaryDo salaryDo) {
         double totalAmount = salaryDo.getDuductSalary() + salaryDo.getWithholdSalary();
-        LoggerUtil.info(logger, String.format("当前用户[%s]扣款合计金额为[%d]", user.getId(), totalAmount));
+        LoggerUtil.info(logger, String.format("当前用户[%s]扣款合计金额为[%s]", user.getId(), totalAmount));
         return totalAmount;
     }
 
@@ -146,7 +195,7 @@ public class SalaryServiceImpl extends BaseService implements SalaryService {
      */
     private double caculdateLowestDiff(WorkPerformance workPerformance, User user) {
         double diffAmount = 0;
-        LoggerUtil.info(logger, String.format("当前用户[%s]保底工资差额为[%d]", user.getId(), diffAmount));
+        LoggerUtil.info(logger, String.format("当前用户[%s]保底工资差额为[%s]", user.getId(), diffAmount));
         return diffAmount;
     }
 
@@ -159,7 +208,7 @@ public class SalaryServiceImpl extends BaseService implements SalaryService {
     private double caculdateFund(WorkPerformance workPerformance, User user) {
         //公积金金额=(个人缴纳+公司缴纳)=(基数*比例*2)
         double fundAmount = workPerformance.getGjjBasic() * workPerformance.getGjjPercent() * 2;
-        LoggerUtil.info(logger, String.format("当前用户[%s]公积金缴存金额为[%d]", user.getId(), fundAmount));
+        LoggerUtil.info(logger, String.format("当前用户[%s]公积金缴存金额为[%s]", user.getId(), fundAmount));
         return fundAmount;
     }
 
@@ -173,7 +222,7 @@ public class SalaryServiceImpl extends BaseService implements SalaryService {
         //社保金额=(个人缴纳+公司缴纳)=(基数*比例*2)
         double socialAmount = workPerformance.getSocialBasic() * workPerformance.getSocialPercent()
                               * 2;
-        LoggerUtil.info(logger, String.format("当前用户[%s]社保缴存金额为[%d]", user.getId(), socialAmount));
+        LoggerUtil.info(logger, String.format("当前用户[%s]社保缴存金额为[%s]", user.getId(), socialAmount));
         return socialAmount;
     }
 
@@ -200,7 +249,7 @@ public class SalaryServiceImpl extends BaseService implements SalaryService {
         salary -= salaryDo.getDuductSalary();//扣款
         salary -= salaryDo.getFundAmunt();//其他代扣
         salaryDo.setSalary(salary);
-        LoggerUtil.info(logger, String.format("当前用户[%s]应发工资为[%d]", user.getId(), salary));
+        LoggerUtil.info(logger, String.format("当前用户[%s]应发工资为[%s]", user.getId(), salary));
     }
 
     /**
@@ -229,7 +278,7 @@ public class SalaryServiceImpl extends BaseService implements SalaryService {
         realSalary -= salaryDo.getFundAmunt();//公积金
         realSalary -= caculateRevenue(companyCode, companyId, user, salaryDo);//个税
 
-        LoggerUtil.info(logger, String.format("当前用户[%s]实发工资为[%d]", user.getId(), realSalary));
+        LoggerUtil.info(logger, String.format("当前用户[%s]实发工资为[%s]", user.getId(), realSalary));
         salaryDo.setRealSalary(realSalary);
     }
 
@@ -328,7 +377,7 @@ public class SalaryServiceImpl extends BaseService implements SalaryService {
      * @return                  个人基本工资
      */
     private double caculateDeduct(WorkPerformance workPerformance, User user) {
-        LoggerUtil.info(logger, String.format("当前用户[%s]扣款金额为[%d]", user.getId(), 0));
+        LoggerUtil.info(logger, String.format("当前用户[%s]扣款金额为[%s]", user.getId(), 0));
         return 0;
     }
 
@@ -339,7 +388,7 @@ public class SalaryServiceImpl extends BaseService implements SalaryService {
      * @return                  个人基本工资
      */
     private double caculdateSubsity(WorkPerformance workPerformance, User user) {
-        LoggerUtil.info(logger, String.format("当前用户[%s]补贴金额为[%d]", user.getId(), 0));
+        LoggerUtil.info(logger, String.format("当前用户[%s]补贴金额为[%s]", user.getId(), 0));
         return 0;
     }
 
@@ -362,7 +411,7 @@ public class SalaryServiceImpl extends BaseService implements SalaryService {
     private double caculateWorkYearSalary(WorkPerformance workPerformance, User user) {
         double workYearSalary = Math.min(getWorkYears(user) * workPerformance.getMonthSalary(),
             workPerformance.getMaxMonthSalary());
-        LoggerUtil.info(logger, String.format("当前用户[%s]工龄工资为[%d]", user.getId(), workYearSalary));
+        LoggerUtil.info(logger, String.format("当前用户[%s]工龄工资为[%s]", user.getId(), workYearSalary));
         return workYearSalary;
     }
 
@@ -384,7 +433,7 @@ public class SalaryServiceImpl extends BaseService implements SalaryService {
     private double caculateLowestSalary(WorkPerformance workPerformance, User user) {
         boolean hasLowestSalary = workPerformance.getSalaryFormuaVO().isHasLowestSalary();
         double lowestSalary = hasLowestSalary ? workPerformance.getLowestSalary() : 0;
-        LoggerUtil.info(logger, String.format("当前用户[%s]最低工资为[%d]", user.getId(), lowestSalary));
+        LoggerUtil.info(logger, String.format("当前用户[%s]最低工资为[%s]", user.getId(), lowestSalary));
         return lowestSalary;
     }
 
@@ -397,7 +446,7 @@ public class SalaryServiceImpl extends BaseService implements SalaryService {
     private double caculateStarSalary(WorkPerformance workPerformance, User user) {
         boolean hasStartSalary = workPerformance.getSalaryFormuaVO().isHasStarSalary();
         double startSalary = hasStartSalary ? workPerformance.getStarSalary() : 0;
-        LoggerUtil.info(logger, String.format("当前用户[%s]星级工资为[%d]", user.getId(), startSalary));
+        LoggerUtil.info(logger, String.format("当前用户[%s]星级工资为[%s]", user.getId(), startSalary));
         return startSalary;
     }
 
@@ -410,7 +459,7 @@ public class SalaryServiceImpl extends BaseService implements SalaryService {
     private double caculateBasicSalary(WorkPerformance workPerformance, User user) {
         boolean hasBasicSalary = workPerformance.getSalaryFormuaVO().isHasBasicSalary();
         double basicSalary = hasBasicSalary ? workPerformance.getBasicSalary() : 0;
-        LoggerUtil.info(logger, String.format("当前用户[%s]基本工资为[%d]", user.getId(), basicSalary));
+        LoggerUtil.info(logger, String.format("当前用户[%s]基本工资为[%s]", user.getId() + "", basicSalary));
         return basicSalary;
     }
 
@@ -421,7 +470,7 @@ public class SalaryServiceImpl extends BaseService implements SalaryService {
      * @return                  个人基本工资
      */
     private double caculdateWithhold(WorkPerformance workPerformance, User user) {
-        LoggerUtil.info(logger, String.format("当前用户[%s]其它代扣金额为[%d]", user.getId(), 0));
+        LoggerUtil.info(logger, String.format("当前用户[%s]其它代扣金额为[%s]", user.getId() + "", 0));
         return 0;
     }
 }

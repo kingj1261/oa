@@ -4,6 +4,8 @@
  */
 package com.wantai.oa.biz.shared.vo;
 
+import com.wantai.oa.common.lang.enums.CustomerTypeEnum;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -18,11 +20,11 @@ public class BasicConfigVO implements Serializable {
     private String          workYearSalary;
 
     /** 每月最大工龄工资*/
-    private String          maxSalaryPerMonth = "1000";
+    private String          maxSalaryPerMonth  = "1000";
 
     //~~~~~~~税率相关
     /** 个税起征点 */
-    private String          start             = "3500";
+    private String          start              = "3500";
 
     /** 个税设置list*/
     private List<RevenueVO> revenueVOList;
@@ -38,6 +40,21 @@ public class BasicConfigVO implements Serializable {
 
     /** 公积金个人缴纳比例*/
     private String          gjjPercent;
+
+    /** 个税是否启用*/
+    private boolean         revenueStartEnable = true;
+
+    /** 社保设置是否启用*/
+    private boolean         socialEnable       = true;
+
+    /** 社保设置方式*/
+    private String          socialSettingType  = CustomerTypeEnum.COMPANY.getCode();
+
+    /** 公积金设置是否启用*/
+    private boolean         fundEnable         = true;
+
+    /** 公积金设置方式*/
+    private String          fundSettingType    = CustomerTypeEnum.COMPANY.getCode();
 
     public String getWorkYearSalary() {
         return workYearSalary;
@@ -101,5 +118,45 @@ public class BasicConfigVO implements Serializable {
 
     public void setGjjPercent(String gjjPercent) {
         this.gjjPercent = gjjPercent;
+    }
+
+    public boolean isRevenueStartEnable() {
+        return revenueStartEnable;
+    }
+
+    public void setRevenueStartEnable(boolean revenueStartEnable) {
+        this.revenueStartEnable = revenueStartEnable;
+    }
+
+    public boolean isSocialEnable() {
+        return socialEnable;
+    }
+
+    public void setSocialEnable(boolean socialEnable) {
+        this.socialEnable = socialEnable;
+    }
+
+    public String getSocialSettingType() {
+        return socialSettingType;
+    }
+
+    public void setSocialSettingType(String socialSettingType) {
+        this.socialSettingType = socialSettingType;
+    }
+
+    public boolean isFundEnable() {
+        return fundEnable;
+    }
+
+    public void setFundEnable(boolean fundEnable) {
+        this.fundEnable = fundEnable;
+    }
+
+    public String getFundSettingType() {
+        return fundSettingType;
+    }
+
+    public void setFundSettingType(String fundSettingType) {
+        this.fundSettingType = fundSettingType;
     }
 }

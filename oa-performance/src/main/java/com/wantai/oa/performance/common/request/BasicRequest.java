@@ -6,6 +6,7 @@ package com.wantai.oa.performance.common.request;
 
 import com.wantai.oa.biz.shared.request.BaseRequest;
 import com.wantai.oa.biz.shared.vo.RevenueVO;
+import com.wantai.oa.common.lang.enums.CustomerTypeEnum;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Digits;
@@ -31,13 +32,13 @@ public class BasicRequest extends BaseRequest {
     @NotNull(message = "每月最大工龄工资不能为空")
     @NotEmpty(message = "每月最大工龄工资不能为空")
     @Digits(message = "每月最大工龄工资必须为数字", integer = 10, fraction = 2)
-    private String          maxSalaryPerMonth = "1000";
+    private String          maxSalaryPerMonth  = "1000";
 
     //~~~~~~~税率相关
     /** 个税起征点 */
     @NotNull(message = "起征点不能为空")
     @Min(value = 3500, message = "起征点必须大于${value}")
-    private Integer         start             = 3500;
+    private Integer         start              = 3500;
 
     /** 个税设置list*/
     private List<RevenueVO> revenueVOList;
@@ -65,6 +66,21 @@ public class BasicRequest extends BaseRequest {
     @NotEmpty(message = "公积金缴纳比例不能为空")
     @Digits(message = "公积金缴纳比例必须为数字", integer = 10, fraction = 2)
     private String          gjjPercent;
+
+    /** 个税是否启用*/
+    private boolean         revenueStartEnable = true;
+
+    /** 社保设置是否启用*/
+    private boolean         socialEnable       = true;
+
+    /** 社保设置方式*/
+    private String          socialSettingType  = CustomerTypeEnum.COMPANY.getCode();
+
+    /** 公积金设置是否启用*/
+    private boolean         fundEnable         = true;
+
+    /** 公积金设置方式*/
+    private String          fundSettingType    = CustomerTypeEnum.COMPANY.getCode();
 
     public String getMaxSalaryPerMonth() {
         return maxSalaryPerMonth;
@@ -128,5 +144,45 @@ public class BasicRequest extends BaseRequest {
 
     public void setGjjPercent(String gjjPercent) {
         this.gjjPercent = gjjPercent;
+    }
+
+    public boolean isRevenueStartEnable() {
+        return revenueStartEnable;
+    }
+
+    public void setRevenueStartEnable(boolean revenueStartEnable) {
+        this.revenueStartEnable = revenueStartEnable;
+    }
+
+    public boolean isSocialEnable() {
+        return socialEnable;
+    }
+
+    public void setSocialEnable(boolean socialEnable) {
+        this.socialEnable = socialEnable;
+    }
+
+    public String getSocialSettingType() {
+        return socialSettingType;
+    }
+
+    public void setSocialSettingType(String socialSettingType) {
+        this.socialSettingType = socialSettingType;
+    }
+
+    public boolean isFundEnable() {
+        return fundEnable;
+    }
+
+    public void setFundEnable(boolean fundEnable) {
+        this.fundEnable = fundEnable;
+    }
+
+    public String getFundSettingType() {
+        return fundSettingType;
+    }
+
+    public void setFundSettingType(String fundSettingType) {
+        this.fundSettingType = fundSettingType;
     }
 }

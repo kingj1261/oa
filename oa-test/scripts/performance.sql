@@ -236,34 +236,3 @@ CREATE TABLE OA_SALARY_DETAILS(
   operator                  VARCHAR(32)  NOT NULL COMMENT '操作员',
   last_modified_oeprator    VARCHAR(32)  NOT NULL COMMENT '最后一次修改日期'
 )COMMENT '实际工资发放流水';
-
-
--- 增量脚本
-alter table OA_BUSINESS_CONFIG add column context TEXT  COMMENT  '主配置表扩展字段';
-
--- 更新业务事项的web扩展css属性
-
-update OA_BUSINESS_CONFIG set context='{icon0:\'DataTextImg1\',icon1:\'DataTextImges1\'}'
-where company_code='99999999999' and company_id='1'
-      and config_type='GWXS' and biz_item='100000000000' and biz_event='10000001';
-
-
-update OA_BUSINESS_CONFIG set context='{icon0:\'DataTextImg2\',icon1:\'DataTextImges2\'}'
-where company_code='99999999999' and company_id='1'
-      and config_type='GWXS' and biz_item='200000000000';
-
-
-update OA_BUSINESS_CONFIG set context='{icon0:\'DataTextImg4\',icon1:\'DataTextImges4\'}'
-where company_code='99999999999' and company_id='1'
-      and config_type='GWXS' and biz_item='400000000000';
-
-
-update OA_BUSINESS_CONFIG set context='{icon0:\'DataTextImg6\',icon1:\'DataTextImges6\'}'
-where company_code='99999999999' and company_id='1'
-      and config_type='GWXS' and biz_item='700000000000';
-
-
-update OA_BUSINESS_CONFIG set context='{icon0:\'DataTextImg8\',icon1:\'DataTextImges8\'}'
-where company_code='99999999999' and company_id='1'
-      and config_type='GWXS' and biz_item='800000000000';
-
