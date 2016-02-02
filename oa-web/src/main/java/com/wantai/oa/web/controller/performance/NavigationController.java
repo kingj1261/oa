@@ -1,11 +1,15 @@
 package com.wantai.oa.web.controller.performance;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+
+import com.wantai.oa.auth.core.UserHolder;
+import com.wantai.oa.biz.shared.result.Status;
+import com.wantai.oa.biz.shared.vo.ConfigVO;
+import com.wantai.oa.performance.common.ConfigService;
 
 /**
  * Desc: 公共导航控制器
@@ -17,6 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class NavigationController {
 
+	@Autowired
+	private ConfigService configService;
     /**
      * 绩效管理--绩效基础设置
      */
@@ -39,6 +45,18 @@ public class NavigationController {
     @RequestMapping(value = "/performance/setbonus", method = RequestMethod.GET)
     public String setBonus() {
         return "info/info_setbonus";
+    }
+
+    @RequestMapping(value = "/performance/dataTable",method = RequestMethod.GET)
+    public String dataTable(Model model){
+    	Status status = new Status();
+    	String companyCode = UserHolder.getUser().getCompanyCode();
+        int companyId = UserHolder.getUser().getCompanyId();
+        ConfigVO configVO = configService.queryConfigs(companyCode, companyId, "GWJJ",
+            false, null);
+        status.setData(configVO);
+        model.addAttribute("gwjj",status);
+    	return "info/dataTable";
     }
 
     /**
@@ -85,11 +103,8 @@ public class NavigationController {
      * 绩效管理--岗位绩效设置
      */
     @RequestMapping(value = "/performance/seteffect", method = RequestMethod.GET)
-    public ModelAndView setEffect(@RequestParam("key") String key, Model model) {
-        ModelAndView mv = new ModelAndView("info/info_seteffect");
-        //搜索模块
-        mv.addObject(key);
-        return mv;
+    public String setEffect() {
+        return "/info/info_seteffect";
     }
 
     /**
@@ -122,7 +137,7 @@ public class NavigationController {
      */
     @RequestMapping(value = "/mine/setsalary", method = RequestMethod.GET)
     public String mineSetSalary() {
-        return "info/info_setsalary";
+        return "info/info_mineform";
     }
 
     /**
@@ -146,7 +161,7 @@ public class NavigationController {
      */
     @RequestMapping(value = "/mine/oversee", method = RequestMethod.GET)
     public String mineOversee() {
-        return "info/info_Oversee_standard";
+        return "info/info_oversee_standard";
     }
 
     /**
