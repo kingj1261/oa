@@ -8,6 +8,7 @@ import com.wantai.oa.test.BaseTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
 
@@ -16,14 +17,18 @@ import java.util.List;
  */
 public class RuleTest extends BaseTest {
     @Autowired
-    private RuleService ruleService;
+    private RuleService  ruleService;
 
     @Autowired
     @Qualifier("roleBasedFactLoader")
-    private FactLoader  ppjlFactLoader;
+    private FactLoader   ppjlFactLoader;
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Test
     public void testFireRules() {
+        jdbcTemplate.execute("delete from oa_performance_details");
         String companyCode = "99999999999";
         String companyId = "1";
         ruleService.fireAllRules(companyCode, companyId);

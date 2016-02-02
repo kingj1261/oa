@@ -55,6 +55,9 @@ public class SubConfigDo extends BaseDo {
      */
     String unit;
 
+    /** 是否启用*/
+    String enable;
+
     int    order;
 
     @Override
@@ -145,5 +148,13 @@ public class SubConfigDo extends BaseDo {
 
     public void setOrder(int order) {
         this.order = order;
+    }
+
+    public String getEnable() {
+        return enable;
+    }
+
+    public void setEnable(String enable) {
+        this.enable = enable;
     }
 }

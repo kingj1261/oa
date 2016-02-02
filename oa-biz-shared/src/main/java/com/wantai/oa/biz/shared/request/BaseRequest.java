@@ -15,34 +15,36 @@ import java.io.Serializable;
 public class BaseRequest implements Serializable {
 
     /** 业务配置id*/
-    Long   businessConfigId;
+    Long    businessConfigId;
 
     /** 业务配置id*/
-    String value;
+    String  value;
 
     /** 开始值*/
-    String fromValue;
+    String  fromValue;
 
     /** 结束值*/
-    String toValue;
+    String  toValue;
 
     /** 单位*/
-    String unit;
+    String  unit;
 
     /** 子事件编号*/
-    String subEventCode;
+    String  subEventCode;
 
     /** 子事件名称*/
-    String subEventCodeName;
+    String  subEventCodeName;
 
     /** 目标配置对象*/
-    String target;
+    String  target;
 
     /** 客户id*/
-    String customerId;
+    String  customerId;
 
     /** 操作员*/
-    String operator;
+    String  operator;
+
+    boolean enable = false;
 
     public String getTarget() {
         return target;
@@ -122,5 +124,13 @@ public class BaseRequest implements Serializable {
 
     public void setOperator(String operator) {
         this.operator = operator;
+    }
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
     }
 }

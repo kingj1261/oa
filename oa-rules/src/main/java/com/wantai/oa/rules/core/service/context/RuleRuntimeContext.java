@@ -5,8 +5,10 @@
 package com.wantai.oa.rules.core.service.context;
 
 import com.wantai.oa.common.dal.mappings.dos.rule.RuleDo;
+import com.wantai.oa.common.util.LoggerUtil;
 import com.wantai.oa.common.util.SpringContextHolder;
 import com.wantai.oa.performance.common.ConfigService;
+import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 
 import java.io.Serializable;
@@ -27,7 +29,10 @@ public class RuleRuntimeContext implements Serializable {
     private String       companyId;
 
     /** 当前公司下所有规则对象 */
-    private List<RuleDo> rules = new ArrayList<>();
+    private List<RuleDo> rules  = new ArrayList<>();
+
+    /** 日志*/
+    private Logger       logger = Logger.getLogger(RuleRuntimeContext.class);
 
     public void addRule(RuleDo context) {
         rules.add(context);
@@ -49,18 +54,23 @@ public class RuleRuntimeContext implements Serializable {
         this.companyId = companyId;
     }
 
-    public String getConfigValue(String bizItem, String bizEvent, String value) {
+    public String getConfigValue(String configType, String bizItem, String bizEvent, String value,
+                                 String customerId) {
         ApplicationContext context = SpringContextHolder.getContext();
         ConfigService configService = context.getBean(ConfigService.class);
-        return configService.getConfigValue(companyCode, companyId, bizItem, bizEvent, value);
+        return configService.getConfigValue(configType, companyCode, companyId, bizItem, bizEvent,
+            value, customerId);
     }
 
-    public void caclulateRatioDetail(String bizItem, String bizEvent, String value,
-                                     String customerId) {
+    public void caclulateRatioDetail(String configType, String bizItem, String bizEvent,
+                                     String value, String customerId) {
+
+        LoggerUtil.info(logger, "当前类型为[" + configType + "],bizItem=[" + bizItem + "],bizEvent=["
+                                + bizEvent + "],当前用户id[" + customerId + "],实际值为[" + value + "]");
         ConfigService configService = SpringContextHolder.getBean(ConfigService.class);
-        String realValue = getConfigValue(bizItem, bizEvent, value);
-        configService.addRatioDetail(companyCode, companyId, bizItem, bizEvent, realValue,
-            customerId);
+        String realValue = getConfigValue(configType, bizItem, bizEvent, value, customerId);
+        configService.addRatioDetail(configType, companyCode, companyId, bizItem, bizEvent,
+            realValue, customerId);
     }
 
     /**

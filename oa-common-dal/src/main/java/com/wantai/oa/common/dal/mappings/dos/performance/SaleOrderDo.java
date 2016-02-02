@@ -20,6 +20,8 @@ public class SaleOrderDo extends BaseDo {
 
     String  role;
 
+    String  configType;
+
     String  bizItem;
 
     String  bizEvent;
@@ -48,6 +50,14 @@ public class SaleOrderDo extends BaseDo {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getConfigType() {
+        return configType;
+    }
+
+    public void setConfigType(String configType) {
+        this.configType = configType;
     }
 
     public String getBizItem() {

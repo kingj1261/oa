@@ -1,3 +1,7 @@
+/**
+ * Wantai.com Inc.
+ * Copyright (c) 2004-2012 All Rights Reserved.
+ */
 package com.wantai.oa.rules.core.service.fact.loader;
 
 import com.wantai.oa.biz.shared.service.RoleService;
@@ -40,6 +44,7 @@ public class RoleBasedFactLoader implements FactLoader {
         Map<String, Object> parameter = new HashMap<>();
         parameter.put("companyCode", ruleDo.getCompanyCode());
         parameter.put("companyId", ruleDo.getCompanyId());
+        parameter.put("configType", ruleDo.getConfigType());
         parameter.put("bizItem", ruleDo.getBizItem());
         parameter.put("bizEvent", ruleDo.getBizEvent());
         parameter.put("role", currentRole);
@@ -49,7 +54,10 @@ public class RoleBasedFactLoader implements FactLoader {
         if (CollectionUtils.isNotEmpty(orders)) {
 
             //设置订单对应用户角色
-            orders.forEach(order -> order.setRole(getRole(ruleDo, order.getCustomerId())));
+            orders.forEach(order -> {
+                order.setConfigType(ruleDo.getConfigType());
+                order.setRole(getRole(ruleDo, order.getCustomerId()));
+            });
 
             //获取订单列表
             List<SaleOrderDo> leaderList = orders

@@ -14,6 +14,7 @@
         <result property="bizEventName" column="biz_event_name" javaType="string" jdbcType="VARCHAR"/>
         <result property="bizItemOrder" column="biz_item_order" javaType="int" jdbcType="INTEGER"/>
         <result property="bizEventOrder" column="biz_event_order" javaType="int" jdbcType="INTEGER"/>
+        <result property="context" column="context" javaType="string" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!-- 查询事项事件配置 -->
@@ -23,7 +24,8 @@
                biz_event_name,biz_item_name,
                biz_item_order,biz_event_order,
                memo,gmt_create,gmt_modified,
-               operator,last_modified_oeprator
+               operator,last_modified_oeprator,
+               context
         from   OA_BUSINESS_CONFIG
         where company_code=#{companyCode}
         and   company_id=#{companyId}
@@ -38,9 +40,10 @@
         biz_event_name,biz_item_name,
         biz_item_order,biz_event_order,
         memo,gmt_create,gmt_modified,
-        operator,last_modified_oeprator
+        operator,last_modified_oeprator,
+        context
         from   OA_BUSINESS_CONFIG
-        where id=#{businessConfigId}
+        where id=#{configId}
     </select>
 
 
@@ -51,11 +54,13 @@
         biz_event_name,biz_item_name,
         biz_item_order,biz_event_order,
         memo,gmt_create,gmt_modified,
-        operator,last_modified_oeprator
+        operator,last_modified_oeprator,
+        context
         from   OA_BUSINESS_CONFIG
         where company_code=#{companyCode}
         and   company_id=#{companyId}
         and   biz_item=#{bizItem}
         and   biz_event=#{bizEvent}
+        and   config_type=#{configType}
     </select>
 </mapper>

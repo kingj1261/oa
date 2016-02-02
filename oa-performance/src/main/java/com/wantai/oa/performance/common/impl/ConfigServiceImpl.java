@@ -4,7 +4,8 @@
  */
 package com.wantai.oa.performance.common.impl;
 
-import com.wantai.oa.auth.core.UserHolder;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.wantai.oa.biz.shared.request.BaseRequest;
 import com.wantai.oa.biz.shared.service.BaseService;
 import com.wantai.oa.biz.shared.vo.BizEventVO;
@@ -15,10 +16,15 @@ import com.wantai.oa.common.dal.mappings.dos.performance.ConfigDo;
 import com.wantai.oa.common.dal.mappings.dos.performance.RatioDetailDo;
 import com.wantai.oa.common.dal.mappings.dos.performance.SubConfigDo;
 import com.wantai.oa.common.lang.constants.Constants;
+import com.wantai.oa.common.lang.enums.ConfigTypeEnum;
 import com.wantai.oa.common.lang.enums.CustomerTypeEnum;
+import com.wantai.oa.common.lang.enums.ErrorCodeEnum;
 import com.wantai.oa.common.lang.enums.UnitEnum;
+import com.wantai.oa.common.lang.exception.CommonException;
+import com.wantai.oa.common.util.LoggerUtil;
 import com.wantai.oa.performance.common.ConfigService;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
@@ -28,6 +34,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -41,44 +48,18 @@ import java.util.stream.Collectors;
 @Service
 public class ConfigServiceImpl extends BaseService implements ConfigService {
 
+    @Autowired
+    private BizConvertor bizConvertor;
+
     @Override
     public void addConfig(Long busConfigId, List<? extends BaseRequest> requests) {
         execute(() -> {
             commonDAO.delete("SubConfig.deleteSubConfig", busConfigId);
             requests.forEach(request -> {
-                commonDAO.insert("SubConfig.addSubConfig", convert(request, new SubConfigDo()));
+                commonDAO.insert("SubConfig.addSubConfig",
+                    bizConvertor.convertRequest2SubConfig(request));
             });
         });
-    }
-
-    private Object convert(BaseRequest request, SubConfigDo subConfigDo) {
-        subConfigDo.setBusinessConfigId(request.getBusinessConfigId());
-        ConfigDo configDo = (ConfigDo) commonDAO.selectOne("Config.queryById", request);
-        if (StringUtils.isBlank(request.getSubEventCode())) {
-            subConfigDo.setSubEventCode(configDo.getBizEvent());
-        } else {
-            subConfigDo.setSubEventCode(request.getSubEventCode());
-        }
-
-        if (StringUtils.isBlank(request.getSubEventCodeName())) {
-            subConfigDo.setSubEventCodeName(configDo.getBizEventName());
-        } else {
-            subConfigDo.setSubEventCodeName(request.getSubEventCodeName());
-
-        }
-
-        //如果客户类型为空,则默认为公司
-        subConfigDo.setTarget(StringUtils.isBlank(request.getTarget()) ? CustomerTypeEnum.COMPANY
-            .getCode() : request.getTarget());
-
-        subConfigDo.setCustomerId(request.getCustomerId());
-        subConfigDo.setValue(request.getValue());
-        subConfigDo.setFromValue(request.getFromValue());
-        subConfigDo.setToValue(request.getToValue());
-        subConfigDo.setUnit(request.getUnit());
-        subConfigDo.setOperator(UserHolder.getUser().getLoginName());
-        subConfigDo.setLastModifiedOperator(UserHolder.getUser().getLoginName());
-        return subConfigDo;
     }
 
     @Override
@@ -107,6 +88,12 @@ public class ConfigServiceImpl extends BaseService implements ConfigService {
             configVO.setConfigType(configDo.getConfigType());
             BizItemVO itemVO = new BizItemVO();
 
+            //设置扩展字段
+            setBizItemContext(itemVO, configDo);
+
+            //备注
+            itemVO.setMemo(configDo.getMemo());
+
             //如果指定了具体的业务事项事件
             if (StringUtils.isNotBlank(bizItem)) {
 
@@ -130,28 +117,48 @@ public class ConfigServiceImpl extends BaseService implements ConfigService {
         // 是否加载子事件
         if (loadAllEvent) {
             items.forEach(item -> {
-                List<ConfigDo> events = configDoList.stream()
+                List<ConfigDo> configList = configDoList.stream()
                     .filter(config -> StringUtils.equals(item.getBizItem(), config.getBizItem()))
                     .collect(Collectors.toList());
-                List<BizEventVO> eventVOs = new ArrayList<>(events.size());
-                events.forEach(event -> {
+                List<BizEventVO> eventVOs = new ArrayList<>(configList.size());
+                configList.forEach(config -> {
                     BizEventVO eventVO = new BizEventVO();
-                    eventVO.setConfigId(event.getId());
-                    eventVO.setBizItem(event.getBizItem());
-                    eventVO.setBizEvent(event.getBizEvent());
-                    eventVO.setBizEventName(event.getBizEventName());
-                    eventVO.setOrder(event.getBizEventOrder());
-                    eventVO.setEnable(Boolean.parseBoolean(event.getEnable()));
-                    eventVO.setUnit(event.getUnit());
-                    eventVO.setSubEventList(querySubEventsVo(event.getId()));
+
+                    eventVO.setConfigId(config.getId());
+                    eventVO.setBizItem(config.getBizItem());
+                    eventVO.setBizEvent(config.getBizEvent());
+                    eventVO.setBizEventName(config.getBizEventName());
+                    eventVO.setOrder(config.getBizEventOrder());
+                    eventVO.setSubEventList(querySubEventsVo(config.getId()));
+                    eventVO.setMemo(config.getMemo());
+
                     eventVOs.add(eventVO);
                 });
+
                 eventVOs.sort(Comparator.comparing(BizEventVO::getOrder));
                 item.setBizEvents(eventVOs);
             });
         }
         configVO.setBizItems(items);
         return configVO;
+    }
+
+    /**
+     * 设置扩展字段
+     * @param itemVO            业务对象
+     * @param configDo          do
+     */
+    private void setBizItemContext(BizItemVO itemVO, ConfigDo configDo) {
+        if (StringUtils.isNotBlank(configDo.getContext())) {
+            try {
+                JSONObject context = JSON.parseObject(configDo.getContext());
+                for (String key : context.keySet()) {
+                    itemVO.getContext().put(key, context.get(key));
+                }
+            } catch (Exception e) {
+                LoggerUtil.caughtException(logger, e);
+            }
+        }
     }
 
     /**
@@ -177,6 +184,7 @@ public class ConfigServiceImpl extends BaseService implements ConfigService {
                 event.setUnit(config.getUnit());
                 event.setTarget(config.getTarget());
                 event.setCustomerId(config.getCustomerId());
+                event.setEnable(config.getEnable());
                 eventList.add(event);
             });
         }
@@ -214,11 +222,24 @@ public class ConfigServiceImpl extends BaseService implements ConfigService {
     }
 
     @Override
-    public String getConfigValue(String companyCode, String companyId, String bizItem,
-                                 String bizEvent, String data) {
+    public ConfigDo queryConfig(String companyCode, String companyId, String configType,
+                                String bizItem, String bizEvent) {
         Map<String, Object> parameter = new HashMap();
         parameter.put("companyCode", companyCode);
         parameter.put("companyId", companyId);
+        parameter.put("configType", configType);
+        parameter.put("bizItem", bizItem);
+        parameter.put("bizEvent", bizEvent);
+        return (ConfigDo) commonDAO.selectOne("Config.querySingleConfig", parameter);
+    }
+
+    @Override
+    public String getConfigValue(String configType, String companyCode, String companyId,
+                                 String bizItem, String bizEvent, String data, String userId) {
+        Map<String, Object> parameter = new HashMap();
+        parameter.put("companyCode", companyCode);
+        parameter.put("companyId", companyId);
+        parameter.put("configType", configType);
         parameter.put("bizItem", bizItem);
         parameter.put("bizEvent", bizEvent);
 
@@ -226,6 +247,70 @@ public class ConfigServiceImpl extends BaseService implements ConfigService {
             "SubConfig.findAllSubConfig", parameter);
         Assert.notEmpty(subConfigs, "业务事项(" + bizItem + "," + bizEvent + ")子项配置为空!");
 
+        ConfigTypeEnum type = ConfigTypeEnum.getByCode(configType.toUpperCase());
+        if (type == null) {
+            throw new CommonException(ErrorCodeEnum.RULE_ERROR_NOT_SUPPORT_CONFIG_TYPE);
+        }
+
+        StringBuilder value = new StringBuilder();
+
+        // 岗位系数计算公式为当前用户完成指标情况获取已配置好的区间系数值
+        if (type == ConfigTypeEnum.GWXS) {
+            value.append(getGwxs(data, subConfigs));
+        }
+
+        // 岗位奖金和岗位提成,计算公式为当前用户完成指标数*单价
+        if (type == ConfigTypeEnum.GWJJ || type == ConfigTypeEnum.GWTC) {
+            value.append(getGwjjOrGwtc(userId, data, subConfigs));
+        }
+
+        return value.length() == 0 ? "0" : value.toString();
+    }
+
+    /**
+     * 计算岗位奖金或者岗位提成
+     *
+     * @param userId            用户id
+     * @param data              当前用户指标完成情况
+     * @param subConfigs        当前业务配置的系数区间值列表
+     * @return                  根据公式计算得出
+     */
+    private String getGwjjOrGwtc(String userId, String data, List<SubConfigDo> subConfigs) {
+        double price = getCustomConfigValue(userId, subConfigs);
+        double counts = Double.parseDouble(data);
+        return price * counts + "";
+    }
+
+    private double getCustomConfigValue(String userId, List<SubConfigDo> subConfigs) {
+        double result = 0d;
+        Optional<SubConfigDo> customerValue = subConfigs
+            .stream()
+            .filter(
+                config -> StringUtils.equals(config.getTarget(),
+                    CustomerTypeEnum.CUSTOMER.getCode())
+                          && StringUtils.equals(userId, config.getCustomerId())).findFirst();
+
+        Optional<SubConfigDo> companyValue = subConfigs
+            .stream()
+            .filter(
+                config -> StringUtils.equals(config.getTarget(), CustomerTypeEnum.COMPANY.getCode()))
+            .findAny();
+
+        if (customerValue.isPresent()) {
+            result = Double.parseDouble(customerValue.get().getValue());
+        } else {
+            result = Double.parseDouble(companyValue.get().getValue());
+        }
+        return result;
+    }
+
+    /**
+     * 计算岗位系数值
+     * @param data              当前用户指标完成情况
+     * @param subConfigs        当前业务配置的系数区间值列表
+     * @return                  完成指标匹配区间对应的系数值
+     */
+    private String getGwxs(String data, List<SubConfigDo> subConfigs) {
         String result = data;
         double value = Double.parseDouble(data);
         for (int i = 0; i < subConfigs.size(); i++) {
@@ -240,20 +325,18 @@ public class ConfigServiceImpl extends BaseService implements ConfigService {
         }
 
         //如果超出最大区间值,则取最大值
-
         double maxValue = subConfigs.stream()
             .mapToDouble(config -> Double.parseDouble(config.getToValue())).max().getAsDouble();
 
         if (value >= maxValue) {
             result = maxValue + "";
         }
-
         return result;
     }
 
     @Override
-    public void addRatioDetail(String companyCode, String companyId, String bizItem,
-                               String bizEvent, String data, String customerId) {
+    public void addRatioDetail(String configType, String companyCode, String companyId,
+                               String bizItem, String bizEvent, String data, String customerId) {
         execute(() -> {
             ConfigDo config = queryConfig(companyCode, companyId, bizItem, bizEvent);
             Assert.notNull(config,
@@ -269,7 +352,7 @@ public class ConfigServiceImpl extends BaseService implements ConfigService {
             detailDo.setValue(data);
             detailDo.setTotal(detailDo.getCount() * Double.parseDouble(data));
             detailDo.setCustomerId(customerId);
-            detailDo.setConfigType(config.getConfigType());
+            detailDo.setConfigType(configType);
             detailDo.setUnit(UnitEnum.FEN.getMessage());
             commonDAO.insert("RatioDetail.addRatioDetail", detailDo);
         });

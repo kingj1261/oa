@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+  
+<mapper namespace="UserBizEvent">
+
+    <resultMap id="userBizEventResultMap" type="com.wantai.oa.common.dal.mappings.dos.performance.UserBizEvent" extends="Common.commonResultMap">
+        <result property="customerId" column="customer_id" javaType="string" jdbcType="VARCHAR"/>
+        <result property="bizItem" column="biz_item" javaType="string" jdbcType="VARCHAR"/>
+        <result property="bizEvent" column="biz_event" javaType="string" jdbcType="VARCHAR"/>
+        <result property="startTime"   column="start_time" javaType="date" jdbcType="DATE"/>
+        <result property="endTime" column="end_time" javaType="date" jdbcType="DATE"/>
+        <result property="enable" column="enable" javaType="string" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- 查询当前用户的事项事件设置 -->
+    <select id="queryUserBizEvent" resultMap="userBizEventResultMap">
+         select
+            id            ,
+            company_code  ,
+            company_id    ,
+            customer_id   ,
+            biz_item      ,
+            biz_event     ,
+            enable        ,
+            start_time    ,
+            end_time      ,
+            memo          ,
+            gmt_create    ,
+            gmt_modified  ,
+            operator      ,
+            last_modified_oeprator
+         from OA_CUSTOM_PERFORMANCE_BIZ_CONFIG
+         where  customer_id=#{customerId}
+         and    company_code=#{companyCode}
+         and    company_id=#{companyId}
+    </select>
+
+    <!-- 根据用户id删除事项事件设置 -->
+    <delete id="deleteUserBizEvent">
+        delete from OA_CUSTOM_PERFORMANCE_BIZ_CONFIG where company_code=#{companyCode}
+        and company_id=#{companyId}
+        and customer_id=#{customerId}
+    </delete>
+
+    <!-- 新增配置 -->
+    <insert id="addUserBizEvent" parameterType="com.wantai.oa.common.dal.mappings.dos.performance.UserBizEvent">
+         insert into  OA_CUSTOM_PERFORMANCE_BIZ_CONFIG
+         (
+            company_code  ,
+            company_id    ,
+            customer_id   ,
+            biz_item      ,
+            biz_event     ,
+            enable        ,
+            start_time    ,
+            end_time      ,
+            memo          ,
+            gmt_create    ,
+            gmt_modified  ,
+            operator      ,
+            last_modified_oeprator
+         )
+         VALUES
+         (
+            #{companyCode},
+            #{companyId},
+            #{customerId},
+            #{bizItem},
+            #{bizEvent},
+            #{enable},
+            now(),
+            now(),
+            '',
+            now(),
+            now(),
+            #{operator},
+            #{lastModifiedOperator}
+         )
+    </insert>
+
+</mapper>

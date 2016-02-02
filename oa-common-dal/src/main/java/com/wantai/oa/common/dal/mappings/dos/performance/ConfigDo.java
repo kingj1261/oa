@@ -44,12 +44,12 @@ public class ConfigDo extends BaseDo {
     /**
      * 业务事项顺序
      */
-    int bizItemOrder;
+    int    bizItemOrder;
 
     /**
      * 业务事件顺序
      */
-    int bizEventOrder;
+    int    bizEventOrder;
 
     /**
      * 值
@@ -74,12 +74,18 @@ public class ConfigDo extends BaseDo {
     /**
      * 开始日期
      */
-    Date startTime = new Date();
+    Date   startTime = new Date();
 
     /**
      * 结束日期
      */
-    Date endTime = new Date();
+    Date   endTime   = new Date();
+
+    /**
+     * 扩展字段
+     * @return
+     */
+    String context   = "{}";
 
     public String getConfigType() {
         return configType;
@@ -183,5 +189,13 @@ public class ConfigDo extends BaseDo {
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
+    }
+
+    public String getContext() {
+        return context;
+    }
+
+    public void setContext(String context) {
+        this.context = context;
     }
 }

@@ -4,6 +4,8 @@
  */
 package com.wantai.oa.common.dal.mappings.dos;
 
+import com.wantai.oa.common.lang.constants.Constants;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -26,10 +28,10 @@ public class BaseDo implements Serializable {
     String memo;
 
     /** 操作员 */
-    String operator;
+    String operator             = Constants.SYSTEM;
 
     /** 最后一次修改操作员 */
-    String lastModifiedOperator;
+    String lastModifiedOperator = Constants.SYSTEM;
 
     /** 创建日期 */
     Date   gmtCreate;

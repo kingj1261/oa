@@ -1,3 +1,240 @@
+﻿/*---------------------OA部分--------------------------------*/
+.perTitle{
+    background-color: #FFFDF9;
+    border:1px solid #F3F3F3;
+    border-image: none;
+    height:65px;
+    margin:20px 15px 0 0;
+}
+.perTitle .titleImg1 {
+    background: url("../images/oa5.png") no-repeat;
+    height:50px;
+    width:50px;
+    background-size: 100%;
+}
+.perTitle .titleImg2 {
+    background: url("../images/oa6.png") no-repeat;
+    height:50px;
+    width:50px;
+    background-size: 100%;
+}
+.perTitle .titleImg3 {
+    background: url("../images/oa7.png") no-repeat;
+    height:50px;
+    width:50px;
+    background-size: 100%;
+}
+.perTitle .titleImg4 {
+    background: url("../images/oa1.png") no-repeat;
+    height:50px;
+    width:50px;
+    background-size: 100%;
+}
+.perTitle .titleImg5 {
+    background: url("../images/oa2.png") no-repeat;
+    height:50px;
+    width:50px;
+    background-size: 100%;
+}
+.perTitle .titleImg6 {
+    background: url("../images/oa3.png") no-repeat;
+    height:50px;
+    width:50px;
+    background-size: 100%;
+}
+.perTitle .titleImg7 {
+    background: url("../images/oa4.png") no-repeat;
+    height:50px;
+    width:50px;
+    background-size: 100%;
+}
+.perTitle .titleImg8 {
+    background: url("../images/oa1.png") no-repeat;
+    height:50px;
+    width:50px;
+    background-size: 100%;
+}
+.perTitle .textPos {
+    line-height:30px;
+    color: #707070;
+    font-size: 16px;
+    font-family: "微软雅黑";
+    width:auto;
+    text-align: center;
+    height: 30px;
+    font-weight: bold;
+}
+.perTitle-after{
+    border:1px solid;
+    border-color:transparent  #F3F3F3  #F3F3F3  #F3F3F3 ;
+    border-image: none;
+    height:65px;
+    margin:0 15px 20px 0;
+}
+
+.DataTextImg {
+    background-color: transparent;
+    background-image: url("../images/tabImg.png");
+    background-repeat: no-repeat;
+    background-position: left top;
+    -webkit-background-size: none;
+    -o-background-size: none;
+    -webkit-background-clip: border-box;
+    -moz-background-clip: border-box;
+    -o-background-clip: border-box;
+    -ms-background-clip: border-box;
+    background-clip: border-box;
+    display: block;
+    height: 22px;
+    width: 22px; }
+.DataTextImgBox {
+    height: 22px;
+    width: 22px;
+    margin: auto;
+    display: block;
+    margin-top: 15px;
+    position: relative;
+    overflow: hidden; }
+
+.DataTextBox {
+    position: absolute; }
+
+.DataTextImg1 {
+    background-position: 0 1px; }
+
+.DataTextImg2 {
+    background-position: 0 -22px; }
+
+.DataTextImg3 {
+    background-position: 0 -45px; }
+
+.DataTextImg4 {
+    background-position: 0 -67px; }
+
+.DataTextImg5 {
+    background-position: 0 -90px; }
+
+.DataTextImg6 {
+    background-position: 0 -113px; }
+
+.DataTextImg7 {
+    background-position: 0 -136px; }
+
+.DataTextImg8 {
+    background-position: 0 -159px; }
+
+.DataTextImges1 {
+    background-position: -23px 1px; }
+
+.DataTextImges2 {
+    background-position: -23px -22px; }
+
+.DataTextImges3 {
+    background-position: -23px -45px; }
+
+.DataTextImges4 {
+    background-position: -23px -67px; }
+
+.DataTextImges5 {
+    background-position: -23px -90px; }
+
+.DataTextImges6 {
+    background-position: -23px -113px; }
+
+.DataTextImges7 {
+    background-position: -23px -136px; }
+
+.DataTextImges8 {
+    background-position: -23px -159px; }
+
+.bounsHref {
+    width: 137px;
+    text-align: center;
+    height: 33px;
+    line-height: 33px;
+    background-color: #F1773C;
+    border-radius: 3px;
+    float: right;
+    margin-top: -5px;
+    color: #ffffff;
+    font-size: 14px;
+}
+.tabCheckUl li {
+    width: 250px;
+    float: left;
+}
+.tabCheckUl li input{
+    margin-top: 10px;
+    float: left;
+    width: 30px;
+}
+.tabCheckUl li label{
+    line-height: 30px;
+    height: 30px;
+    text-align: left;
+    float: left;
+    display: block;
+    font-size: 14px;
+    width: 200px;
+}
+
+/*树状图*/
+.selectBoxes {
+    /*margin-bottom: 20px;*/
+    width: auto;
+    height: auto;
+    position: relative;
+}
+.menuBox {
+    display: none;
+    position: absolute;
+    z-index: 2;
+    background-color: #FFF;
+    width:230px;
+    border: 1px solid #f3f3f3;
+    line-height: 24px; }
+.menuBox span {
+    font-size: 13px;
+    display: block; }
+.menuBox .unitActive, .menuBox .menuText .menuc:hover, .menuText .menuBox .menuc:hover {
+    position: relative;
+    background-color: transparent;
+    color: #0f9ee3; }
+.menuBox .unitActive:before, .menuBox .menuText .menuc:hover:before, .menuText .menuBox .menuc:hover:before {
+    content: '';
+    display: block;
+    border: 7px solid #0f9ee3;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+    position: absolute;
+    left: 0%;
+    top: 5px; }
+
+.menuTitle {
+    font-size: 14px;
+    font-weight: bold; }
+
+.menuText {
+    padding: 5px 20px;
+    display: none; }
+.menuText .menuc {
+    padding-left: 15px; }
+
+.menuChi {
+    padding-left: 15px; }
+
+.menuChir:before {
+    content: url("../images/jia.png");
+    padding-right: 5px; }
+
+.menuChin:before {
+    content: url("../images/jian.png");
+    padding-right: 5px; }
+
+
+/*----------------------------------------------------------------*/
+
 /*手机验证码*/
 .phoneYan{
     border: 1px solid transparent;
@@ -98,15 +335,15 @@
     font-size: 14px;
 
 }
-/*.T-DivJJ {*/
-    /*overflow: hidden;*/
-    /*width: 190px;*/
-    /*height: 230px;*/
-    /*margin: 20px 0  0 80px;*/
-    /*text-align: center; }*/
-/*.T-DivJJ p {*/
-    /*font-size: 16px;*/
-    /*margin: 5px 0 0 0; }*/
+.T-DivJJ {
+    overflow: hidden;
+    width: 190px;
+    height: 230px;
+    margin: 20px 0  0 80px;
+    text-align: center; }
+.T-DivJJ p {
+    font-size: 16px;
+    margin: 5px 0 0 0; }
 .uploadInp {
     display: block;
     width: 100%;
@@ -176,7 +413,7 @@
 }
 .radioBox input{
     vertical-align: middle;
-    /*margin-right: 5px;*/
+    margin-right: 5px;
 }
 .radioBox em{
     vertical-align: middle;
@@ -290,12 +527,12 @@
     color: #7b7b7b;
     font-size: 12px;
     display: block;
-    /*width:auto;*/
+    width:auto;
     height: 30px;
     line-height: 30px;
 }
 .S-search input[type=text]{
-    /*float: left;*/
+    float: left;
     width: 128px;
     height:28px;
     border: 1px solid #c2c2c2;
@@ -335,7 +572,7 @@
     -ms-background-size: 20px 20px;
     background-size: 20px 20px;
     -webkit-background-clip: border-box;
-    /* -moz-background-clip: border-box; */
+     -moz-background-clip: border-box;
     -o-background-clip: border-box;
     -ms-background-clip: border-box;
     background-clip: border-box;
@@ -383,6 +620,13 @@
     overflow: hidden;
     line-height: 45px;
 }
+.graone{
+    background: #fff;
+}
+.gratwo{
+    background: #f8f8f8;
+}
+
 
 .S-main-table {
     min-width: 460px;
@@ -470,7 +714,6 @@
 }
 /*。。。。。。。。。。。弹窗。。。。。。。。。。。。。。。*/
 .S-popWindow{
-    /*border: 1px solid transparent;*/
     overflow: hidden;
     position: relative;
 }
@@ -478,7 +721,7 @@
 .S-popWindow .popWTop{
     border-top-right-radius:3px;
     border-top-left-radius:3px;
-    /*position: relative;*/
+    position: relative;
     overflow: hidden;
     height:50px;
     background-color: #0d92d0;
@@ -588,9 +831,9 @@
     margin: 5px 5px
 }
 .S-formPop label{
-    /*display: block;*/
-    /*width:80px;*/
-    /*height: 30px;*/
+    display: block;
+    width:80px;
+    height: 30px;
     line-height: 30px;
     text-align: right;
     font-weight:normal;
@@ -644,7 +887,7 @@
     line-height:35px
 }
 .smallUl li select{
-    /*height: 28px;*/
+    height: 28px;
     width: 130px;
     border:1px solid #c2c2c2;
 }
@@ -694,7 +937,7 @@
 .checkBtn,.editBtn,.carryBtn,.cancelBtn,.warnBtn,.rejectBtn,.bigGreen,.bigBlue,.printBtn,.allotBtn{
     margin-top: 10px;
     display: block;
-    /*margin-left: auto;*/
+    margin-left: auto;
     color: #fff;
     text-align: center;
     width: 62px;
@@ -707,7 +950,7 @@
 /*调拨*/
 .allotBtn{background: #ff9800}
 /*打印 处理*/
-.printBtn{background:#f74e28}
+.printBtn{background:#a6a6a6}
 /*查看*/
 .checkBtn{
     background-color: #2998cb;
@@ -860,21 +1103,6 @@
     color: #F7F7F7;
     font-family: '宋体'; }
 /*。。。。。。。。。。。。。。。。。。查看大图轮播框。。。。。。。。。。。。。。。。。。。。。。。。。。*/
-:root {
-    background-color: transparent;
-    overflow-x: auto;
-    font-size: 12px;
-    line-height: 2;
-    font-size: 12px;
-}
-
-:root {
-    min-width: 1000px;
-    max-width: auto;
-    height: 100%;
-    min-height: 100%;
-}
-
 
 .popupBtn .undo,.borderBlod{border-color:  #dadde5;}
 .popupContBox .selectBoxes{min-width: 130px;}
@@ -1061,8 +1289,6 @@ table.dataToBox textarea {width: 85%;}
 .outworkerCentre-home{
     width: 100%;
     height: auto;
-    padding: 15px 10px;
-    background: #f9f9f9;
 }
 .outworkerCentre-home .out-header{
     color: #7e7e7e;

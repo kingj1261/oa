@@ -6,7 +6,8 @@
 
     <!-- 查询当前部门下所有车辆销售记录 -->
     <select id="findAllSaleOrders" resultType="com.wantai.oa.common.dal.mappings.dos.performance.SaleOrderDo">
-           select
+        <![CDATA[
+            select
                   orders.customer_id customerId,
                   users.depart_id departId,
                   '${bizItem}' bizItem,
@@ -32,6 +33,117 @@
                  and orders.company_id=#{companyId}
                  and orders.customer_id=users.id
                  and orders.operate_person_1=users.id
+                 AND FROM_UNIXTIME(orders.create_time)>=DATE_SUB(CURRENT_DATE, INTERVAL DAYOFMONTH(CURRENT_DATE)-1 DAY)
+                 AND FROM_UNIXTIME(orders.create_time)<=LAST_DAY(CURRENT_DATE)
                  group by orders.customer_id
+        ]]>
     </select>
+
+    
+    <resultMap id="performanceConfig" type="com.wantai.oa.common.dal.mappings.dos.performance.PerformanceDo" extends="Common.commonResultMap">
+        <result property="customerId"   column="customer_id" javaType="string" jdbcType="VARCHAR"/>
+        <result property="startTime"   column="start_time" javaType="date" jdbcType="DATE"/>
+        <result property="endTime" column="end_time" javaType="date" jdbcType="DATE"/>
+        <result property="basicSalary" column="basic_salary" javaType="double" jdbcType="DECIMAL"/>
+        <result property="starSalary" column="start_salary" javaType="double" jdbcType="DECIMAL"/>
+        <result property="lowestSalary" column="lowest_salary" javaType="double" jdbcType="DECIMAL"/>
+        <result property="workYearsSalary" column="work_years_salary" javaType="double" jdbcType="DECIMAL"/>
+        <result property="maxWorkYearsSalary" column="max_work_years_salary" javaType="double" jdbcType="DECIMAL"/>
+        <result property="betAmount" column="bet_amount" javaType="double" jdbcType="DECIMAL"/>
+        <result property="currency" column="currency" javaType="string" jdbcType="VARCHAR"/>
+        <result property="socialBasicAmount" column="social_basic_amount" javaType="double" jdbcType="DECIMAL"/>
+        <result property="socialPercent" column="social_percent" javaType="double" jdbcType="DECIMAL"/>
+        <result property="fundBasicAmount" column="fund_basic_amount" javaType="double" jdbcType="DECIMAL"/>
+        <result property="fundPercent" column="fund_percent" javaType="double" jdbcType="DECIMAL"/>
+    </resultMap>
+
+    <!-- 查询绩效设置 -->
+    <select id="queryPerformanceConfig" resultMap="performanceConfig">
+         select
+            id                  ,
+            company_code        ,
+            company_id          ,
+            customer_id         ,
+            start_time          ,
+            end_time            ,
+            basic_salary        ,
+            start_salary        ,
+            lowest_salary       ,
+            work_years_salary   ,
+            max_work_years_salary,
+            bet_amount          ,
+            currency            ,
+            social_basic_amount ,
+            social_percent      ,
+            fund_basic_amount   ,
+            fund_percent        ,
+            memo                ,
+            gmt_create          ,
+            gmt_modified        ,
+            operator            ,
+            last_modified_oeprator
+         from OA_CUSTOM_PERFORMANCE_CONFIG
+         where  customer_id=#{customerId}
+         and    company_code=#{companyCode}
+         and    company_id=#{companyId}
+    </select>
+
+
+    <!-- 删除用户绩效配置 -->
+    <delete id="deleteUserPerformance">
+        delete from  OA_CUSTOM_PERFORMANCE_CONFIG where id=#{id}
+    </delete>
+
+    <!-- 新增用户绩效配置 -->
+    <insert id="addUserPerformance" parameterType="com.wantai.oa.common.dal.mappings.dos.performance.PerformanceDo">
+       insert into OA_CUSTOM_PERFORMANCE_CONFIG
+       (
+            company_code            ,
+            company_id              ,
+            customer_id             ,
+            start_time              ,
+            end_time                ,
+            basic_salary            ,
+            start_salary            ,
+            lowest_salary           ,
+            work_years_salary       ,
+            max_work_years_salary   ,
+            bet_amount              ,
+            currency                ,
+            social_basic_amount     ,
+            social_percent          ,
+            fund_basic_amount       ,
+            fund_percent            ,
+            memo                    ,
+            gmt_create              ,
+            gmt_modified            ,
+            operator                ,
+            last_modified_oeprator
+       )
+       VALUES
+       (
+            #{companyCode},
+            #{companyId},
+            #{customerId},
+            now(),
+            now(),
+            #{basicSalary},
+            #{starSalary},
+            #{lowestSalary},
+            #{workYearsSalary},
+            #{maxWorkYearsSalary},
+            #{betAmount},
+            #{currency},
+            #{socialBasicAmount},
+            #{socialPercent},
+            #{fundBasicAmount},
+            #{fundPercent},
+            '',
+            now(),
+            now(),
+            #{operator},
+            #{lastModifiedOperator}
+       )
+    </insert>
+
 </mapper>

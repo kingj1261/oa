@@ -21,11 +21,11 @@ CREATE TABLE OA_BUSINESS_CONFIG
   biz_item_order          INT DEFAULT 0 COMMENT '业务事项顺序',
   biz_event_order         INT DEFAULT 0 COMMENT '事件顺序',
   enable                  VARCHAR(8) NOT NULL COMMENT '是否启用 true-启用 false-不启用 默认启用',
-  start_time              DATETIME NOT NULL COMMENT '绩效指标设置开始时间',
-  end_time                DATETIME NOT NULL COMMENT '绩效指标设置结束时间',
+  start_time              DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '绩效指标设置开始时间',
+  end_time                DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '绩效指标设置结束时间',
   memo                    VARCHAR(256) COMMENT '备注',
-  gmt_create              DATETIME NOT NULL COMMENT '创建日期',
-  gmt_modified            DATETIME NOT NULL COMMENT '最后修改日期',
+  gmt_create              DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建日期',
+  gmt_modified            DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '最后修改日期',
   operator                VARCHAR(32) NOT NULL COMMENT '操作员',
   last_modified_oeprator  VARCHAR(32) NOT NULL COMMENT '最后一次修改日期'
 )COMMENT  '绩效配置主表';
@@ -43,10 +43,11 @@ CREATE TABLE OA_SUB_BUSINESS_CONFIG(
   from_value              VARCHAR(32) NOT NULL COMMENT '配置区间开始值',
   to_value                VARCHAR(32) NOT NULL COMMENT '配置区间结束值',
   unit                    VARCHAR(8) NOT NULL COMMENT '值单位 元-人民币（156） 百分比-%',
+  enable                  VARCHAR(8) NOT NULL DEFAULT 'true' COMMENT '是否启用 true-启用 false-不启用 默认启用',
   memo                    VARCHAR(256) COMMENT '备注',
   orders                  INT DEFAULT 0 COMMENT '排序',
-  gmt_create              DATETIME NOT NULL COMMENT '创建日期',
-  gmt_modified            DATETIME NOT NULL COMMENT '最后修改日期',
+  gmt_create              DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建日期',
+  gmt_modified            DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '最后修改日期',
   operator                VARCHAR(32) NOT NULL COMMENT '操作员',
   last_modified_oeprator  VARCHAR(32) NOT NULL COMMENT '最后一次修改日期'
 )COMMENT '绩效配置子表';
@@ -94,15 +95,13 @@ CREATE TABLE OA_CUSTOM_PERFORMANCE_CONFIG(
   company_code            VARCHAR(32) NOT NULL COMMENT '公司码',
   company_id              INT NOT NULL COMMENT '公司id',
   customer_id             VARCHAR(32) NOT NULL COMMENT '客户id',
-  config_type             VARCHAR(32) NOT NULL COMMENT '配置类型',
-  biz_item                VARCHAR(12) NOT NULL COMMENT '业务事项',
-  biz_event               VARCHAR(8) NOT NULL COMMENT '业务事件',
   start_time              DATETIME NOT NULL COMMENT '绩效指标设置开始时间',
   end_time                DATETIME NOT NULL COMMENT '绩效指标设置结束时间',
   basic_salary            DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '基本工资',
   start_salary            DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '星级工资',
   lowest_salary           DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '保底工资',
   work_years_salary       DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '工龄工资',
+  max_work_years_salary   DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '最大工龄工资',
   bet_amount              DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '对赌金额',
   currency                VARCHAR(12) NOT NULL COMMENT '单位：币种  元-人民币（156)',
   social_basic_amount     DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '社保基数，单位元，取unit（币种）字段',
@@ -115,6 +114,25 @@ CREATE TABLE OA_CUSTOM_PERFORMANCE_CONFIG(
   operator                VARCHAR(32) NOT NULL COMMENT '操作员',
   last_modified_oeprator  VARCHAR(32) NOT NULL COMMENT '最后一次修改日期'
 )COMMENT '个人绩效指标配置表';
+
+
+-- 个人绩效指标业务事项事件配置表
+CREATE TABLE OA_CUSTOM_PERFORMANCE_BIZ_CONFIG(
+  id                      INT PRIMARY KEY NOT NULL AUTO_INCREMENT COMMENT '逻辑主键',
+  company_code            VARCHAR(32) NOT NULL COMMENT '公司码',
+  company_id              INT NOT NULL COMMENT '公司id',
+  customer_id             VARCHAR(32) NOT NULL COMMENT '客户id',
+  biz_item                VARCHAR(12) NOT NULL COMMENT '业务事项',
+  biz_event               VARCHAR(8) NOT NULL COMMENT '业务事件',
+  enable                  VARCHAR(8) NOT NULL DEFAULT 'true' COMMENT '是否生效,默认生效',
+  start_time              DATETIME NOT NULL COMMENT '绩效指标设置开始时间',
+  end_time                DATETIME NOT NULL COMMENT '绩效指标设置结束时间',
+  memo                    VARCHAR(256) COMMENT '备注',
+  gmt_create              DATETIME NOT NULL COMMENT '创建日期',
+  gmt_modified            DATETIME NOT NULL COMMENT '最后修改日期',
+  operator                VARCHAR(32) NOT NULL COMMENT '操作员',
+  last_modified_oeprator  VARCHAR(32) NOT NULL COMMENT '最后一次修改日期'
+)COMMENT '个人绩效指标业务事项事件配置表';
 
 -- 工资计算公式
 CREATE TABLE OA_SALARY_CACULATE_FORMULA(
@@ -175,7 +193,7 @@ CREATE TABLE OA_PERFORMANCE_DETAILS(
   value                   VARCHAR(32) NOT NULL COMMENT '实际值',
   unit                    VARCHAR(12) NOT NULL COMMENT '值单位 元-人民币（156）',
   count                   INT NOT NULL COMMENT '次数 绩效系数计算时默认为1',
-  total                   DECIMAL NOT NULL COMMENT '总值',
+  total                   DECIMAL(12,2) NOT NULL COMMENT '总值',
   out_biz_date            DATETIME COMMENT '外部事件发生时间（奖金、补贴、扣款、其它代扣)',
   memo                    VARCHAR(256) COMMENT '备注',
   gmt_create              DATETIME NOT NULL COMMENT '创建日期',
@@ -186,32 +204,66 @@ CREATE TABLE OA_PERFORMANCE_DETAILS(
 
 -- 实际工资发放流水
 CREATE TABLE OA_SALARY_DETAILS(
-  id                      INT PRIMARY KEY NOT NULL AUTO_INCREMENT COMMENT '逻辑主键',
-  company_code            VARCHAR(32) NOT NULL COMMENT '公司码',
-  company_id              INT NOT NULL COMMENT '公司id',
-  customer_id             VARCHAR(32) NOT NULL COMMENT '客户id',
-  start_time              DATETIME NOT NULL COMMENT '绩效指标设置开始时间',
-  end_time                DATETIME NOT NULL COMMENT '绩效指标设置结束时间',
-  basic_salary            DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '基本工资',
-  start_salary            DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '星级工资',
-  lowest_salary           DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '保底工资',
-  work_years_salary       DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '工龄工资',
-  bet_amount              DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '对赌金额',
-  currency                VARCHAR(12) NOT NULL COMMENT '单位：币种  元-人民币（156)',
-  gwjj                    DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '岗位奖金',
-  gwtc                    DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '岗位提成',
-  ratio_amount            DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '岗位提成',
-  subsity_amount          DECIMAL(9,2) NOT NULL COMMENT '补贴金额',
-  bonus_amount            DECIMAL(9,2) NOT NULL COMMENT '奖金',
-  deduct_amount           DECIMAL(9,2) NOT NULL COMMENT '扣款金额',
-  withhold_amount         DECIMAL(9,2) NOT NULL COMMENT '代扣金额',
-  socail_amount           DECIMAL(9,2) NOT NULL COMMENT '社保缴存金额',
-  fund_amount             DECIMAL(9,2) NOT NULL COMMENT '公积金缴存金额',
-  revenue_amount          DECIMAL(9,2) NOT NULL COMMENT '缴存个税',
-  memo                    VARCHAR(256) COMMENT '备注',
-  gmt_create              DATETIME NOT NULL COMMENT '创建日期',
-  gmt_modified            DATETIME NOT NULL COMMENT '最后修改日期',
-  operator                VARCHAR(32) NOT NULL COMMENT '操作员',
-  last_modified_oeprator  VARCHAR(32) NOT NULL COMMENT '最后一次修改日期'
+  id                        INT PRIMARY KEY NOT NULL AUTO_INCREMENT COMMENT '逻辑主键',
+  company_code              VARCHAR(32) NOT NULL COMMENT '公司码',
+  company_id                INT NOT NULL COMMENT '公司id',
+  customer_id               VARCHAR(32) NOT NULL COMMENT '客户id',
+  start_time                DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '绩效指标设置开始时间',
+  end_time                  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '绩效指标设置结束时间',
+  basic_salary              DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '基本工资',
+  start_salary              DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '星级工资',
+  lowest_salary             DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '保底工资',
+  work_years_salary         DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '工龄工资',
+  bet_amount                DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '对赌金额',
+  currency                  VARCHAR(12)  NOT NULL DEFAULT '156' COMMENT '单位：币种  元-人民币（156)',
+  gwjj                      DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '岗位奖金',
+  gwtc                      DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '岗位提成',
+  ratio_amount              DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '考核绩效',
+  subsity_amount            DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '补贴金额',
+  bonus_amount              DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '奖金',
+  deduct_amount             DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '扣款金额',
+  withhold_amount           DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '代扣金额',
+  socail_amount             DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '社保缴存金额',
+  fund_amount               DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '公积金缴存金额',
+  revenue_amount            DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '缴存个税',
+  lowest_salary_difference  DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '保底工资差额',
+  gross_salary              DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '应发工资',
+  total_withholding_amount  DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '代扣款合计',
+  net_salary                DECIMAL(9,2) NOT NULL DEFAULT 0 COMMENT '实发工资',
+  memo                      VARCHAR(256) COMMENT '备注',
+  gmt_create                DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建日期',
+  gmt_modified              DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '最后修改日期',
+  operator                  VARCHAR(32)  NOT NULL COMMENT '操作员',
+  last_modified_oeprator    VARCHAR(32)  NOT NULL COMMENT '最后一次修改日期'
 )COMMENT '实际工资发放流水';
+
+
+-- 增量脚本
+alter table OA_BUSINESS_CONFIG add column context TEXT  COMMENT  '主配置表扩展字段';
+
+-- 更新业务事项的web扩展css属性
+
+update OA_BUSINESS_CONFIG set context='{icon0:\'DataTextImg1\',icon1:\'DataTextImges1\'}'
+where company_code='99999999999' and company_id='1'
+      and config_type='GWXS' and biz_item='100000000000' and biz_event='10000001';
+
+
+update OA_BUSINESS_CONFIG set context='{icon0:\'DataTextImg2\',icon1:\'DataTextImges2\'}'
+where company_code='99999999999' and company_id='1'
+      and config_type='GWXS' and biz_item='200000000000';
+
+
+update OA_BUSINESS_CONFIG set context='{icon0:\'DataTextImg4\',icon1:\'DataTextImges4\'}'
+where company_code='99999999999' and company_id='1'
+      and config_type='GWXS' and biz_item='400000000000';
+
+
+update OA_BUSINESS_CONFIG set context='{icon0:\'DataTextImg6\',icon1:\'DataTextImges6\'}'
+where company_code='99999999999' and company_id='1'
+      and config_type='GWXS' and biz_item='700000000000';
+
+
+update OA_BUSINESS_CONFIG set context='{icon0:\'DataTextImg8\',icon1:\'DataTextImges8\'}'
+where company_code='99999999999' and company_id='1'
+      and config_type='GWXS' and biz_item='800000000000';
 

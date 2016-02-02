@@ -203,10 +203,10 @@ var mvAry = [];
 mvAry[mvAry.length] = ' <div name="calendarForm" style="margin: 0px;">'; 
 mvAry[mvAry.length] = '    <table width="100%" border="0" cellpadding="0" cellspacing="1" style="font-size:12px;">'; 
 mvAry[mvAry.length] = '      <tr>'; 
-mvAry[mvAry.length] = '        <th align="left" width="1%"><input style="border: 1px solid ' + calendar.colors["input_border"] + ';background-color:' + calendar.colors["input_bg"] + ';width:16px;height:20px;'; 
+mvAry[mvAry.length] = '        <th align="left" width="1%"><input style="border: 1px solid ;' + calendar.colors["input_border"] + ';background-color:' + calendar.colors["input_bg"] + ';width:16px;height:20px;';
 if(calendar.DateMode > pickMode["month"]){mvAry[mvAry.length] = 'display:none;';}//pickMode 精确到年时隐藏 “月” 
 mvAry[mvAry.length] ='" name="prevMonth" type="button" id="prevMonth" value="&lt;" /></th>'; 
-mvAry[mvAry.length] = '        <th align="center" width="98%" nowrap="nowrap"><select name="calendarYear" id="calendarYear" style="font-size:12px;"></select><select name="calendarMonth" id="calendarMonth" style="font-size:12px;'; 
+mvAry[mvAry.length] = '        <th align="center" width="98%" nowrap="nowrap"><select name="calendarYear" id="calendarYear" style="font-size:12px;"></select><select name="calendarMonth" id="calendarMonth" style="font-size:12px;';
 if(calendar.DateMode > pickMode["month"]){mvAry[mvAry.length] = 'display:none;';}//pickMode 精确到年时隐藏 “月” 
 mvAry[mvAry.length] = '"></select></th>'; 
 mvAry[mvAry.length] = '        <th align="right" width="1%"><input style="border: 1px solid ' + calendar.colors["input_border"] + ';background-color:' + calendar.colors["input_bg"] + ';width:16px;height:20px;'; 
@@ -609,7 +609,7 @@ if(!isFocus){this.hide();}
 //以下由寒羽枫 2007-07-26 修改 → 确保日历容器节点在 body 最后，否则 FireFox 中不能出现在最上方 
 function InitContainerPanel() //初始化容器 
 { 
-var str = '<div id="calendarPanel" style="position: absolute;display: none;z-index:9999; background-color: #FFFFFF;border: 1px solid #CCCCCC;width:175px;font-size:12px;"></div>'; 
+var str = '<div id="calendarPanel" style="position: absolute;display: none;z-index:9999; background-color: #FFFFFF;border: 1px solid #CCCCCC;width:174px;font-size:12px;"></div>';
 if(document.all) 
 { 
 str += '<iframe style="position:absolute;z-index:2000;width:expression(this.previousSibling.offsetWidth);'; 
